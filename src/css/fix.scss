@@ -1,0 +1,10 @@
+//Fix form
+input[type=text], input[type=password] {
+  height: 2em !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+::placeholder {
+  color: gray !important;
+}
