@@ -4,6 +4,7 @@ import OneSelectQuestionComponent from "@/components/voteComponents/OneSelect";
 import { Type, plainToClass, Transform, classToPlain, classToClass } from 'class-transformer';
 import { TransformationType } from "class-transformer/TransformOperationExecutor";
 import { ArrayTransformFn as ArrayTransform } from "@/utils/TransformUtil";
+import * as LimitConst from "@/const/LimitConst";
 
 export enum QuestionType {
   ONE_SELECT = "ONE_SELECT"
@@ -78,11 +79,38 @@ export class OneSelectOption {
 export class OneSelectQuestion extends Question {
   type: QuestionType = QuestionType.ONE_SELECT;
   @Type(() => OneSelectOption)
-  options: OneSelectOption[];
+  private options: OneSelectOption[];
   constructor(title: string = '', options: OneSelectOption[] = []) {
     super(title);
     this.options = options;
   }
+
+  getOptions(): Readonly<OneSelectOption[]> {
+    return this.options;
+  }
+
+  addOption(option: OneSelectOption): boolean {
+    if (!this.canAddOption())
+      return false;
+    this.options.push(option);
+    return true;
+  }
+
+  deleteOption(index: number) {
+    if (!this.canDeleteOption())
+      return false;
+    this.options.splice(index, 1);
+    return true;
+  }
+
+  canAddOption() {
+    return this.options.length < LimitConst.MAX_ONE_SELECT_OPTION_NUM;
+  }
+
+  canDeleteOption() {
+    return LimitConst.MIN_ONE_SELECT_OPTION_NUM < this.options.length;
+  }
+
 }
 
 class OneSelectQuestionViewFactory extends QuestionViewFactory {

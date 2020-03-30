@@ -1,0 +1,2 @@
+export const MIN_ONE_SELECT_OPTION_NUM = 1;
+export const MAX_ONE_SELECT_OPTION_NUM = 10;

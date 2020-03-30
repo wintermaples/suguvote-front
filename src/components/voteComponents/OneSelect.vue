@@ -5,7 +5,7 @@
     </div>
     <transition-group name="options-list" tag="div">
       <div class="field option" v-for="(option, index) in question.options" :key="option.symbol">
-        <input type="text" class="input option-text is-small" v-model="question.options[index].content" :placeholder="'選択技' + (index+1)" required>
+        <input type="text" class="input option-text is-small" v-model="question.options[index].content" :placeholder="'選択技' + (index+1)" required maxlength="32">
         <div class="delete-option-button-container">
           <button type="button" class="button is-danger is-small delete-option" @click="deleteOption(index)">x</button>
         </div>
@@ -22,18 +22,20 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import { OneSelectOption } from "@/models/vote/Vote";
+import { OneSelectOption, OneSelectQuestion } from "@/models/vote/Vote";
 
   @Component({
     props: ['question']
   })
   export default class OneSelectQuestionComponent extends Vue {
     addOption(): void {
-      this.$props.question.options.push(new OneSelectOption(''));
+      const question: OneSelectQuestion = this.$props.question;
+      question.addOption(new OneSelectOption(''));
     }
 
     deleteOption(index: number): void {
-      this.$props.question.options.splice(index, 1);
+      const question: OneSelectQuestion = this.$props.question;
+      question.deleteOption(index);
     }
   }
 </script>

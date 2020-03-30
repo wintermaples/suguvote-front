@@ -2,7 +2,7 @@
   <form action="" id="createVoteForm">
     <div class="field">
       <label for="createVoteTitle" class="label">タイトル</label>
-      <div class="control"><input type="text" class="input" name="createVoteTitle" placeholder="" v-model="vote.title" required></div>
+      <div class="control"><input type="text" class="input" name="createVoteTitle" placeholder="" v-model="vote.title" required maxlength="256"></div>
     </div>
     <div class="field">
       <template v-for="question in vote.questions">
@@ -11,7 +11,7 @@
     </div>
     <div class="field">
       <label for="createVotePassword" class="label">編集用パスワード</label>
-      <div class="control"><input type="password" class="input is-small" name="createVotePassword" placeholder="" v-model="createVotePassword" required></div>
+      <div class="control"><input type="password" class="input is-small" name="createVotePassword" placeholder="" v-model="createVotePassword" required maxlength="64"></div>
     </div>
     <div class="field">
       <label class="checkbox"><input type="checkbox" id="agreeToS" name="agreeToS" required>利用規約に同意する</label>
