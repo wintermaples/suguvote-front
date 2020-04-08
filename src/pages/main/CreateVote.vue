@@ -11,13 +11,13 @@
     </div>
     <div class="field">
       <label for="createVotePassword" class="label">編集用パスワード</label>
-      <div class="control"><input type="password" class="input is-small" name="createVotePassword" placeholder="" v-model="createVotePassword" required maxlength="64"></div>
+      <div class="control"><input type="password" class="input is-small" name="createVotePassword" placeholder="" v-model="vote.password" required maxlength="64"></div>
     </div>
     <div class="field">
       <label class="checkbox"><input type="checkbox" id="agreeToS" name="agreeToS" required>利用規約に同意する</label>
     </div>
     <div class="field">
-      <button type="button" class="button is-large is-success is-fullwidth">投票を作成する!</button>
+      <button type="button" class="button is-large is-success is-fullwidth" @click="createVote">投票を作成する!</button>
     </div>
   </form>
 </template>
@@ -29,22 +29,26 @@ import { Vote, QuestionType, QuestionViewFactory } from '@/models/vote/Vote';
 import { OneSelectQuestion, OneSelectOption } from '@/models/vote/Vote';
 import axios from 'axios';
 import { plainToClass } from "class-transformer";
+import { api } from '@/requests/requests';
 
   @Component
   export default class CreateVoteComponent extends Vue {
     vote: Vote = new Vote();
-    createVotePassword: string = '';
     async created() {
       //デフォルト値
       this.vote.questions.push(new OneSelectQuestion(
             '選択技',
             [new OneSelectOption('')]
       ));
-
-      const voteJson = JSON.stringify(this.vote);
-      const vote: Vote = plainToClass(Vote, JSON.parse(voteJson));
-      console.log(vote);
     }
+
+    async createVote() {
+      const form: HTMLFormElement|null = <HTMLFormElement> document.getElementById('createVoteForm') ?? null;
+      if (!form?.reportValidity())
+        return;
+      api.votes.create(this.vote);
+    }
+
   }
 </script>
 

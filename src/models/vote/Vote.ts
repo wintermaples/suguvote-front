@@ -44,6 +44,7 @@ export abstract class Question {
 
 export class Vote {
   title: string = '';
+  password: string|undefined;
   @ArrayTransform(Question.transformFn)
   questions: Question[] = [];
 }
