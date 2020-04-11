@@ -1,6 +1,5 @@
 import { Component } from "vue";
 import { VueConstructor } from "vue/types/umd";
-import OneSelectQuestionComponent from "@/components/voteComponents/OneSelect";
 import { Type, plainToClass, Transform, classToPlain, classToClass } from 'class-transformer';
 import { TransformationType } from "class-transformer/TransformOperationExecutor";
 import { ArrayTransformFn as ArrayTransform } from "@/utils/TransformUtil";
@@ -118,13 +117,13 @@ export class OneSelectQuestion extends Question {
 
 }
 
-class OneSelectQuestionViewFactory extends QuestionViewFactory {
-  getQuestionType(): QuestionType {
-    return QuestionType.ONE_SELECT;
-  }
-  generateComponent(question: Question): VueConstructor<Vue> {
-    return OneSelectQuestionComponent;
-  }
-}
+// class OneSelectQuestionViewFactory extends QuestionViewFactory {
+//   getQuestionType(): QuestionType {
+//     return QuestionType.ONE_SELECT;
+//   }
+//   generateComponent(question: Question): VueConstructor<Vue> {
+//     return OneSelectQuestionComponent;
+//   }
+// }
 
-QuestionViewFactory.addFactory(new OneSelectQuestionViewFactory());
+// QuestionViewFactory.addFactory(new OneSelectQuestionViewFactory());

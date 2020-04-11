@@ -26,7 +26,6 @@
     "@types/chart.js": "^2.9.19",
     "axios": "^0.19.2",
     "babel-loader": "^8.1.0",
-    "bulma": "^0.8.1",
     "chart.js": "^2.9.3",
     "core-js": "^3.6.4",
     "css-loader": "^3.4.2",
