@@ -1,7 +1,6 @@
 @import 'bulma/sass/utilities/_all';
 @import 'bulma/sass/form/_all';
 @import 'bulma/sass/elements/button';
-@import '@/css/fix.scss';
 
 body {
   margin: 0;
@@ -17,9 +16,4 @@ h2 {
   text-align: center;
   font-size: 2em;
   color: #333;
-}
-
-@font-face {
-  font-family: "Tryst";
-  src: url('/fonts/tryst.otf');
 }

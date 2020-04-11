@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import router from './router';
-import AppComponent from '@/App.vue';
+import AppComponent from '@/App';
 import { QuestionViewFactory } from "./models/vote/Vote";
 
 require('@/index.scss');

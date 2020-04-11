@@ -27,7 +27,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { Vote, QuestionType, QuestionViewFactory } from '@/models/vote/Vote';
 import { OneSelectQuestion, OneSelectOption } from '@/models/vote/Vote';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { plainToClass } from "class-transformer";
 import { api } from '@/requests/requests';
 
@@ -46,7 +46,14 @@ import { api } from '@/requests/requests';
       const form: HTMLFormElement|null = <HTMLFormElement> document.getElementById('createVoteForm') ?? null;
       if (!form?.reportValidity())
         return;
-      api.votes.create(this.vote);
+
+      try {
+        const createdVote: Vote = await api.votes.create(this.vote);
+        const pk = createdVote['pk'];
+        this.$router.push(`/vote/${pk}`);
+      } catch (err) {
+        console.log(err);
+      }
     }
 
   }

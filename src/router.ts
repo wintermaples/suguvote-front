@@ -1,11 +1,11 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import MainComponent from "@/pages/main/Main.vue";
+import TopPageComponent from "@/pages/topPage/TopPage";
 
 Vue.use(VueRouter);
 
 export const routes = [
-  { path: '/', component: MainComponent },
+  { path: '/', component: TopPageComponent },
 ];
 
 const router = new VueRouter({

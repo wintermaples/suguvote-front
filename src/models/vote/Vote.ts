@@ -43,10 +43,14 @@ export abstract class Question {
 }
 
 export class Vote {
+  pk: string|undefined;
+  creator: any|undefined;
   title: string = '';
   password: string|undefined;
   @ArrayTransform(Question.transformFn)
   questions: Question[] = [];
+  created_at: string|undefined;
+  updated_at: string|undefined;
 }
 
 export abstract class QuestionViewFactory {

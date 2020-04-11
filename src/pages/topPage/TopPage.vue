@@ -1,10 +1,5 @@
 <template>
-  <div id="app">
-    <div id="headerContainer">
-    </div>
-    <div>
-      <router-view></router-view>
-    </div>
+  <div id="topPage">
   </div>
 </template>
 
@@ -12,9 +7,10 @@
 import Vue from "vue";
 import Component from "vue-class-component";
   @Component
-  export default class AppComponent extends Vue {
+  export default class TopPageComponent extends Vue {
   }
 </script>
 
 <style lang="scss" scoped>
+
 </style>
