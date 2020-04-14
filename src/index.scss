@@ -8,8 +8,38 @@ body {
   "sans-serif";
 }
 
-h2 {
+.btn {
+  display: inline-block;
+  text-decoration: none;
   text-align: center;
-  font-size: 2em;
-  color: #333;
+  padding: 0.3em 1em;
+  border-radius: 3px;
+  transition: .4s;
+  
+  @media screen and (min-width: 768px) {
+    min-width: 8em;
+  }
+}
+
+.btn-small {
+  font-size: 100%;
+}
+
+.btn-medium {
+  font-size: 150%;
+}
+
+.btn-large {
+  font-size: 200%;
+  font-weight: bolder;
+}
+
+.btn-color-light-sky-blue {
+  color: #67c5ff;
+  border: solid 2px #67c5ff;
+}
+
+.btn-color-light-sky-blue:hover {
+  background: #67c5ff;
+  color: white;
 }
