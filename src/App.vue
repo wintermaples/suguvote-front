@@ -4,7 +4,7 @@
       <div id="headerTitle"><router-link to="/">Suguvote</router-link></div>
       <div id="headerMenu"></div>
     </div>
-    <div>
+    <div id="content">
       <router-view></router-view>
     </div>
   </div>
@@ -36,6 +36,12 @@ export default class AppComponent extends Vue {}
 #headerTitle a {
   text-decoration: none;
   color: #111;
+}
+
+#content {
+  $paddingX: 15%;
+  width: calc(100% - #{$paddingX} * 2);
+  padding: 0 $paddingX;
 }
 
 </style>

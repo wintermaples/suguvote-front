@@ -4,7 +4,7 @@
     <div id="titleDescription">アンケートを簡単に「作れる」・「見つけられる」サービス</div>
     <div id="topPageSpaceFromTitleToMenu"></div>
     <div id="topPageMenu">
-      <router-link to="/"><div class="btn btn-large btn-color-light-sky-blue">アンケートを作る</div></router-link>
+      <router-link to="/createVote"><div class="btn btn-large btn-color-light-sky-blue">アンケートを作る</div></router-link>
       <router-link to="/"><div class="btn btn-large btn-color-light-sky-blue">アンケートを探す</div></router-link>
     </div>
   </div>
@@ -19,9 +19,6 @@ export default class TopPageComponent extends Vue {}
 
 <style lang="scss" scoped>
 #topPage {
-  $paddingX: 15%;
-  width: calc(100% - #{$paddingX} * 2);
-  padding: 0 $paddingX;
   display: flex;
   flex-direction: column;
   justify-content: center;

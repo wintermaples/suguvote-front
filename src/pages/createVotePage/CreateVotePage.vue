@@ -1,5 +1,8 @@
 <template>
-  <form action="" id="createVoteForm">
+<div id="container">
+  test
+</div>
+  <!-- <form action="" id="createVoteForm">
     <div class="field">
       <label for="createVoteTitle" class="label">タイトル</label>
       <div class="control"><input type="text" class="input" name="createVoteTitle" placeholder="" v-model="vote.title" required maxlength="256"></div>
@@ -19,7 +22,7 @@
     <div class="field">
       <button type="button" class="button is-large is-success is-fullwidth" @click="createVote">投票を作成する!</button>
     </div>
-  </form>
+  </form> -->
 </template>
 
 <script lang="ts">
@@ -62,5 +65,19 @@ import { api } from '@/requests/requests';
 <style lang="scss" scoped>
 .field {
   margin: 2em auto;
+}
+
+#container {
+  display: flex;
+  width: 100%;
+  margin: auto;
+}
+
+#questions {
+
+}
+
+#question-select {
+
 }
 </style>
