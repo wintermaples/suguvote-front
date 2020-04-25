@@ -28,8 +28,8 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import { Vote, QuestionType, QuestionViewFactory } from '@/models/vote/Vote';
-import { OneSelectQuestion, OneSelectOption } from '@/models/vote/Vote';
+import { Vote, QuestionType, QuestionViewFactory } from '@/models/VoteModels';
+import { OneSelectQuestion, OneSelectOption } from '@/models/VoteModels';
 import axios, { AxiosResponse } from 'axios';
 import { plainToClass } from "class-transformer";
 import { api } from '@/requests/requests';

@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import { Vote } from '@/models/vote/Vote';
+import { Vote } from '@/models/VoteModels';
 import { plainToClass } from 'class-transformer';
 
 const axiosInstance: AxiosInstance = axios.create({

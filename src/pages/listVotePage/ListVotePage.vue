@@ -8,7 +8,8 @@
 import Vue from "vue";
 import Component from "vue-class-component";
   @Component
-  export default class CreateVoteComponent extends Vue {
+  export default class ListVoteComponent extends Vue {
+    
   }
 </script>
 
