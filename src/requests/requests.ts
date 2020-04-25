@@ -1,13 +1,20 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import { Vote } from '@/models/VoteModels';
+import { Vote, VoteModelWrappedInPagination } from '@/models/VoteModels';
 import { plainToClass } from 'class-transformer';
+import ModelWrappedInPagination from '@/models/ModelWrappedInPagination';
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: 'http://192.168.0.3:8000/',
+  baseURL: 'http://localhost:8000/',
   headers: {
     'Content-Type': 'application/json;charset=UTF-8',
   }
 });
+
+async function listVote(size: number=20): Promise<VoteModelWrappedInPagination> {
+  const response: AxiosResponse = await axiosInstance.get(`/votes/?size=${size}`);
+  const votes: VoteModelWrappedInPagination = plainToClass(VoteModelWrappedInPagination, response.data);
+  return votes;
+}
 
 async function createVote(vote: Vote): Promise<Vote> {
   const data: object = vote;
@@ -29,6 +36,7 @@ async function votingResults(id: number): Promise<any> {
 
 export const api = {
   votes: {
+    list: listVote,
     create: createVote,
     detail: detailVote,
     votingResults: {

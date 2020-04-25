@@ -2,8 +2,9 @@ import { Component } from "vue";
 import { VueConstructor } from "vue/types/umd";
 import { Type, plainToClass, Transform, classToPlain, classToClass } from 'class-transformer';
 import { TransformationType } from "class-transformer/TransformOperationExecutor";
-import { ArrayTransformFn as ArrayTransform } from "@/utils/TransformUtil";
+import { ArrayTransformFn as ArrayTransform, TypeSpecifiedArrayTransformFn } from "@/utils/TransformUtil";
 import * as LimitConst from "@/const/LimitConst";
+import ModelWrappedInPagination from "./ModelWrappedInPagination";
 
 export enum QuestionType {
   ONE_SELECT = "ONE_SELECT"
@@ -127,3 +128,8 @@ export class OneSelectQuestion extends Question {
 // }
 
 // QuestionViewFactory.addFactory(new OneSelectQuestionViewFactory());
+
+export class VoteModelWrappedInPagination extends ModelWrappedInPagination {
+  @TypeSpecifiedArrayTransformFn(Vote)
+  results: Vote|undefined;
+}

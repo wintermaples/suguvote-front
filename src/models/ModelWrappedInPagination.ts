@@ -1,9 +1,6 @@
-import { ArrayTransformFn as ArrayTransform } from "@/utils/TransformUtil";
-
-export default class ModelWrappedInPagination<T> {
+export default abstract class ModelWrappedInPagination {
   count: number|undefined;
   next: string|undefined;
   previous: string|undefined;
-  @ArrayTransform()
-  results: T[]|undefined;
+  abstract results: any|undefined;
 }
