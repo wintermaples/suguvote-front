@@ -5,7 +5,7 @@
     <div id="topPageSpaceFromTitleToMenu"></div>
     <div id="topPageMenu">
       <router-link to="/createVote"><div class="btn btn-large btn-color-light-sky-blue">アンケートを作る</div></router-link>
-      <router-link to="/"><div class="btn btn-large btn-color-light-sky-blue">アンケートを探す</div></router-link>
+      <router-link to="/list"><div class="btn btn-large btn-color-light-sky-blue">アンケートを探す</div></router-link>
     </div>
   </div>
 </template>
