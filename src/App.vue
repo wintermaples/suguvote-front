@@ -5,7 +5,9 @@
       <div id="headerMenu"></div>
     </div>
     <div id="content">
-      <router-view></router-view>
+      <transition name="router-transition" mode="out-in">
+        <router-view></router-view>
+      </transition>
     </div>
   </div>
 </template>
@@ -42,6 +44,14 @@ export default class AppComponent extends Vue {}
   $paddingX: 15%;
   width: calc(100% - #{$paddingX} * 2);
   padding: 0 $paddingX;
+}
+
+.router-transition-enter-active, .router-transition-leave-active {
+  transition: opacity 0.2s;
+}
+
+.router-transition-enter, .router-transition-leave-to {
+  opacity: 0;
 }
 
 </style>
