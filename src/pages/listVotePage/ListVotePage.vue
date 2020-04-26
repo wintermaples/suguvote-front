@@ -1,6 +1,40 @@
 <template>
   <div id="container">
-    test
+    <div id="subtitleContainer">
+      <div id="subtitle">投稿された投票</div>
+      <div id="sortButton"><i class="fas fa-list"></i>新着順</div>
+    </div>
+    <ul id="voteList">
+      <li class="voteContainer" v-for="vote in votes">
+        <div class="vote">
+          <div class="vote-header">
+            <router-link to>
+              <h3 class="vote-title">{{ vote.title }}</h3>
+            </router-link>
+          </div>
+          <div class="vote-main">{{ vote.description }}</div>
+          <div class="vote-footer">
+            <div>
+              <div class="vote-tags">
+                タグ:&nbsp;
+                <router-link class="vote-tag" v-for="tag in vote.tags" to :key="tag">{{ tag }}</router-link>
+              </div>
+            </div>
+            <div>
+              <span class="vote-count">
+                <i class="fas fa-vote-yea"></i>{{ vote.vote_count }}
+              </span>
+              <span class="vote-closing-at">
+                <i class="far fa-calendar-alt"></i>{{ vote.closing_at ? formatDate(new Date(vote.closing_at)) : "---" }}
+              </span>
+              <span class="vote-created-at">
+                <i class="fas fa-pen"></i>{{ formatDate(new Date(vote.created_at)) }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -10,25 +44,111 @@ import Component from "vue-class-component";
 import ModelWrappedInPagination from "../../models/ModelWrappedInPagination";
 import { Vote, VoteModelWrappedInPagination } from "@/models/VoteModels";
 import { api } from "@/requests/requests";
+import HelperMixin from "@/utils/HelperMixin";
+import { OneSelectQuestion } from "@/models/VoteModels";
+import { OneSelectOption } from "@/models/VoteModels";
 
+@Component({
+  mixins: [HelperMixin]
+})
+export default class ListVoteComponent extends Vue {
+  votes: Vote[] = [];
 
-  @Component
-  export default class ListVoteComponent extends Vue {
-    async created() {
-      try {
-        const votes: VoteModelWrappedInPagination = await api.votes.list();
-        console.log(votes);
-      } catch (err) {
-        console.log(err);
-      }
+  async created() {
+    try {
+      const votes: VoteModelWrappedInPagination = await api.votes.list();
+      this.votes = votes.results ?? [];
+    } catch (err) {
+      console.log(err);
     }
-
   }
+}
 </script>
 
 <style lang="scss" scoped>
-  #container {
-    margin: auto;
-    width: 100%;
+#container {
+  margin: auto;
+  width: 100%;
+}
+
+#subtitleContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 2em auto;
+  border-bottom: 2px solid #999;
+}
+
+#subtitleContainer > * {
+  margin: 0.75em 0;
+}
+
+#subtitle {
+  font-size: 150%;
+  font-weight: bold;
+}
+
+#sortButton {
+  font-size: 110%;
+  margin-right: 3em;
+}
+
+ul#voteList {
+  list-style-type: none;
+  padding: 0;
+
+  li.voteContainer {
+    padding: 1em 0 0 0;
+    min-height: 100px;
+    border-bottom: 1px solid #cccccc;
+
+    .vote {
+      a {
+        color: inherit;
+      }
+
+      .vote-title {
+        font-size: 150%;
+      }
+
+      .vote-main {
+        margin: 1em auto;
+      }
+
+      .vote-footer {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0.5em auto;
+      }
+
+      .vote-tag {
+        color: #505050;
+        padding: 0.5em;
+        display: inline-block;
+        line-height: 1.1;
+        background: #dedede;
+        vertical-align: middle;
+        border-radius: 25px 0px 0px 25px;
+        margin: auto 0.5em;
+      }
+
+      .vote-tag:before {
+        content: "●";
+        color: white;
+        margin-right: 8px;
+      }
+
+      a.vote-tag {
+        text-decoration: inherit;
+      }
+
+      .vote-count, .vote-closing-at, .vote-created-at{
+        margin: auto 1em;
+      }
+    }
   }
+}
 </style>

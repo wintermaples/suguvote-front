@@ -47,10 +47,14 @@ export class Vote {
   creator: any|undefined;
   title: string = '';
   password: string|undefined;
+  description: string = " ";
+  tags: string[] = [];
+  closing_at: Date|null = null;
   @ArrayTransform(Question.transformFn)
   questions: Question[] = [];
   created_at: string|undefined;
   updated_at: string|undefined;
+  vote_count: number|undefined;
 }
 
 export abstract class QuestionViewFactory {
@@ -131,5 +135,5 @@ export class OneSelectQuestion extends Question {
 
 export class VoteModelWrappedInPagination extends ModelWrappedInPagination {
   @TypeSpecifiedArrayTransformFn(Vote)
-  results: Vote|undefined;
+  results: Vote[]|undefined;
 }

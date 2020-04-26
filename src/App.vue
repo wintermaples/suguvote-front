@@ -43,7 +43,9 @@ export default class AppComponent extends Vue {}
 #content {
   $paddingX: 15%;
   width: calc(100% - #{$paddingX} * 2);
+  max-width: 1440px;
   padding: 0 $paddingX;
+  margin: auto;
 }
 
 .router-transition-enter-active, .router-transition-leave-active {
