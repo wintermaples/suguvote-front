@@ -48,6 +48,12 @@ import HelperMixin from "@/utils/HelperMixin";
 import { OneSelectQuestion } from "@/models/VoteModels";
 import { OneSelectOption } from "@/models/VoteModels";
 
+// TODO: Implement sorting
+// TODO: Change a design of this page
+// TODO: Implement showing creator's user name
+// TODO: Implement searching
+// TODO: Implement pagination
+// TODO: Implement feature of chaning page size
 @Component({
   mixins: [HelperMixin]
 })
@@ -69,6 +75,7 @@ export default class ListVoteComponent extends Vue {
 #container {
   margin: auto;
   width: 100%;
+  max-width: 1024px;
 }
 
 #subtitleContainer {
@@ -106,6 +113,10 @@ ul#voteList {
     .vote {
       a {
         color: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
       }
 
       .vote-title {
