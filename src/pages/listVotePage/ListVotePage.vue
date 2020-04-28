@@ -2,13 +2,15 @@
   <div id="container">
     <div id="subtitleContainer">
       <div id="subtitle">投稿された投票</div>
-      <div id="sortButton"><i class="fas fa-list"></i>新着順</div>
+      <div id="sortButton">
+        <i class="fas fa-list"></i>新着順
+      </div>
     </div>
-    <ul id="voteList">
+    <ul id="voteList" v-if="votes">
       <li class="voteContainer" v-for="vote in votes">
         <div class="vote">
           <div class="vote-header">
-            <router-link :to='`/detail/${vote.pk}`'>
+            <router-link :to="`/detail/${vote.pk}`">
               <h3 class="vote-title">{{ vote.title }}</h3>
             </router-link>
           </div>
@@ -22,13 +24,16 @@
             </div>
             <div>
               <span class="vote-count">
-                <i class="fas fa-vote-yea"></i>{{ vote.vote_count }}
+                <i class="fas fa-vote-yea"></i>
+                {{ vote.vote_count }}
               </span>
               <span class="vote-closing-at">
-                <i class="far fa-calendar-alt"></i>{{ vote.closing_at ? formatDate(new Date(vote.closing_at)) : "---" }}
+                <i class="far fa-calendar-alt"></i>
+                {{ vote.closing_at ? formatDate(new Date(vote.closing_at)) : "---" }}
               </span>
               <span class="vote-created-at">
-                <i class="fas fa-pen"></i>{{ formatDate(new Date(vote.created_at)) }}
+                <i class="fas fa-pen"></i>
+                {{ formatDate(new Date(vote.created_at)) }}
               </span>
             </div>
           </div>
@@ -41,12 +46,11 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import ModelWrappedInPagination from "../../models/ModelWrappedInPagination";
-import { Vote, VoteModelWrappedInPagination } from "@/models/VoteModels";
 import { api } from "@/requests/requests";
 import HelperMixin from "@/utils/HelperMixin.vue";
-import { OneSelectQuestion } from "@/models/VoteModels";
+import { OneSelectQuestion, Vote } from "@/models/VoteModels";
 import { OneSelectOption } from "@/models/VoteModels";
+import { VoteModelWrappedInPagination } from "@/models/ModelWrappedInPagination";
 
 // TODO: Implement sorting
 // TODO: Change a design of this page
@@ -58,7 +62,7 @@ import { OneSelectOption } from "@/models/VoteModels";
   mixins: [HelperMixin]
 })
 export default class ListVoteComponent extends Vue {
-  votes: Vote[] = [];
+  votes: Readonly<Vote[]> | null = null;
 
   async created() {
     try {
@@ -156,7 +160,9 @@ ul#voteList {
         text-decoration: inherit;
       }
 
-      .vote-count, .vote-closing-at, .vote-created-at{
+      .vote-count,
+      .vote-closing-at,
+      .vote-created-at {
         margin: auto 1em;
       }
     }

@@ -1,7 +1,7 @@
+import { VoteModelWrappedInPagination } from '@/models/ModelWrappedInPagination';
+import { Vote, VotingResult } from '@/models/VoteModels';
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import { Vote, VoteModelWrappedInPagination, VotingResult } from '@/models/VoteModels';
 import { plainToClass } from 'class-transformer';
-import ModelWrappedInPagination from '@/models/ModelWrappedInPagination';
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: 'http://localhost:8000/',
