@@ -1,5 +1,5 @@
 <template>
-  <div id="container" v-if="vote">
+  <div id="container" v-if="vote && votingResults.length > 0">
     <div id="backToPrevious">
       <a href="javascript:history.back();">← 前のページに戻る</a>
     </div>
@@ -14,10 +14,7 @@
     <div id="votingResultsContainer">
       <div class="votingResultOfOneQuestion" v-for="(question, questionIndex) in vote.questions">
         <div class="question-title">Q{{ questionIndex + 1}}.&nbsp;{{ question.title }}</div>
-        <div class="chart-container">
-          <canvas :id="`chart${questionIndex}`"></canvas>
-          <!-- TODO: Add chart detail -->
-        </div>
+        <component :is="toVotingResultOfOneQuestionView(question)" :question="question" :votingResult="votingResults[questionIndex]" :index="questionIndex" />
       </div>
     </div>
   </div>
@@ -32,14 +29,17 @@ import { plainToClass } from "class-transformer";
 import { planningChartBackgroundColorScheme } from "@/utils/ChartUtil";
 import Chart, { ChartConfiguration } from "chart.js";
 import { VotingResultChartGenerator } from "@/chart/VotingResultChart";
+import HelperMixin from "../../utils/HelperMixin.vue";
 
-@Component
+@Component({
+  mixins: [HelperMixin]
+})
 export default class DetailVotePageComponent extends Vue {
   vote: Vote | null = null;
   votingResults: VotingResult[] = [];
   charts: Chart[] = [];
 
-  async mounted() {
+  async created() {
     try {
       this.vote = await api.votes.retrieve(parseInt(this.$route.params.id));
       this.votingResults = await api.votes.votingResults.retrieve(
@@ -47,23 +47,6 @@ export default class DetailVotePageComponent extends Vue {
       );
     } catch (err) {
       console.log(err);
-    }
-
-    // Mapping charts to canvases.
-    if (!this.vote) return;
-    for (let i = 0; i < this.vote.questions.length; i++) {
-      const question: Question = this.vote.questions[i];
-      const votingResult: VotingResult = this.votingResults[i];
-      const chartCanvasElement: HTMLCanvasElement | null = <HTMLCanvasElement>(
-        document.getElementById(`chart${i}`)
-      );
-      const chartConfiguration:
-        | ChartConfiguration
-        | undefined = VotingResultChartGenerator.findGenerator(
-        this.vote.questions[i]
-      )?.generate(question, votingResult);
-      if (chartCanvasElement && chartConfiguration)
-        this.charts.push(new Chart(chartCanvasElement, chartConfiguration));
     }
   }
 }
