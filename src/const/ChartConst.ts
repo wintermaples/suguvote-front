@@ -1,0 +1,3 @@
+export const CHART_BG_COLOR_SATURATION = 0.6;
+export const CHART_BG_COLOR_LIGHTNESS = 0.6;
+export const CHART_BG_COLOR_MAIN_SPLIT_NUM = 12;

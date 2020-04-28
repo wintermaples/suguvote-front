@@ -7,7 +7,8 @@ import * as LimitConst from "@/const/LimitConst";
 import ModelWrappedInPagination from "./ModelWrappedInPagination";
 
 export enum QuestionType {
-  ONE_SELECT = "ONE_SELECT"
+  ONE_SELECT = "ONE_SELECT",
+  NULL = "NULL"
 }
 
 export abstract class Question {
@@ -57,6 +58,11 @@ export class Vote {
   vote_count: number|undefined;
 }
 
+export class VotingResult {
+  type: QuestionType = QuestionType.NULL
+  results: any = {};
+}
+
 export abstract class QuestionViewFactory {
   abstract getQuestionType(): QuestionType;
   abstract generateComponent(question: Question): VueConstructor<Vue>;
@@ -88,6 +94,7 @@ export class OneSelectOption {
 export class OneSelectQuestion extends Question {
   type: QuestionType = QuestionType.ONE_SELECT;
   @Type(() => OneSelectOption)
+  @ArrayTransform((optionPlain: any) => new OneSelectOption(optionPlain), { toClassOnly: true })
   private options: OneSelectOption[];
   constructor(title: string = '', options: OneSelectOption[] = []) {
     super(title);

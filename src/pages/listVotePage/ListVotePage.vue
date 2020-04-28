@@ -8,11 +8,11 @@
       <li class="voteContainer" v-for="vote in votes">
         <div class="vote">
           <div class="vote-header">
-            <router-link to>
+            <router-link :to='`/detail/${vote.pk}`'>
               <h3 class="vote-title">{{ vote.title }}</h3>
             </router-link>
           </div>
-          <div class="vote-main">{{ vote.description }}</div>
+          <div class="vote-main multiline-text">{{ vote.description }}</div>
           <div class="vote-footer">
             <div>
               <div class="vote-tags">
@@ -44,7 +44,7 @@ import Component from "vue-class-component";
 import ModelWrappedInPagination from "../../models/ModelWrappedInPagination";
 import { Vote, VoteModelWrappedInPagination } from "@/models/VoteModels";
 import { api } from "@/requests/requests";
-import HelperMixin from "@/utils/HelperMixin";
+import HelperMixin from "@/utils/HelperMixin.vue";
 import { OneSelectQuestion } from "@/models/VoteModels";
 import { OneSelectOption } from "@/models/VoteModels";
 

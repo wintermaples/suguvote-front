@@ -1,5 +1,5 @@
 import { TransformationType } from "class-transformer/TransformOperationExecutor";
-import { Transform, plainToClass, classToPlain, classToClass } from "class-transformer";
+import { Transform, plainToClass, classToPlain, classToClass, TransformOptions } from "class-transformer";
 import { ClassType } from "class-transformer/ClassTransformer";
 
 function _genericTransformFn(classType: ClassType<any>, value: any, obj: any, type: TransformationType) {
@@ -12,8 +12,8 @@ function _genericTransformFn(classType: ClassType<any>, value: any, obj: any, ty
   }
 }
 
-export function ArrayTransformFn(transformFn: Function) {
-  return Transform((v,o,t) => v.map((vv: any) => transformFn(vv,o,t)));
+export function ArrayTransformFn(transformFn: Function, options: TransformOptions|undefined=undefined) {
+  return Transform((v,o,t) => v.map((vv: any) => transformFn(vv,o,t)), options);
 }
 
 export function TypeSpecifiedArrayTransformFn(classType: ClassType<any>) {

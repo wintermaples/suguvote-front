@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import { Vote, VoteModelWrappedInPagination } from '@/models/VoteModels';
+import { Vote, VoteModelWrappedInPagination, VotingResult } from '@/models/VoteModels';
 import { plainToClass } from 'class-transformer';
 import ModelWrappedInPagination from '@/models/ModelWrappedInPagination';
 
@@ -23,24 +23,25 @@ async function createVote(vote: Vote): Promise<Vote> {
   return createdVote;
 }
 
-async function detailVote(id: number): Promise<Vote> {
+async function retrieveVote(id: number): Promise<Vote> {
   const response: AxiosResponse = await axiosInstance.get(`/votes/${id}/`);
   const vote: Vote = plainToClass(Vote, response.data);
   return vote;
 }
 
-async function votingResults(id: number): Promise<any> {
+async function retrieveVotingResults(id: number): Promise<VotingResult[]> {
   const response: AxiosResponse = await axiosInstance.get(`/votes/${id}/voting_results/`);
-  return response.data;
+  const votingResults: VotingResult[] = response.data.map((obj: any) => plainToClass(VotingResult, obj));
+  return votingResults;
 }
 
 export const api = {
   votes: {
     list: listVote,
     create: createVote,
-    detail: detailVote,
+    retrieve: retrieveVote,
     votingResults: {
-      get: votingResults
+      retrieve: retrieveVotingResults
     }
   },
 }
