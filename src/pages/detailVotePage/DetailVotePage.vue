@@ -15,7 +15,7 @@
     <div class="clear"></div>
     <div id="createdAt" class="right">作成日時:&nbsp;{{ formatDate(vote.created_at) }}</div>
     <div class="clear"></div>
-    <div id="closingAt" class="right">締切:&nbsp;{{ formatDate(vote.closing_at) }}</div>
+    <div id="closingAt" class="right">締切:&nbsp;{{ vote.closing_at ? formatDate(vote.closing_at) : '---' }}</div>
     <div class="clear"></div>
     <div id="voteCount" class="right">投票数:&nbsp;{{ vote.vote_count }}</div>
     <div class="clear"></div>
