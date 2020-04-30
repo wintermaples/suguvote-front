@@ -51,6 +51,7 @@ import HelperMixin from "@/utils/HelperMixin.vue";
 import { OneSelectQuestion, Vote } from "@/models/VoteModels";
 import { OneSelectOption } from "@/models/VoteModels";
 import { VoteModelWrappedInPagination } from "@/models/ModelWrappedInPagination";
+import SuguvoteVue from "@/utils/HelperMixin.vue";
 
 // TODO: Implement sorting
 // TODO: Change a design of this page
@@ -58,10 +59,8 @@ import { VoteModelWrappedInPagination } from "@/models/ModelWrappedInPagination"
 // TODO: Implement searching
 // TODO: Implement pagination
 // TODO: Implement feature of chaning page size
-@Component({
-  mixins: [HelperMixin]
-})
-export default class ListVoteComponent extends Vue {
+@Component
+export default class ListVotePageComponent extends SuguvoteVue {
   votes: Readonly<Vote[]> | null = null;
 
   async created() {

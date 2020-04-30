@@ -2,6 +2,7 @@ import { VoteModelWrappedInPagination } from '@/models/ModelWrappedInPagination'
 import { Vote, VotingResult } from '@/models/VoteModels';
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { plainToClass } from 'class-transformer';
+import { VoteAnswer } from '@/models/VoteAnswerModel';
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: 'http://localhost:8000/',
@@ -35,13 +36,24 @@ async function retrieveVotingResults(id: number): Promise<VotingResult[]> {
   return votingResults;
 }
 
+async function postVotingResults(id: number, voteAnswers: VoteAnswer[], recaptcha_token: string): Promise<VotingResult[]> {
+  const data: string = JSON.stringify({
+    answers: voteAnswers,
+    recaptcha_token: recaptcha_token
+  });
+  const response: AxiosResponse =  await axiosInstance.post(`/votes/${id}/voting_results/`, data);
+  const votingResults: VotingResult[] = response.data.map((obj: any) => plainToClass(VotingResult, obj));
+  return votingResults;
+}
+
 export const api = {
   votes: {
     list: listVote,
     create: createVote,
     retrieve: retrieveVote,
     votingResults: {
-      retrieve: retrieveVotingResults
+      retrieve: retrieveVotingResults,
+      post: postVotingResults,
     }
   },
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="chart-container">
-    <canvas :id="`chart${index}`"></canvas>
+    <canvas :id="`chart${questionIndex}`"></canvas>
   </div>
 </template>
 
@@ -10,8 +10,8 @@ import Component from "vue-class-component";
 import { Prop } from "vue-property-decorator";
 import { VotingResult, Question } from "@/models/VoteModels";
 import { ChartConfiguration } from "chart.js";
-import { VotingResultChartGenerator } from "@/chart/VotingResultChart";
 import Chart from "chart.js";
+import { VotingResultChartGenerator } from "@/chart/VotingResultChartGenerator";
 
 @Component
 export default class VotingResultOfOneSelectQuestionViewComponent extends Vue {
@@ -20,14 +20,14 @@ export default class VotingResultOfOneSelectQuestionViewComponent extends Vue {
   @Prop()
   votingResult?: VotingResult;
   @Prop()
-  index?: number;
+  questionIndex?: number;
   chart: Chart | null = null;
 
   async mounted() {
-    if (!this.question || !this.votingResult || this.index == null) return;
+    if (!this.question || !this.votingResult || this.questionIndex == null) return;
 
     const chartCanvasElement: HTMLCanvasElement | null = <HTMLCanvasElement>(
-      document.getElementById(`chart${this.index}`)
+      document.getElementById(`chart${this.questionIndex}`)
     );
     const chartConfiguration:
       | ChartConfiguration
