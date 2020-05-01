@@ -7,11 +7,11 @@
         @click="isActiveSortingMenu=!isActiveSortingMenu"
         :class="{ 'is-active-sorting-menu': isActiveSortingMenu }"
       >
-        <i class="fas fa-list"></i>新着順
+        <i class="fas fa-list"></i>{{ currentOrderingUserString }}
         <div id="sortButtonSubMenu">
           <ul>
-            <li @click="changeQuery(size=null, ordering='-created_at')">新着順</li>
-            <li @click="changeQuery(size=null, ordering='-vote_count')">投票数が多い順</li>
+            <li @click="changeQuery(size=null, ordering='-created_at');currentOrderingUserString='新着順'">新着順</li>
+            <li @click="changeQuery(size=null, ordering='-vote_count');currentOrderingUserString='投票数が多い順'">投票数が多い順</li>
           </ul>
         </div>
       </div>
@@ -73,6 +73,7 @@ import SuguvoteVue from "@/utils/HelperMixin.vue";
 export default class ListVotePageComponent extends SuguvoteVue {
   votes: Readonly<Vote[]> | null = null;
   isActiveSortingMenu: boolean = false;
+  currentOrderingUserString: string = "新着順";
 
   async created() {
     try {
@@ -134,7 +135,7 @@ export default class ListVotePageComponent extends SuguvoteVue {
   text-decoration: none;
   color: #000;
   transition: background-color 0.2s;
-  width: 6em;
+  width: 12em;
   cursor: pointer;
   &:hover {
     background-color: #f9f9f9;
