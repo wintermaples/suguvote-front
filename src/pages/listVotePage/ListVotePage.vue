@@ -84,6 +84,7 @@ export default class ListVotePageComponent extends SuguvoteVue {
   }
 
   async fetchVotes() {
+    this.votes = [];
     const size: number =
       parseInt(this.$route.query?.size?.toString() ?? "20");
     const ordering: string = this.$route.query?.ordering?.toString() ?? undefined;
