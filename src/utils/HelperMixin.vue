@@ -15,7 +15,7 @@ export default class SuguvoteVue extends Vue {
   }
 
   formatDate(date: Date) {
-    return dayjs(date).format("YYYY/MM/DD HH:mm");
+    return dayjs(date).format("YYYY/MM/DD HH:mm:ss");
   }
 
   toEditQuestionView(question: Question): VueConstructor<Vue> | undefined {

@@ -3,6 +3,7 @@ import { Vote, VotingResult } from '@/models/VoteModels';
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { plainToClass } from 'class-transformer';
 import { VoteAnswer } from '@/models/VoteAnswerModel';
+import { Dictionary } from 'vue-router/types/router';
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: 'http://localhost:8000/',
@@ -11,8 +12,9 @@ const axiosInstance: AxiosInstance = axios.create({
   }
 });
 
-async function listVote(size: number=20): Promise<VoteModelWrappedInPagination> {
-  const response: AxiosResponse = await axiosInstance.get(`/votes/?size=${size}`);
+async function listVote(query: any={}): Promise<VoteModelWrappedInPagination> {
+  const queryString: string = Object.keys(query).filter(key => query[key]).map(key => key + '=' + query[key]).join('&');
+  const response: AxiosResponse = await axiosInstance.get(`/votes/?${queryString}`);
   const votes: VoteModelWrappedInPagination = plainToClass(VoteModelWrappedInPagination, response.data);
   return votes;
 }

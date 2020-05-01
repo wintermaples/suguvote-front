@@ -2,8 +2,18 @@
   <div id="container">
     <div id="subtitleContainer">
       <div id="subtitle">投稿された投票</div>
-      <div id="sortButton">
+      <div
+        id="sortButton"
+        @click="isActiveSortingMenu=!isActiveSortingMenu"
+        :class="{ 'is-active-sorting-menu': isActiveSortingMenu }"
+      >
         <i class="fas fa-list"></i>新着順
+        <div id="sortButtonSubMenu">
+          <ul>
+            <li @click="changeQuery(size=null, ordering='-created_at')">新着順</li>
+            <li @click="changeQuery(size=null, ordering='-vote_count')">投票数が多い順</li>
+          </ul>
+        </div>
       </div>
     </div>
     <ul id="voteList" v-if="votes">
@@ -62,14 +72,36 @@ import SuguvoteVue from "@/utils/HelperMixin.vue";
 @Component
 export default class ListVotePageComponent extends SuguvoteVue {
   votes: Readonly<Vote[]> | null = null;
+  isActiveSortingMenu: boolean = false;
 
   async created() {
     try {
-      const votes: VoteModelWrappedInPagination = await api.votes.list();
-      this.votes = votes.results ?? [];
+      this.fetchVotes();
     } catch (err) {
       console.log(err);
     }
+  }
+
+  async fetchVotes() {
+    const size: number =
+      parseInt(this.$route.query?.size?.toString() ?? "20");
+    const ordering: string = this.$route.query?.ordering?.toString() ?? undefined;
+    const votes: VoteModelWrappedInPagination = await api.votes.list({
+      size: size,
+      ordering: ordering
+    });
+    this.votes = votes.results ?? [];
+  }
+
+  async changeQuery(size: number | null, ordering: string | null) {
+    this.$router.push({
+      path: this.$route.path,
+      query: {
+        size: size ? size.toString() : this.$route.query?.size,
+        ordering: ordering ? ordering.toString() : this.$route.query?.ordering
+      }
+    }, () => {}, () => {});
+    await this.fetchVotes();
   }
 }
 </script>
@@ -90,10 +122,6 @@ export default class ListVotePageComponent extends SuguvoteVue {
   border-bottom: 2px solid #999;
 }
 
-#subtitleContainer > * {
-  margin: 0.75em 0;
-}
-
 #subtitle {
   font-size: 150%;
   font-weight: bold;
@@ -102,6 +130,46 @@ export default class ListVotePageComponent extends SuguvoteVue {
 #sortButton {
   font-size: 110%;
   margin-right: 3em;
+  padding: 0.5em 0;
+  text-decoration: none;
+  color: #000;
+  transition: background-color 0.2s;
+  width: 6em;
+  cursor: pointer;
+  &:hover {
+    background-color: #f9f9f9;
+  }
+  #sortButtonSubMenu {
+    position: absolute;
+    transition: opacity 0.2s, visibility 0.2s;
+    a {
+      color: #000;
+      text-decoration: none;
+    }
+    ul {
+      list-style: none;
+      margin: 0.5em 0 0 0;
+      padding: 0;
+    }
+    li {
+      width: 10em;
+      margin: 0;
+      background-color: #f9f9f9;
+      padding: 0.5em 0;
+      transition: background-color 0.2s;
+      &:hover {
+        background-color: #ccc;
+      }
+    }
+  }
+  &:not(.is-active-sorting-menu) #sortButtonSubMenu {
+    visibility: hidden;
+    opacity: 0;
+  }
+  &.is-active-sorting-menu #sortButtonSubMenu {
+    visibility: visible;
+    opacity: 1;
+  }
 }
 
 ul#voteList {
