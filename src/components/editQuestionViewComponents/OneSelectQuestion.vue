@@ -5,13 +5,13 @@
     </div>
     <transition-group name="options-list" tag="div">
       <div class="field option" v-for="(option, index) in question.options" :key="option.symbol">
-        <input type="text" class="input option-text is-small" v-model="question.options[index].content" :placeholder="'選択技' + (index+1)" required maxlength="32">
-        <div class="delete-option-button-container">
+        <input type="text" class="input field-input option-text is-small" v-model="question.options[index].content" :placeholder="'選択技' + (index+1)" required maxlength="32">
+        <div class="delete-option-button-container" v-if="canDeleteOption()">
           <button type="button" class="button is-danger is-small delete-option" @click="deleteOption(index)">x</button>
         </div>
       </div>
     </transition-group>
-    <div class="field">
+    <div class="field" v-if="canAddOption()" >
       <div class="control">
         <button type="button" class="button is-link" @click="addOption">選択技を追加</button>
       </div>
@@ -22,7 +22,7 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import { OneSelectOption, OneSelectQuestion } from "@/models/vote/Vote";
+import { OneSelectOption, OneSelectQuestion } from "@/models/VoteModels";
 
   @Component({
     props: ['question']
@@ -33,9 +33,19 @@ import { OneSelectOption, OneSelectQuestion } from "@/models/vote/Vote";
       question.addOption(new OneSelectOption(''));
     }
 
+    canAddOption(): boolean {
+      const question: OneSelectQuestion = this.$props.question;
+      return question.canAddOption();
+    }
+
     deleteOption(index: number): void {
       const question: OneSelectQuestion = this.$props.question;
       question.deleteOption(index);
+    }
+
+    canDeleteOption(): boolean {
+      const question: OneSelectQuestion = this.$props.question;
+      return question.canDeleteOption();
     }
   }
 </script>

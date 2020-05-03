@@ -1,5 +1,6 @@
-import { QuestionType, Question } from "./VoteModels";
+import { QuestionType, Question, OneSelectQuestion } from "./VoteModels";
 import { VueConstructor } from "vue";
+import OneSelectQuestionComponent from "@/components/editQuestionViewComponents/OneSelectQuestion.vue";
 
 export abstract class EditQuestionViewFactory {
   abstract getQuestionType(): QuestionType;
@@ -18,13 +19,16 @@ export abstract class EditQuestionViewFactory {
 }
 
 
-// class OneSelectQuestionViewFactory extends QuestionViewFactory {
-//   getQuestionType(): QuestionType {
-//     return QuestionType.ONE_SELECT;
-//   }
-//   generateComponent(question: Question): VueConstructor<Vue> {
-//     return OneSelectQuestionComponent;
-//   }
-// }
+class OneSelectQuestionViewFactory extends EditQuestionViewFactory {
+  getQuestionType(): QuestionType {
+    return QuestionType.ONE_SELECT;
+  }
+  generateComponent(question: Question): VueConstructor<Vue> {
+    return OneSelectQuestionComponent;
+  }
+}
 
-// QuestionViewFactory.addFactory(new OneSelectQuestionViewFactory());
+EditQuestionViewFactory.addFactory({
+  getQuestionType: () => QuestionType.ONE_SELECT,
+  generateComponent: () => OneSelectQuestionComponent
+});

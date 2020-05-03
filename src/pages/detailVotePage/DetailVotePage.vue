@@ -27,7 +27,7 @@
       <a @click="toggleMode();" id="voteButton">投票結果に戻る</a>
     </div>
     <!-- VoteButtonContainer End -->
-    <div id="voteBorder"></div>
+    <div class="border"></div>
     <VotingResultsComponent
       :vote="vote"
       :votingResults="votingResults"
@@ -142,10 +142,5 @@ export default class DetailVotePageComponent extends SuguvoteVue {
 #voteCount {
   font-size: 87.5%;
   color: #606060;
-}
-
-#voteBorder {
-  width: 100%;
-  border-top: 1px solid #c0c0c0;
 }
 </style>

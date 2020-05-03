@@ -1,3 +1,5 @@
+@import './form';
+
 body {
   margin: 0;
   font-family: "Helvetica Neue",
@@ -120,4 +122,47 @@ i.fas, i.far {
 
 .dialog-show > .dialog-contents {
   transform: scale(1, 1);
+}
+
+.border {
+  width: 100%;
+  border-top: 1px solid #c0c0c0;
+}
+
+.vote-tags {
+  .vote-tag {
+    color: #505050;
+    padding: 0.5em;
+    display: inline-block;
+    line-height: 1.1;
+    background: #dedede;
+    vertical-align: middle;
+    border-radius: 25px 0px 0px 25px;
+    margin: auto 0.5em;
+
+    .tag-delete-button {
+      display: inline-block;
+      text-align: center;
+      cursor: pointer;
+      margin: 0 0.25em 0 0.5em;
+      width: 20px;
+      height: 20px;
+      font-size: 20px;
+      line-height: 20px;
+      &:hover {
+        border-radius: 10px;
+        background-color: #cecece;
+      }
+    }
+  }
+
+  .vote-tag:before {
+    content: "●";
+    color: white;
+    margin-right: 8px;
+  }
+
+  a.vote-tag {
+    text-decoration: none;
+  }
 }

@@ -7,11 +7,16 @@
         @click="isActiveSortingMenu=!isActiveSortingMenu"
         :class="{ 'is-active-sorting-menu': isActiveSortingMenu }"
       >
-        <i class="fas fa-list"></i>{{ currentOrderingUserString }}
+        <i class="fas fa-list"></i>
+        {{ currentOrderingUserString }}
         <div id="sortButtonSubMenu">
           <ul>
-            <li @click="changeQuery(size=null, ordering='-created_at');currentOrderingUserString='新着順'">新着順</li>
-            <li @click="changeQuery(size=null, ordering='-vote_count');currentOrderingUserString='投票数が多い順'">投票数が多い順</li>
+            <li
+              @click="changeQuery(size=null, ordering='-created_at');currentOrderingUserString='新着順'"
+            >新着順</li>
+            <li
+              @click="changeQuery(size=null, ordering='-vote_count');currentOrderingUserString='投票数が多い順'"
+            >投票数が多い順</li>
           </ul>
         </div>
       </div>
@@ -20,8 +25,8 @@
       <li class="voteContainer" v-for="vote in votes">
         <div class="vote">
           <div class="vote-header">
-            <router-link :to="`/detail/${vote.pk}`">
-              <h3 class="vote-title">{{ vote.title }}</h3>
+            <router-link :to="`/detail/${vote.pk}`" class="vote-title">
+              <h3>{{ vote.title }}</h3>
             </router-link>
           </div>
           <div class="vote-main multiline-text">{{ vote.description }}</div>
@@ -85,9 +90,9 @@ export default class ListVotePageComponent extends SuguvoteVue {
 
   async fetchVotes() {
     this.votes = [];
-    const size: number =
-      parseInt(this.$route.query?.size?.toString() ?? "20");
-    const ordering: string = this.$route.query?.ordering?.toString() ?? undefined;
+    const size: number = parseInt(this.$route.query?.size?.toString() ?? "20");
+    const ordering: string =
+      this.$route.query?.ordering?.toString() ?? undefined;
     const votes: VoteModelWrappedInPagination = await api.votes.list({
       size: size,
       ordering: ordering
@@ -96,13 +101,17 @@ export default class ListVotePageComponent extends SuguvoteVue {
   }
 
   async changeQuery(size: number | null, ordering: string | null) {
-    this.$router.push({
-      path: this.$route.path,
-      query: {
-        size: size ? size.toString() : this.$route.query?.size,
-        ordering: ordering ? ordering.toString() : this.$route.query?.ordering
-      }
-    }, () => {}, () => {});
+    this.$router.push(
+      {
+        path: this.$route.path,
+        query: {
+          size: size ? size.toString() : this.$route.query?.size,
+          ordering: ordering ? ordering.toString() : this.$route.query?.ordering
+        }
+      },
+      () => {},
+      () => {}
+    );
     await this.fetchVotes();
   }
 }
@@ -184,16 +193,13 @@ ul#voteList {
     border-bottom: 1px solid #cccccc;
 
     .vote {
-      a {
-        color: inherit;
-        text-decoration: inherit;
-      }
-      a:hover {
-        text-decoration: underline;
-      }
-
       .vote-title {
         font-size: 150%;
+        color: inherit;
+        text-decoration: inherit;
+        &:hover {
+          text-decoration: underline;
+        }
       }
 
       .vote-main {
@@ -206,27 +212,6 @@ ul#voteList {
         justify-content: space-between;
         align-items: center;
         margin: 0.5em auto;
-      }
-
-      .vote-tag {
-        color: #505050;
-        padding: 0.5em;
-        display: inline-block;
-        line-height: 1.1;
-        background: #dedede;
-        vertical-align: middle;
-        border-radius: 25px 0px 0px 25px;
-        margin: auto 0.5em;
-      }
-
-      .vote-tag:before {
-        content: "●";
-        color: white;
-        margin-right: 8px;
-      }
-
-      a.vote-tag {
-        text-decoration: inherit;
       }
 
       .vote-count,

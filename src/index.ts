@@ -5,7 +5,7 @@ import smoothscroll from 'smoothscroll-polyfill';
 
 smoothscroll.polyfill();
 
-require('@/index.scss');
+require('@/css/index.scss');
 
 const app: Vue = new Vue({
   render: h => h(AppComponent),
