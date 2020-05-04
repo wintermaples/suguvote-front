@@ -7,6 +7,8 @@ smoothscroll.polyfill();
 
 require('@/css/index.scss');
 
+Vue.component('paginate', require('vuejs-paginate'));
+
 const app: Vue = new Vue({
   render: h => h(AppComponent),
   router
