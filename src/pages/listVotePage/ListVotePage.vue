@@ -38,7 +38,7 @@
             <div>
               <div class="vote-tags">
                 タグ:&nbsp;
-                <router-link class="vote-tag" v-for="tag in vote.tags" to :key="tag">{{ tag }}</router-link>
+                <a class="vote-tag" v-for="tag in vote.tags" :key="tag" @click="query.like=tag;reflectQuery(resetPageNumber=true);" style="cursor:pointer;">{{ tag }}</a>
               </div>
             </div>
             <div>
