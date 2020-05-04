@@ -12,15 +12,19 @@
         <div id="sortButtonSubMenu">
           <ul>
             <li
-              @click="changeQuery(size=null, ordering='-created_at');currentOrderingUserString='新着順'"
+              @click="changeQuery(size=null,ordering='-created_at',searchText=null);currentOrderingUserString='新着順'"
             >新着順</li>
             <li
-              @click="changeQuery(size=null, ordering='-vote_count');currentOrderingUserString='投票数が多い順'"
+              @click="changeQuery(size=null,ordering='-vote_count',searchText=null);currentOrderingUserString='投票数が多い順'"
             >投票数が多い順</li>
           </ul>
         </div>
       </div>
     </div>
+    <div class="right" id="searchWindowContainer">
+      <input type="text" class="field-input" v-model="searchText" @keyup.enter="changeQuery(size=null,ordering=null,searchText=searchText)"/><button class="search-button" @click="changeQuery(size=null,ordering=null,searchText=searchText)"><i class="fas fa-search"></i></button>
+    </div>
+    <div class="clear"></div>
     <ul id="voteList" v-if="votes">
       <li class="voteContainer" v-for="vote in votes">
         <div class="vote">
@@ -79,8 +83,11 @@ export default class ListVotePageComponent extends SuguvoteVue {
   votes: Readonly<Vote[]> | null = null;
   isActiveSortingMenu: boolean = false;
   currentOrderingUserString: string = "新着順";
+  searchText: string = "";
 
   async created() {
+    this.searchText = this.$route.query?.like?.toString();
+
     try {
       this.fetchVotes();
     } catch (err) {
@@ -93,20 +100,23 @@ export default class ListVotePageComponent extends SuguvoteVue {
     const size: number = parseInt(this.$route.query?.size?.toString() ?? "20");
     const ordering: string =
       this.$route.query?.ordering?.toString() ?? undefined;
+    const like: string = this.$route.query?.like?.toString() ?? undefined;
     const votes: VoteModelWrappedInPagination = await api.votes.list({
       size: size,
-      ordering: ordering
+      ordering: ordering,
+      like: like,
     });
     this.votes = votes.results ?? [];
   }
 
-  async changeQuery(size: number | null, ordering: string | null) {
+  async changeQuery(size: number | null=null, ordering: string | null=null, searchText: string | null=null) {
     this.$router.push(
       {
         path: this.$route.path,
         query: {
           size: size ? size.toString() : this.$route.query?.size,
-          ordering: ordering ? ordering.toString() : this.$route.query?.ordering
+          ordering: ordering ? ordering.toString() : this.$route.query?.ordering,
+          like: searchText != null && searchText != undefined ? searchText.toString() : this.$route.query?.like,
         }
       },
       () => {},
@@ -129,7 +139,7 @@ export default class ListVotePageComponent extends SuguvoteVue {
   width: 100%;
   justify-content: space-between;
   align-items: flex-end;
-  margin: 2em auto;
+  margin-top: 2em;
   border-bottom: 2px solid #999;
 }
 
@@ -220,6 +230,18 @@ ul#voteList {
         margin: auto 1em;
       }
     }
+  }
+}
+
+.search-button {
+  margin: 0 5px;
+  font-size: 1.5em;
+  border: 0;
+  background-color: #f0f0f0;
+  transition: background-color 0.1s;
+
+  &:hover {
+    background-color: #e0e0e0;
   }
 }
 </style>
