@@ -8,21 +8,21 @@
         :class="{ 'is-active-sorting-menu': isActiveSortingMenu }"
       >
         <i class="fas fa-list"></i>
-        {{ currentOrderingUserString }}
+        {{ getOrderingUserString() }}
         <div id="sortButtonSubMenu">
           <ul>
             <li
-              @click="changeQuery(size=null,ordering='-created_at',searchText=null);currentOrderingUserString='新着順'"
+              @click="query.ordering='-created_at';reflectQueryToURL();"
             >新着順</li>
             <li
-              @click="changeQuery(size=null,ordering='-vote_count',searchText=null);currentOrderingUserString='投票数が多い順'"
+              @click="query.ordering='-vote_count';reflectQueryToURL();"
             >投票数が多い順</li>
           </ul>
         </div>
       </div>
     </div>
     <div class="right" id="searchWindowContainer">
-      <input type="text" class="field-input" v-model="searchText" @keyup.enter="changeQuery(size=null,ordering=null,searchText=searchText)"/><button class="search-button" @click="changeQuery(size=null,ordering=null,searchText=searchText)"><i class="fas fa-search"></i></button>
+      <input type="text" class="field-input" v-model="query.like" @keyup.enter="reflectQueryToURL()"/><button class="search-button" @click="reflectQueryToURL()"><i class="fas fa-search"></i></button>
     </div>
     <div class="clear"></div>
     <ul id="voteList" v-if="votes">
@@ -71,22 +71,28 @@ import { OneSelectQuestion, Vote } from "@/models/VoteModels";
 import { OneSelectOption } from "@/models/VoteModels";
 import { VoteModelWrappedInPagination } from "@/models/ModelWrappedInPagination";
 import SuguvoteVue from "@/utils/HelperMixin.vue";
+import { Dictionary } from "vue-router/types/router";
 
-// TODO: Implement sorting
 // TODO: Change a design of this page
 // TODO: Implement showing creator's user name
-// TODO: Implement searching
 // TODO: Implement pagination
 // TODO: Implement feature of chaning page size
 @Component
 export default class ListVotePageComponent extends SuguvoteVue {
   votes: Readonly<Vote[]> | null = null;
   isActiveSortingMenu: boolean = false;
-  currentOrderingUserString: string = "新着順";
-  searchText: string = "";
+  query: Dictionary<string | (string | null)[] | null | undefined> = {
+    size: undefined,
+    ordering: undefined,
+    like: ''
+  }
 
   async created() {
-    this.searchText = this.$route.query?.like?.toString();
+    this.query = {
+      size: this.$route.query?.size ?? undefined,
+      ordering: this.$route.query?.ordering ?? undefined,
+      like: this.$route.query?.like ?? undefined
+    };
 
     try {
       this.fetchVotes();
@@ -97,33 +103,35 @@ export default class ListVotePageComponent extends SuguvoteVue {
 
   async fetchVotes() {
     this.votes = [];
-    const size: number = parseInt(this.$route.query?.size?.toString() ?? "20");
-    const ordering: string =
-      this.$route.query?.ordering?.toString() ?? undefined;
-    const like: string = this.$route.query?.like?.toString() ?? undefined;
-    const votes: VoteModelWrappedInPagination = await api.votes.list({
-      size: size,
-      ordering: ordering,
-      like: like,
-    });
+    const votes: VoteModelWrappedInPagination = await api.votes.list(this.query);
     this.votes = votes.results ?? [];
   }
 
-  async changeQuery(size: number | null=null, ordering: string | null=null, searchText: string | null=null) {
+  async reflectQueryToURL() {
     this.$router.push(
       {
         path: this.$route.path,
-        query: {
-          size: size ? size.toString() : this.$route.query?.size,
-          ordering: ordering ? ordering.toString() : this.$route.query?.ordering,
-          like: searchText != null && searchText != undefined ? searchText.toString() : this.$route.query?.like,
-        }
+        query: this.query
       },
       () => {},
       () => {}
     );
     await this.fetchVotes();
   }
+
+  getOrderingUserString(): string {
+    switch(this.query['ordering']) {
+      case '-created_at':
+        return '新着順';
+      case '-vote_count':
+        return '投票数が多い順';
+      case undefined:
+        return '新着順';
+      default:
+        return 'カスタム';
+    }
+  }
+
 }
 </script>
 
