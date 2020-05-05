@@ -1,10 +1,13 @@
+import AppComponent from '@/App.vue';
 import Vue from "vue";
-import VueRouter from "vue-router";
 import router from './router';
-import AppComponent from '@/App';
-import { QuestionViewFactory } from "./models/vote/Vote";
+import smoothscroll from 'smoothscroll-polyfill';
 
-require('@/index.scss');
+smoothscroll.polyfill();
+
+require('@/css/index.scss');
+
+Vue.component('paginate', require('vuejs-paginate'));
 
 const app: Vue = new Vue({
   render: h => h(AppComponent),

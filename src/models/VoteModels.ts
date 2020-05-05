@@ -1,26 +1,20 @@
-import { Component } from "vue";
-import { VueConstructor } from "vue/types/umd";
-import { Type, plainToClass, Transform, classToPlain, classToClass } from 'class-transformer';
-import { TransformationType } from "class-transformer/TransformOperationExecutor";
-import { ArrayTransformFn as ArrayTransform } from "@/utils/TransformUtil";
 import * as LimitConst from "@/const/LimitConst";
+import { ArrayTransformFn as ArrayTransform } from "@/utils/TransformUtil";
+import { classToClass, classToPlain, plainToClass, Type } from 'class-transformer';
+import { TransformationType } from "class-transformer/TransformOperationExecutor";
 
 export enum QuestionType {
   ONE_SELECT = "ONE_SELECT"
 }
 
 export abstract class Question {
-  abstract type: QuestionType;
-  title: string = '';
+  abstract type: Readonly<QuestionType>;
+  title: string;
   constructor(title: string='') {
     this.title = title;
   }
 
-  toViewComponent(): Component|null {
-    return QuestionViewFactory.findFactory(this)?.generateComponent(this) ?? null;
-  }
-
-  static transformFn(value: Question, obj: any, type: TransformationType) {
+  static transformFn(value: any, obj: any, type: TransformationType): any {
     if (type === TransformationType.PLAIN_TO_CLASS) {
       return Question.fromObject(value);
     } else if (type === TransformationType.CLASS_TO_PLAIN) {
@@ -46,31 +40,24 @@ export class Vote {
   creator: any|undefined;
   title: string = '';
   password: string|undefined;
+  description: string = "";
+  tags: string[] = [];
+  closing_at: Date|null = null;
   @ArrayTransform(Question.transformFn)
   questions: Question[] = [];
   created_at: string|undefined;
   updated_at: string|undefined;
+  vote_count: number|undefined;
 }
 
-export abstract class QuestionViewFactory {
-  abstract getQuestionType(): QuestionType;
-  abstract generateComponent(question: Question): VueConstructor<Vue>;
-  static factories: QuestionViewFactory[] = [];
-  
-  static addFactory(factory: QuestionViewFactory): void {
-    if (this.factories.some(f => f.getQuestionType() == factory.getQuestionType()))
-      throw `You are already added factory for ${factory.getQuestionType()}!`;
-    this.factories.push(factory);
-  }
-
-  static findFactory(question: Question): QuestionViewFactory|null {
-    return this.factories.find(f => f.getQuestionType() == question.type) ?? null;
-  }
+export class VotingResult {
+  type: QuestionType|undefined;
+  results: any|undefined;
 }
 
 export class OneSelectOption {
   symbol: Symbol = Symbol();
-  content: string = '';
+  content: string;
   constructor (content: string) {
     this.content = content;
   }
@@ -81,8 +68,9 @@ export class OneSelectOption {
 }
 
 export class OneSelectQuestion extends Question {
-  type: QuestionType = QuestionType.ONE_SELECT;
+  type: Readonly<QuestionType> = QuestionType.ONE_SELECT;
   @Type(() => OneSelectOption)
+  @ArrayTransform((optionPlain: any) => new OneSelectOption(optionPlain), { toClassOnly: true })
   private options: OneSelectOption[];
   constructor(title: string = '', options: OneSelectOption[] = []) {
     super(title);
@@ -116,14 +104,3 @@ export class OneSelectQuestion extends Question {
   }
 
 }
-
-// class OneSelectQuestionViewFactory extends QuestionViewFactory {
-//   getQuestionType(): QuestionType {
-//     return QuestionType.ONE_SELECT;
-//   }
-//   generateComponent(question: Question): VueConstructor<Vue> {
-//     return OneSelectQuestionComponent;
-//   }
-// }
-
-// QuestionViewFactory.addFactory(new OneSelectQuestionViewFactory());

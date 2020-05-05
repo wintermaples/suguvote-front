@@ -1,0 +1,39 @@
+.field {
+  margin: 30px auto;
+}
+
+.field-title {
+  font-weight: bold;
+  &::before {
+    content: '・';
+  }
+}
+
+input[type="text"].field-input,
+input[type="password"].field-input,
+input[type="datetime-local"].field-input,
+textarea.field-input {
+  font-family: "Helvetica Neue",
+  "Arial",
+  "Hiragino Kaku Gothic ProN",
+  "Hiragino Sans",
+  "Meiryo",
+  "sans-serif";
+  border: 0;
+  border: solid 1px #ccc;
+  height: 20px;
+  padding: 10px;
+  border-radius: 3px;
+  font-size: 1.3em;
+  box-shadow: inset 1px 4px 9px -6px rgba(0,0,0,0.3);
+  margin: 5px 0;
+}
+
+textarea.field-input {
+  height: 4em;
+}
+
+.wide-input {
+  width: 768px;
+  max-width: 100%;
+}

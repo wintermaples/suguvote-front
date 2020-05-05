@@ -1,13 +1,23 @@
+import { VoteModelWrappedInPagination } from '@/models/ModelWrappedInPagination';
+import { Vote, VotingResult } from '@/models/VoteModels';
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import { Vote } from '@/models/vote/Vote';
 import { plainToClass } from 'class-transformer';
+import { VoteAnswer } from '@/models/VoteAnswerModel';
+import { Dictionary } from 'vue-router/types/router';
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: 'http://192.168.0.3:8000/',
+  baseURL: 'http://localhost:8000/',
   headers: {
     'Content-Type': 'application/json;charset=UTF-8',
   }
 });
+
+async function listVote(query: any={}): Promise<VoteModelWrappedInPagination> {
+  const queryString: string = Object.keys(query).filter(key => query[key]).map(key => key + '=' + query[key]).join('&');
+  const response: AxiosResponse = await axiosInstance.get(`/votes/?${queryString}`);
+  const votes: VoteModelWrappedInPagination = plainToClass(VoteModelWrappedInPagination, response.data);
+  return votes;
+}
 
 async function createVote(vote: Vote): Promise<Vote> {
   const data: object = vote;
@@ -16,23 +26,36 @@ async function createVote(vote: Vote): Promise<Vote> {
   return createdVote;
 }
 
-async function detailVote(id: number): Promise<Vote> {
+async function retrieveVote(id: number): Promise<Vote> {
   const response: AxiosResponse = await axiosInstance.get(`/votes/${id}/`);
   const vote: Vote = plainToClass(Vote, response.data);
   return vote;
 }
 
-async function votingResults(id: number): Promise<any> {
+async function retrieveVotingResults(id: number): Promise<VotingResult[]> {
   const response: AxiosResponse = await axiosInstance.get(`/votes/${id}/voting_results/`);
-  return response.data;
+  const votingResults: VotingResult[] = response.data.map((obj: any) => plainToClass(VotingResult, obj));
+  return votingResults;
+}
+
+async function postVotingResults(id: number, voteAnswers: VoteAnswer[], recaptcha_token: string): Promise<VotingResult[]> {
+  const data: string = JSON.stringify({
+    answers: voteAnswers,
+    recaptcha_token: recaptcha_token
+  });
+  const response: AxiosResponse =  await axiosInstance.post(`/votes/${id}/voting_results/`, data);
+  const votingResults: VotingResult[] = response.data.map((obj: any) => plainToClass(VotingResult, obj));
+  return votingResults;
 }
 
 export const api = {
   votes: {
+    list: listVote,
     create: createVote,
-    detail: detailVote,
+    retrieve: retrieveVote,
     votingResults: {
-      get: votingResults
+      retrieve: retrieveVotingResults,
+      post: postVotingResults,
     }
   },
 }

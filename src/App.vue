@@ -4,8 +4,10 @@
       <div id="headerTitle"><router-link to="/">Suguvote</router-link></div>
       <div id="headerMenu"></div>
     </div>
-    <div>
-      <router-view></router-view>
+    <div id="content">
+      <transition name="router-transition" mode="out-in">
+        <router-view></router-view>
+      </transition>
     </div>
   </div>
 </template>
@@ -36,6 +38,22 @@ export default class AppComponent extends Vue {}
 #headerTitle a {
   text-decoration: none;
   color: #111;
+}
+
+#content {
+  $paddingX: 15%;
+  width: calc(100% - #{$paddingX} * 2);
+  max-width: 1440px;
+  padding: 0 $paddingX;
+  margin: auto;
+}
+
+.router-transition-enter-active, .router-transition-leave-active {
+  transition: opacity 0.2s;
+}
+
+.router-transition-enter, .router-transition-leave-to {
+  opacity: 0;
 }
 
 </style>

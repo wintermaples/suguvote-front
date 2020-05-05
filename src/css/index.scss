@@ -1,0 +1,169 @@
+@import './form';
+@import './pagination';
+
+body {
+  margin: 0;
+  font-family: "Helvetica Neue",
+  "Arial",
+  "Hiragino Kaku Gothic ProN",
+  "Hiragino Sans",
+  "Meiryo",
+  "sans-serif";
+  color: #333;
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  padding: 0.3em 1em;
+  border-radius: 3px;
+  transition: .4s;
+  
+  @media screen and (min-width: 768px) {
+    min-width: 8em;
+  }
+}
+
+.btn-small {
+  font-size: 100%;
+}
+
+.btn-medium {
+  font-size: 150%;
+}
+
+.btn-large {
+  font-size: 200%;
+  font-weight: bolder;
+}
+
+.btn-color-light-sky-blue {
+  color: #67c5ff;
+  border: solid 2px #67c5ff;
+}
+
+.btn-color-light-sky-blue:hover {
+  background: #67c5ff;
+  color: white;
+}
+
+i.fas, i.far {
+  margin: auto 0.5em;
+}
+
+.multiline-text {
+  white-space: pre;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.clear {
+  clear: both;
+}
+
+.recaptcha-brand {
+  font-size: 80%;
+  color: #999;
+  text-align: center;
+}
+
+.grecaptcha-badge { visibility: hidden; }
+
+.dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+
+  transition: opacity 0.2s, visibility 0.2s;
+  opacity: 0;
+}
+
+.dialog-contents {
+  width: 600px;
+  max-height: 100vh;
+  background-color: #ffffff;
+  margin: auto;
+  z-index: 1002;
+  border-radius: 10px;
+  border: 1px solid #cccccc;
+  padding: 2em;
+  overflow-y: auto;
+
+  transition: transform 0.2s;
+  transform: scale(0, 0);
+}
+
+.dialog-margin {
+  position: fixed;
+  opacity: 0;
+  z-index: 1001;
+  width: 100vw;
+  height: 100vh;
+}
+
+.dialog-show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.dialog-show > .dialog-contents {
+  transform: scale(1, 1);
+}
+
+.border {
+  width: 100%;
+  border-top: 1px solid #c0c0c0;
+}
+
+.vote-tags {
+  .vote-tag {
+    color: #505050;
+    padding: 0.5em;
+    display: inline-block;
+    line-height: 1.1;
+    background: #dedede;
+    vertical-align: middle;
+    border-radius: 25px 0px 0px 25px;
+    margin: auto 0.5em;
+
+    .tag-delete-button {
+      display: inline-block;
+      text-align: center;
+      cursor: pointer;
+      margin: 0 0.25em 0 0.5em;
+      width: 20px;
+      height: 20px;
+      font-size: 20px;
+      line-height: 20px;
+      &:hover {
+        border-radius: 10px;
+        background-color: #cecece;
+      }
+    }
+  }
+
+  .vote-tag:before {
+    content: "●";
+    color: white;
+    margin-right: 8px;
+  }
+
+  a.vote-tag {
+    text-decoration: none;
+  }
+}
