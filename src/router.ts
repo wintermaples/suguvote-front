@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import TopPageComponent from "@/pages/topPage/TopPage.vue";
-import CreateVotePageComponent from "@/pages/createVotePage/createVotePage.vue";
+import CreateVotePageComponent from "@/pages/createVotePage/CreateVotePage.vue";
 import ListVotePageComponent from "@/pages/listVotePage/ListVotePage.vue";
 import DetailVotePageComponent from "@/pages/detailVotePage/DetailVotePage.vue";
 
