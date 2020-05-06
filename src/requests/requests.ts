@@ -6,7 +6,7 @@ import { VoteAnswer } from '@/models/VoteAnswerModel';
 import { Dictionary } from 'vue-router/types/router';
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: 'http://35.199.190.207:8000/',
+  baseURL: 'http://35.199.190.207:8080/',
   headers: {
     'Content-Type': 'application/json;charset=UTF-8',
   }
