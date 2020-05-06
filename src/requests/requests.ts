@@ -4,9 +4,10 @@ import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { plainToClass } from 'class-transformer';
 import { VoteAnswer } from '@/models/VoteAnswerModel';
 import { Dictionary } from 'vue-router/types/router';
+import { BASE_URL } from '@/const/CommonConst';
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: 'http://35.199.190.207:8080/',
+  baseURL: BASE_URL,
   headers: {
     'Content-Type': 'application/json;charset=UTF-8',
   }
