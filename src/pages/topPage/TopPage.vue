@@ -27,8 +27,10 @@ export default class TopPageComponent extends Vue {}
   // 600px未満の場合は入り切らないのでスクロールできるようにautoにする。
   @media screen and (min-height: 600px) {
     height: calc(
-      100vh - 52px
-    ); // As HeaderSize = 52px ・・・ (40px + (5*2)px + (1*2)px)
+      100vh - 52px - 100px
+    );
+    // As HeaderSize = 52px ・・・ (40px + (5*2)px + (1*2)px)
+    //    FooterSize = 100px ・・・(40px + (15*2)px + 30px)
   }
   @media screen and (max-height: 599px) {
     height: auto;
@@ -38,7 +40,7 @@ export default class TopPageComponent extends Vue {}
 h1#title {
   font-size: 400%;
   border-bottom: 2px solid lightseagreen;
-  padding: 0 3em 0.5em 3em;
+  padding: 0 3rem 0.5rem 3rem;
 
   animation: titleAnimation 1s ease 0.5s 1 forwards;
   transform: rotateX(90deg);
@@ -94,13 +96,13 @@ h1#title {
   }
 
   > * {
-    margin: 1em auto;
+    margin: 1rem auto;
   }
 }
 
 #topPageSpaceFromTitleToMenu {
   @media screen and (min-height: 600px) {
-    margin: 3em 0;
+    margin: 3rem 0;
   }
 }
 </style>

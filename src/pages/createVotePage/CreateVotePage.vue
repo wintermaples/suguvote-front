@@ -168,7 +168,7 @@ export default class CreateVoteComponent extends SuguvoteVue {
 
 .tag-button {
   margin: 0 5px;
-  font-size: 1.5em;
+  font-size: 1.5rem;
   border: 0;
   background-color: #f0f0f0;
   transition: background-color 0.1s;
@@ -221,7 +221,7 @@ export default class CreateVoteComponent extends SuguvoteVue {
   text-decoration: inherit;
   border-radius: 4px;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-  padding: 1em 5em;
+  padding: 1rem 5rem;
   background-color: #4c7a34;
   color: white;
   font-weight: bold;

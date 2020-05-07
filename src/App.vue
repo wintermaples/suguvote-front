@@ -12,7 +12,7 @@
       </transition>
     </div>
     <div id="footer">
-      <div style="white-space: ">
+      <div>
         Made by
         <a href="https://twitter.com/yoshi_yukky">@yoshi_yukky</a>.
         <br />Suguvote is in development now(Alpha dev.1).

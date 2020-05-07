@@ -4,16 +4,16 @@ ul.pagination-container {
   align-items: center;
   width: 100%;
   padding: 0;
-  margin: 4em 0;
+  margin: 4rem 0;
   list-style: none;
   font-weight: bold;
 
   li.pagination-prev, li.page-li, li.pagination-next {
     margin: 0 3px;
-    padding: 1em 0;
+    padding: 1rem 0;
     transition: background-color 0.2s;
     a {
-      padding: 1em 1.2em;
+      padding: 1rem 1.2rem;
       border: 1px solid #e0e0e0;
     }
 

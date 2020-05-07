@@ -53,7 +53,7 @@ import { OneSelectOption, OneSelectQuestion } from "@/models/VoteModels";
 <style lang="scss" scoped>
 .option {
   display: flex;
-  margin: 0.5em auto;
+  margin: 0.5rem auto;
 }
 
 .option-text {

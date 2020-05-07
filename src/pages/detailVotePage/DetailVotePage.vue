@@ -129,7 +129,7 @@ export default class DetailVotePageComponent extends SuguvoteVue {
   max-width: 32px;
   max-height: 32px;
   height: auto;
-  margin-right: 2em;
+  margin-right: 2rem;
 }
 
 #username {

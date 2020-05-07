@@ -191,7 +191,7 @@ export default class ListVotePageComponent extends SuguvoteVue {
   width: 100%;
   justify-content: space-between;
   align-items: flex-end;
-  margin-top: 2em;
+  margin-top: 2rem;
   border-bottom: 2px solid #999;
 }
 
@@ -202,12 +202,12 @@ export default class ListVotePageComponent extends SuguvoteVue {
 
 #sortButton {
   font-size: 110%;
-  margin-right: 3em;
-  padding: 0.5em 0;
+  margin-right: 3rem;
+  padding: 0.5rem 0;
   text-decoration: none;
   color: #000;
   transition: background-color 0.2s;
-  width: 12em;
+  width: 12rem;
   cursor: pointer;
   &:hover {
     background-color: #f9f9f9;
@@ -221,14 +221,14 @@ export default class ListVotePageComponent extends SuguvoteVue {
     }
     ul {
       list-style: none;
-      margin: 0.5em 0 0 0;
+      margin: 0.5rem 0 0 0;
       padding: 0;
     }
     li {
-      width: 10em;
+      width: 10rem;
       margin: 0;
       background-color: #f9f9f9;
-      padding: 0.5em 0;
+      padding: 0.5rem 0;
       transition: background-color 0.2s;
       &:hover {
         background-color: #ccc;
@@ -250,7 +250,7 @@ ul#voteList {
   padding: 0;
 
   li.voteContainer {
-    padding: 1em 0 0 0;
+    padding: 1rem 0 0 0;
     min-height: 100px;
     border-bottom: 1px solid #cccccc;
 
@@ -265,7 +265,7 @@ ul#voteList {
       }
 
       .vote-main {
-        margin: 1em auto;
+        margin: 1rem auto;
       }
 
       .vote-footer {
@@ -273,13 +273,13 @@ ul#voteList {
         width: 100%;
         justify-content: space-between;
         align-items: center;
-        margin: 0.5em auto;
+        margin: 0.5rem auto;
       }
 
       .vote-count,
       .vote-closing-at,
       .vote-created-at {
-        margin: auto 1em;
+        margin: auto 1rem;
       }
     }
   }
@@ -287,7 +287,7 @@ ul#voteList {
 
 .search-button {
   margin: 0 5px;
-  font-size: 1.5em;
+  font-size: 1.5rem;
   border: 0;
   background-color: #f0f0f0;
   transition: background-color 0.1s;
