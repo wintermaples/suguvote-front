@@ -119,7 +119,6 @@ export default class ListVotePageComponent extends SuguvoteVue {
   }
 
   async fetchVotes() {
-    this.votes = [];
     const votes: VoteModelWrappedInPagination = await api.votes.list(this.query);
     this.votes = votes.results ?? [];
     this.pageCount = this.calcPageCount(votes);

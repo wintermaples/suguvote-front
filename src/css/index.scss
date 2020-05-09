@@ -1,6 +1,12 @@
 @import './form';
 @import './pagination';
 
+html {
+  @media screen and (max-width: 767px) {
+    font-size: 10px;
+  }
+}
+
 body {
   margin: 0;
   font-family: "Helvetica Neue",
@@ -10,10 +16,10 @@ body {
   "Meiryo",
   "sans-serif";
   color: #333;
+}
 
-  @media screen and (max-width: 767px) {
-    font-size: 10px;
-  }
+.text {
+  display: inline-block;
 }
 
 .btn {
