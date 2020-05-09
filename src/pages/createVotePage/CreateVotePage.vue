@@ -32,7 +32,10 @@
       <input type="text" name="tag" id="form-tag" class="field-input" v-model="tagField" />
       <button class="tag-button" @click="addTag()" type="button">+</button>
       <div class="vote-tags">
-        <span class="vote-tag" v-for="tag in vote.tags" :key="tag">{{ tag }}<span class="tag-delete-button" @click="deleteTag(tag)">×</span></span>
+        <span class="vote-tag" v-for="tag in vote.tags" :key="tag">
+          {{ tag }}
+          <span class="tag-delete-button" @click="deleteTag(tag)">×</span>
+        </span>
       </div>
     </div>
     <div class="field">
@@ -80,6 +83,13 @@
         <a @click="createVote()" id="createVoteButton">アンケートを作成する</a>
       </div>
     </div>
+    <div class="recaptcha-brand">
+      This site is protected by reCAPTCHA and the Google
+      <a
+        href="https://policies.google.com/privacy"
+      >Privacy Policy</a> and
+      <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+    </div>
   </form>
 </template>
 
@@ -92,6 +102,7 @@ import { plainToClass } from "class-transformer";
 import { api } from "@/requests/requests";
 import SuguvoteVue from "../../utils/HelperMixin.vue";
 import { MAX_QUESTION_NUM, MAX_TAG_NUM } from "@/const/LimitConst";
+import { getReCAPTCHAToken } from "@/utils/recaptcha";
 
 @Component
 export default class CreateVoteComponent extends SuguvoteVue {
@@ -110,8 +121,13 @@ export default class CreateVoteComponent extends SuguvoteVue {
       <HTMLFormElement>document.getElementById("createVoteForm") ?? null;
     if (!form?.reportValidity()) return;
 
+    const recaptcha_token: string = await getReCAPTCHAToken();
+
     try {
-      const createdVote: Vote = await api.votes.create(this.vote);
+      const createdVote: Vote = await api.votes.create(
+        this.vote,
+        recaptcha_token
+      );
       const pk = createdVote["pk"];
       this.$router.push(`/detail/${pk}`);
     } catch (err) {
