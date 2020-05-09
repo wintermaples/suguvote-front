@@ -85,6 +85,7 @@ import { VoteModelWrappedInPagination, ModelWrappedInPageNumberPagination } from
 import SuguvoteVue from "@/utils/HelperMixin.vue";
 import { Dictionary } from "vue-router/types/router";
 import { DEFAULT_PAGE_SIZE } from "@/const/CommonConst";
+import { Watch } from "vue-property-decorator";
 
 // TODO: Change a design of this page
 // TODO: Implement showing creator's user name
@@ -102,6 +103,10 @@ export default class ListVotePageComponent extends SuguvoteVue {
   }
 
   async created() {
+    await this.updatePage();
+  }
+
+  async updatePage() {
     this.query = {
       size: this.$route.query?.size ?? undefined,
       ordering: this.$route.query?.ordering ?? undefined,
@@ -128,6 +133,8 @@ export default class ListVotePageComponent extends SuguvoteVue {
     if (resetPageNumber)
       this.query['page'] = undefined;
 
+    window.scrollTo(0, 0);
+
     this.$router.push(
       {
         path: this.$route.path,
@@ -136,7 +143,11 @@ export default class ListVotePageComponent extends SuguvoteVue {
       () => {},
       () => {}
     );
-    await this.fetchVotes();
+  }
+
+  @Watch('$route.query')
+  async onQueryChanged (to: any, from: any) {
+    await this.updatePage();
   }
 
   getOrderingUserString(): string {
