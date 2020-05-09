@@ -39,5 +39,13 @@ export default class SuguvoteVue extends Vue {
       question
     )?.generateComponent(question);
   }
+
+  omitTooLongLines(text: string, maxLine: number=15, ellipsis_text='...'): string {
+    const lines: string[] = text.split('\n');
+    const linesOmitted: string[] = lines.slice(0, maxLine);
+    if (lines.length > maxLine)
+      linesOmitted.push(ellipsis_text);
+    return linesOmitted.join('\n');
+  }
 }
 </script>

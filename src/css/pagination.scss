@@ -10,10 +10,20 @@ ul.pagination-container {
 
   li.pagination-prev, li.page-li, li.pagination-next {
     margin: 0 3px;
-    padding: 1rem 0;
     transition: background-color 0.2s;
+    @media screen and (max-width: 374px) {
+      padding: 0.5rem 0;
+    }
+    @media screen and (min-width: 375px) {
+      padding: 1rem 0;
+    }
     a {
-      padding: 1rem 1.2rem;
+      @media screen and (max-width: 374px) {
+        padding: 0.5rem 0.6rem;
+      }
+      @media screen and (min-width: 375px) {
+        padding: 1rem 1.2rem;
+      }
       border: 1px solid #e0e0e0;
     }
 

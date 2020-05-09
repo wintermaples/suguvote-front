@@ -27,13 +27,13 @@
     <div class="clear"></div>
     <ul id="voteList" v-if="votes">
       <li class="voteContainer" v-for="vote in votes">
-        <div class="vote">
+        <div class="vote" :class="{'is-closed': vote.isClosed()}">
           <div class="vote-header">
             <router-link :to="`/detail/${vote.pk}`" class="vote-title">
               <h3>{{ vote.title }}</h3>
             </router-link>
           </div>
-          <div class="vote-main multiline-text">{{ vote.description }}</div>
+          <div class="vote-main multiline-text">{{ omitTooLongLines(vote.description) }}</div>
           <div class="vote-footer">
             <div>
               <div class="vote-tags">
@@ -260,17 +260,32 @@ ul#voteList {
   padding: 0;
 
   li.voteContainer {
-    padding: 1rem 0 0 0;
+    margin: 3rem auto;
     min-height: 100px;
-    border-bottom: 1px solid #cccccc;
+    border: 2px solid #cccccc;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
 
     .vote {
+      margin: 0;
+      padding: 1em;
+
+      &.is-closed{
+        border-left: 10px solid #ccc;
+      }
+      &:not(.is-closed) {
+        border-left: 10px solid #90ee90;
+      }
+
       .vote-title {
         font-size: 150%;
         color: inherit;
         text-decoration: inherit;
         &:hover {
           text-decoration: underline;
+        }
+        h3 {
+          word-break: break-all;
         }
       }
 
@@ -280,6 +295,7 @@ ul#voteList {
 
       .vote-footer {
         display: flex;
+        flex-wrap: wrap;
         width: 100%;
         justify-content: space-between;
         align-items: center;
@@ -289,7 +305,8 @@ ul#voteList {
       .vote-count,
       .vote-closing-at,
       .vote-created-at {
-        margin: auto 1rem;
+        margin: auto 1rem auto auto;
+        display: inline-block;
       }
     }
   }

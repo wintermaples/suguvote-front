@@ -111,6 +111,7 @@ export default class DetailVotePageComponent extends SuguvoteVue {
   margin-top: 50px;
   font-size: 187.5%;
   font-weight: bold;
+  word-break: break-all;
 }
 
 #voteDescription {
