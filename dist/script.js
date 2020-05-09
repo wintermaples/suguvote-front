@@ -3160,7 +3160,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"getReCAPTCHAToken\", function() { return getReCAPTCHAToken; });\nasync function getReCAPTCHAToken() {\n  const readyPromise = new Promise((resolve, reject) => grecaptcha.ready(resolve));\n  await readyPromise;\n  return await grecaptcha.execute('6LfW6u8UAAAAAEOrBF9FepgePLQXlzjie06TXxJK', {\n    action: 'social'\n  });\n}\n\n//# sourceURL=webpack:///./src/utils/recaptcha.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"getReCAPTCHAToken\", function() { return getReCAPTCHAToken; });\nasync function getReCAPTCHAToken() {\n  const readyPromise = new Promise((resolve, reject) => {\n    try {\n      grecaptcha.ready(resolve);\n    } catch (err) {\n      reject(err);\n    }\n  });\n  await readyPromise;\n  return await grecaptcha.execute('6LfW6u8UAAAAAEOrBF9FepgePLQXlzjie06TXxJK', {\n    action: 'social'\n  });\n}\n\n//# sourceURL=webpack:///./src/utils/recaptcha.js?");
 
 /***/ })
 
