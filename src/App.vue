@@ -25,23 +25,14 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 @Component
-export default class AppComponent extends Vue {
-
-}
-//Fix vh.
-let vh = window.innerHeight * 0.01;
-document.documentElement.style.setProperty('--vh', `${vh}px`);
-window.addEventListener('resize', () => {
-  let vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-});
+export default class AppComponent extends Vue {}
 </script>
 
 <style lang="scss" scoped>
 #app {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  // min-height: 100vh;
   min-height: calc(var(--vh, 1vh) * 100);
   justify-content: center;
   align-items: center;

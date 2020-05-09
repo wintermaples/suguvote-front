@@ -9,6 +9,15 @@
   <script src="/static/js/Reflect.min.js"></script>
   <script src="https://kit.fontawesome.com/313a04d92e.js" crossorigin="anonymous"></script>
   <script src="https://www.google.com/recaptcha/api.js?render=6LfW6u8UAAAAAEOrBF9FepgePLQXlzjie06TXxJK"></script>
+  <script>
+    //Fix vh.
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+    window.addEventListener('resize', () => {
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    });
+  </script>
 </head>
 <body>
   <div id="app"></div>

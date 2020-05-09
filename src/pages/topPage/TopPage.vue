@@ -24,7 +24,7 @@ export default class TopPageComponent extends Vue {}
   align-items: center;
   margin: auto;
   height: calc(
-    100vh - 52px - 100px
+    calc(var(--vh, 1vh) * 100) - 52px - 100px
   );
   // As HeaderSize = 52px ・・・ (40px + (5*2)px + (1*2)px)
   //    FooterSize = 100px ・・・(40px + (15*2)px + 30px)
