@@ -20,8 +20,11 @@ async function listVote(query: any={}): Promise<VoteModelWrappedInPagination> {
   return votes;
 }
 
-async function createVote(vote: Vote): Promise<Vote> {
-  const data: object = vote;
+async function createVote(vote: Vote, recaptcha_token: string): Promise<Vote> {
+  const data: string = JSON.stringify({
+    ...vote,
+    recaptcha_token: recaptcha_token
+  });
   const response: AxiosResponse = await axiosInstance.post('/votes/', data);
   const createdVote: Vote = plainToClass(Vote, response.data);
   return createdVote;
