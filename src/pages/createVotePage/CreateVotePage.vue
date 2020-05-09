@@ -122,7 +122,7 @@ export default class CreateVoteComponent extends SuguvoteVue {
     if (!form?.reportValidity()) return;
 
     try {
-    const recaptcha_token: string = await getReCAPTCHAToken();
+      const recaptcha_token: string = await getReCAPTCHAToken();
     } catch (err) {
       console.log(err);
     }
