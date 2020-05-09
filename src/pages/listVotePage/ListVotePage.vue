@@ -12,10 +12,10 @@
         <div id="sortButtonSubMenu">
           <ul>
             <li
-              @click="query.ordering='-created_at';reflectQuery();"
+              @click="query.ordering='-created_at';reflectQuery(true);"
             >新着順</li>
             <li
-              @click="query.ordering='-vote_count';reflectQuery();"
+              @click="query.ordering='-vote_count';reflectQuery(true);"
             >投票数が多い順</li>
           </ul>
         </div>
@@ -164,11 +164,11 @@ export default class ListVotePageComponent extends SuguvoteVue {
   }
 
   async paginationClickCallback() {
-    await this.reflectQuery(true);
+    await this.reflectQuery();
   }
 
   getPageNumber(): number {
-    return parseInt(this.query['page']?.toString() ?? '0');
+    return parseInt(this.query['page']?.toString() ?? '1');
   }
 
   setPageNumber(input: any): void {
