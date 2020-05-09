@@ -121,7 +121,11 @@ export default class CreateVoteComponent extends SuguvoteVue {
       <HTMLFormElement>document.getElementById("createVoteForm") ?? null;
     if (!form?.reportValidity()) return;
 
-    // const recaptcha_token: string = await getReCAPTCHAToken();
+    try {
+    const recaptcha_token: string = await getReCAPTCHAToken();
+    } catch (err) {
+      console.log(err);
+    }
 
     // try {
     //   const createdVote: Vote = await api.votes.create(
