@@ -123,16 +123,16 @@ export default class CreateVoteComponent extends SuguvoteVue {
 
     const recaptcha_token: string = await getReCAPTCHAToken();
 
-    try {
-      const createdVote: Vote = await api.votes.create(
-        this.vote,
-        recaptcha_token
-      );
-      const pk = createdVote["pk"];
-      this.$router.push(`/detail/${pk}`);
-    } catch (err) {
-      console.log(err);
-    }
+    // try {
+    //   const createdVote: Vote = await api.votes.create(
+    //     this.vote,
+    //     recaptcha_token
+    //   );
+    //   const pk = createdVote["pk"];
+    //   this.$router.push(`/detail/${pk}`);
+    // } catch (err) {
+    //   console.log(err);
+    // }
   }
 
   addQuestion() {
