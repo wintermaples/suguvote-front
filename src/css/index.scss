@@ -1,6 +1,12 @@
 @import './form';
 @import './pagination';
 
+html {
+  @media screen and (max-width: 767px) {
+    font-size: 10px;
+  }
+}
+
 body {
   margin: 0;
   font-family: "Helvetica Neue",
@@ -10,6 +16,10 @@ body {
   "Meiryo",
   "sans-serif";
   color: #333;
+}
+
+.text {
+  display: inline-block;
 }
 
 .btn {
@@ -49,11 +59,12 @@ body {
 }
 
 i.fas, i.far {
-  margin: auto 0.5em;
+  margin: auto 0.5rem;
 }
 
 .multiline-text {
-  white-space: pre;
+  white-space: pre-wrap;
+  word-break: break-all;
 }
 
 .left {
@@ -101,7 +112,7 @@ i.fas, i.far {
   z-index: 1002;
   border-radius: 10px;
   border: 1px solid #cccccc;
-  padding: 2em;
+  padding: 2rem;
   overflow-y: auto;
 
   transition: transform 0.2s;
@@ -133,19 +144,19 @@ i.fas, i.far {
 .vote-tags {
   .vote-tag {
     color: #505050;
-    padding: 0.5em;
+    padding: 0.5rem;
     display: inline-block;
     line-height: 1.1;
     background: #dedede;
     vertical-align: middle;
     border-radius: 25px 0px 0px 25px;
-    margin: auto 0.5em;
+    margin: auto 0.5rem;
 
     .tag-delete-button {
       display: inline-block;
       text-align: center;
       cursor: pointer;
-      margin: 0 0.25em 0 0.5em;
+      margin: 0 0.25rem 0 0.5rem;
       width: 20px;
       height: 20px;
       font-size: 20px;

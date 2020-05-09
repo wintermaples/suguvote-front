@@ -27,13 +27,13 @@
     <div class="clear"></div>
     <ul id="voteList" v-if="votes">
       <li class="voteContainer" v-for="vote in votes">
-        <div class="vote">
+        <div class="vote" :class="{'is-closed': vote.isClosed()}">
           <div class="vote-header">
             <router-link :to="`/detail/${vote.pk}`" class="vote-title">
               <h3>{{ vote.title }}</h3>
             </router-link>
           </div>
-          <div class="vote-main multiline-text">{{ vote.description }}</div>
+          <div class="vote-main multiline-text">{{ omitTooLongLines(vote.description) }}</div>
           <div class="vote-footer">
             <div>
               <div class="vote-tags">
@@ -85,6 +85,7 @@ import { VoteModelWrappedInPagination, ModelWrappedInPageNumberPagination } from
 import SuguvoteVue from "@/utils/HelperMixin.vue";
 import { Dictionary } from "vue-router/types/router";
 import { DEFAULT_PAGE_SIZE } from "@/const/CommonConst";
+import { Watch } from "vue-property-decorator";
 
 // TODO: Change a design of this page
 // TODO: Implement showing creator's user name
@@ -102,6 +103,10 @@ export default class ListVotePageComponent extends SuguvoteVue {
   }
 
   async created() {
+    await this.updatePage();
+  }
+
+  async updatePage() {
     this.query = {
       size: this.$route.query?.size ?? undefined,
       ordering: this.$route.query?.ordering ?? undefined,
@@ -119,7 +124,6 @@ export default class ListVotePageComponent extends SuguvoteVue {
   }
 
   async fetchVotes() {
-    this.votes = [];
     const votes: VoteModelWrappedInPagination = await api.votes.list(this.query);
     this.votes = votes.results ?? [];
     this.pageCount = this.calcPageCount(votes);
@@ -129,6 +133,8 @@ export default class ListVotePageComponent extends SuguvoteVue {
     if (resetPageNumber)
       this.query['page'] = undefined;
 
+    window.scrollTo(0, 0);
+
     this.$router.push(
       {
         path: this.$route.path,
@@ -137,7 +143,11 @@ export default class ListVotePageComponent extends SuguvoteVue {
       () => {},
       () => {}
     );
-    await this.fetchVotes();
+  }
+
+  @Watch('$route.query')
+  async onQueryChanged (to: any, from: any) {
+    await this.updatePage();
   }
 
   getOrderingUserString(): string {
@@ -191,7 +201,7 @@ export default class ListVotePageComponent extends SuguvoteVue {
   width: 100%;
   justify-content: space-between;
   align-items: flex-end;
-  margin-top: 2em;
+  margin-top: 2rem;
   border-bottom: 2px solid #999;
 }
 
@@ -202,12 +212,12 @@ export default class ListVotePageComponent extends SuguvoteVue {
 
 #sortButton {
   font-size: 110%;
-  margin-right: 3em;
-  padding: 0.5em 0;
+  margin-right: 3rem;
+  padding: 0.5rem 0;
   text-decoration: none;
   color: #000;
   transition: background-color 0.2s;
-  width: 12em;
+  width: 12rem;
   cursor: pointer;
   &:hover {
     background-color: #f9f9f9;
@@ -221,14 +231,14 @@ export default class ListVotePageComponent extends SuguvoteVue {
     }
     ul {
       list-style: none;
-      margin: 0.5em 0 0 0;
+      margin: 0.5rem 0 0 0;
       padding: 0;
     }
     li {
-      width: 10em;
+      width: 10rem;
       margin: 0;
       background-color: #f9f9f9;
-      padding: 0.5em 0;
+      padding: 0.5rem 0;
       transition: background-color 0.2s;
       &:hover {
         background-color: #ccc;
@@ -250,11 +260,23 @@ ul#voteList {
   padding: 0;
 
   li.voteContainer {
-    padding: 1em 0 0 0;
+    margin: 3rem auto;
     min-height: 100px;
-    border-bottom: 1px solid #cccccc;
+    border: 2px solid #cccccc;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
 
     .vote {
+      margin: 0;
+      padding: 1em;
+
+      &.is-closed{
+        border-left: 10px solid #ccc;
+      }
+      &:not(.is-closed) {
+        border-left: 10px solid #90ee90;
+      }
+
       .vote-title {
         font-size: 150%;
         color: inherit;
@@ -262,24 +284,29 @@ ul#voteList {
         &:hover {
           text-decoration: underline;
         }
+        h3 {
+          word-break: break-all;
+        }
       }
 
       .vote-main {
-        margin: 1em auto;
+        margin: 1rem auto;
       }
 
       .vote-footer {
         display: flex;
+        flex-wrap: wrap;
         width: 100%;
         justify-content: space-between;
         align-items: center;
-        margin: 0.5em auto;
+        margin: 0.5rem auto;
       }
 
       .vote-count,
       .vote-closing-at,
       .vote-created-at {
-        margin: auto 1em;
+        margin: auto 1rem auto auto;
+        display: inline-block;
       }
     }
   }
@@ -287,7 +314,7 @@ ul#voteList {
 
 .search-button {
   margin: 0 5px;
-  font-size: 1.5em;
+  font-size: 1.5rem;
   border: 0;
   background-color: #f0f0f0;
   transition: background-color 0.1s;
