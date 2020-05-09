@@ -121,22 +121,24 @@ export default class CreateVoteComponent extends SuguvoteVue {
       <HTMLFormElement>document.getElementById("createVoteForm") ?? null;
     if (!form?.reportValidity()) return;
 
+    let recaptcha_token: string;
     try {
-      const recaptcha_token: string = await getReCAPTCHAToken();
+      recaptcha_token = await getReCAPTCHAToken();
+    } catch (err) {
+      console.log(err);
+      return;
+    }
+
+    try {
+      const createdVote: Vote = await api.votes.create(
+        this.vote,
+        recaptcha_token
+      );
+      const pk = createdVote["pk"];
+      this.$router.push(`/detail/${pk}`);
     } catch (err) {
       console.log(err);
     }
-
-    // try {
-    //   const createdVote: Vote = await api.votes.create(
-    //     this.vote,
-    //     recaptcha_token
-    //   );
-    //   const pk = createdVote["pk"];
-    //   this.$router.push(`/detail/${pk}`);
-    // } catch (err) {
-    //   console.log(err);
-    // }
   }
 
   addQuestion() {
