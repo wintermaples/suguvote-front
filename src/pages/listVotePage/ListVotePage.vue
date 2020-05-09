@@ -164,7 +164,7 @@ export default class ListVotePageComponent extends SuguvoteVue {
   }
 
   async paginationClickCallback() {
-    await this.reflectQuery();
+    await this.reflectQuery(true);
   }
 
   getPageNumber(): number {
