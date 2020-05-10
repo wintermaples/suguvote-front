@@ -29,7 +29,14 @@
     <div class="field">
       <label class="field-title" for="tag">タグ</label>
       <br />
-      <input type="text" name="tag" id="form-tag" class="field-input" v-model="tagField" />
+      <input
+        type="text"
+        name="tag"
+        id="form-tag"
+        class="field-input"
+        maxlength="10"
+        v-model="tagField"
+      />
       <button class="tag-button" @click="addTag()" type="button">+</button>
       <div class="vote-tags">
         <span class="vote-tag" v-for="tag in vote.tags" :key="tag">
@@ -41,13 +48,13 @@
     <div class="field">
       <label class="field-title" for="closingAt">締切</label>
       <br />
-      <input
-        type="datetime-local"
-        name="closingAt"
-        id="form-closingAt"
-        class="field-input"
-        v-model="vote.closing_at"
-      />
+      <datetime
+        type="datetime"
+        format="yyyy-MM-dd HH:mm"
+        :min-datetime="`${(new Date()).toISOString()}`"
+        :value="vote.closing_at"
+        @input="vote.closing_at = $event ? $event : null"
+      ></datetime>
     </div>
     <div class="field">
       <label class="field-title" for="password">編集用パスワード</label>
@@ -65,9 +72,14 @@
     <div class="border"></div>
     <div id="questionsContainer">
       <div class="field">
-        <template v-for="question in vote.questions">
-          <component :is="toEditQuestionView(question)" :question="question" />
-        </template>
+        <div v-for="(question, questionIndex) in vote.questions" class="question-container">
+          <component
+            :is="toEditQuestionView(question)"
+            :question="question"
+            :canDeleteQuestion="canDeleteQuestion()"
+            @delete="deleteQuestion(questionIndex)"
+          />
+        </div>
       </div>
       <div
         id="addQuestionButtonContainer"
@@ -103,6 +115,8 @@ import { api } from "@/requests/requests";
 import SuguvoteVue from "../../utils/HelperMixin.vue";
 import { MAX_QUESTION_NUM, MAX_TAG_NUM } from "@/const/LimitConst";
 import { getReCAPTCHAToken } from "@/utils/recaptcha";
+import { Watch } from "vue-property-decorator";
+import dayjs from "dayjs";
 
 @Component
 export default class CreateVoteComponent extends SuguvoteVue {
@@ -112,7 +126,10 @@ export default class CreateVoteComponent extends SuguvoteVue {
   async created() {
     //デフォルト値
     this.vote.questions.push(
-      new OneSelectQuestion("選択技", [new OneSelectOption("")])
+      new OneSelectQuestion("", [
+        new OneSelectOption(""),
+        new OneSelectOption("")
+      ])
     );
   }
 
@@ -144,7 +161,10 @@ export default class CreateVoteComponent extends SuguvoteVue {
   addQuestion() {
     if (!this.canAddQuestion()) return;
     this.vote.questions.push(
-      new OneSelectQuestion("選択技", [new OneSelectOption("")])
+      new OneSelectQuestion("", [
+        new OneSelectOption(""),
+        new OneSelectOption("")
+      ])
     );
   }
 
@@ -167,6 +187,16 @@ export default class CreateVoteComponent extends SuguvoteVue {
   canAddTag(): boolean {
     return this.vote.tags.length < MAX_TAG_NUM;
   }
+
+  canDeleteQuestion(): boolean {
+    return this.vote.questions.length > 1
+  }
+
+  deleteQuestion(index: number): boolean {
+    if (!this.canDeleteQuestion()) return false;
+    this.vote.questions.splice(index, 1);
+    return true;
+  }
 }
 </script>
 
@@ -182,10 +212,6 @@ export default class CreateVoteComponent extends SuguvoteVue {
   margin-top: 50px;
   font-size: 187.5%;
   font-weight: bold;
-}
-
-.question-container {
-  margin-top: 75px;
 }
 
 .tag-button {
@@ -260,5 +286,16 @@ export default class CreateVoteComponent extends SuguvoteVue {
     background-color: #3c6a24;
     box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.5);
   }
+}
+
+.question-container {
+  border: 2px solid #cccccc;
+  border-radius: 5px;
+  margin: 2rem auto;
+}
+
+.question {
+  border-left: 5px solid #90ee90;
+  padding: 0 1em;
 }
 </style>

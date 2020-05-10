@@ -43,7 +43,7 @@ export class Vote {
   password: string|undefined;
   description: string = "";
   tags: string[] = [];
-  closing_at: Date|null = null;
+  closing_at: string|null = null;
   @ArrayTransform(Question.transformFn)
   questions: Question[] = [];
   created_at: string|undefined;

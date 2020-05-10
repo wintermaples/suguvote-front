@@ -1,7 +1,7 @@
 <template>
   <div id="topPage">
     <h1 id="title">Suguvote</h1>
-    <div id="titleDescription"><span class="text">アンケートを簡単に</span><span class="text">「作れる」・「見つけられる」サービス</span></div>
+    <div id="titleDescription"><span class="text">アンケートを簡単に</span><span class="text">「作れる」・「見つけられる」</span><span class="text">サービス</span></div>
     <div id="topPageMenu">
       <router-link to="/createVote"><div class="btn btn-large btn-color-light-sky-blue">アンケートを作る</div></router-link>
       <router-link to="/list"><div class="btn btn-large btn-color-light-sky-blue">アンケートを探す</div></router-link>
@@ -28,7 +28,7 @@ export default class TopPageComponent extends Vue {}
   );
   // As HeaderSize = 52px ・・・ (40px + (5*2)px + (1*2)px)
   //    FooterSize = 100px ・・・(40px + (15*2)px + 30px)
-  min-height: 500px - 152px;
+  min-height: 550px - 152px;
 }
 
 h1#title {

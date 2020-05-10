@@ -3,7 +3,7 @@
 
 html {
   @media screen and (max-width: 767px) {
-    font-size: 10px;
+    font-size: 11px;
   }
 }
 
@@ -16,6 +16,10 @@ body {
   "Meiryo",
   "sans-serif";
   color: #333;
+  min-width: 320px;
+  @media screen and (max-width: 767px) {
+    font-size: 11px;
+  }
 }
 
 .text {
@@ -31,7 +35,7 @@ body {
   transition: .4s;
   
   @media screen and (min-width: 768px) {
-    min-width: 8em;
+    width: 8em;
   }
 }
 
@@ -56,10 +60,6 @@ body {
 .btn-color-light-sky-blue:hover {
   background: #67c5ff;
   color: white;
-}
-
-i.fas, i.far {
-  margin: auto 0.5rem;
 }
 
 .multiline-text {
@@ -142,25 +142,29 @@ i.fas, i.far {
 }
 
 .vote-tags {
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
+
   .vote-tag {
     color: #505050;
     padding: 0.5rem;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     line-height: 1.1;
     background: #dedede;
-    vertical-align: middle;
     border-radius: 25px 0px 0px 25px;
-    margin: auto 0.5rem;
+    margin: 0.25rem 0.5rem;
 
     .tag-delete-button {
       display: inline-block;
       text-align: center;
       cursor: pointer;
       margin: 0 0.25rem 0 0.5rem;
-      width: 20px;
-      height: 20px;
-      font-size: 20px;
-      line-height: 20px;
+      width: 1.5rem;
+      height: 1.5rem;
+      font-size: 1.5rem;
+      line-height: 1.5rem;
       &:hover {
         border-radius: 10px;
         background-color: #cecece;
