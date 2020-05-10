@@ -2,6 +2,7 @@ import * as LimitConst from "@/const/LimitConst";
 import { ArrayTransformFn as ArrayTransform } from "@/utils/TransformUtil";
 import { classToClass, classToPlain, plainToClass, Type } from 'class-transformer';
 import { TransformationType } from "class-transformer/TransformOperationExecutor";
+import dayjs from "dayjs";
 
 export enum QuestionType {
   ONE_SELECT = "ONE_SELECT"
@@ -42,12 +43,18 @@ export class Vote {
   password: string|undefined;
   description: string = "";
   tags: string[] = [];
-  closing_at: Date|null = null;
+  closing_at: string|null = null;
   @ArrayTransform(Question.transformFn)
   questions: Question[] = [];
   created_at: string|undefined;
   updated_at: string|undefined;
   vote_count: number|undefined;
+
+  isClosed(): boolean {
+    if (!this.closing_at)
+      return false;
+    return dayjs(this.closing_at).isBefore(new Date());
+  }
 }
 
 export class VotingResult {

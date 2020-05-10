@@ -12,7 +12,7 @@
       </transition>
     </div>
     <div id="footer">
-      <div style="white-space: ">
+      <div>
         Made by
         <a href="https://twitter.com/yoshi_yukky">@yoshi_yukky</a>.
         <br />Suguvote is in development now(Alpha dev.1).
@@ -29,8 +29,17 @@ export default class AppComponent extends Vue {}
 </script>
 
 <style lang="scss" scoped>
+#app {
+  display: flex;
+  flex-direction: column;
+  // min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
+  justify-content: center;
+  align-items: center;
+}
+
 #header {
-  $paddingX: 15%;
+  $paddingX: 5%;
   width: calc(100% - #{$paddingX} * 2);
   height: 40px;
   padding: 5px $paddingX;
@@ -40,7 +49,7 @@ export default class AppComponent extends Vue {}
 }
 
 #headerTitle {
-  font-size: 34px;
+  font-size: 34px; // Specified with px for fitting to header.
   font-weight: bold;
 }
 
@@ -50,11 +59,11 @@ export default class AppComponent extends Vue {}
 }
 
 #content {
-  $paddingX: 15%;
+  $paddingX: 5%;
   width: calc(100% - #{$paddingX} * 2);
   max-width: 1440px;
   padding: 0 $paddingX;
-  margin: auto;
+  margin: 0 auto auto auto;
 }
 
 .router-transition-enter-active,
@@ -68,15 +77,12 @@ export default class AppComponent extends Vue {}
 }
 
 #footer {
-  $paddingX: 15%;
-  width: calc(100% - #{$paddingX} * 2);
+  width: 100%;
   height: 40px;
   margin: 30px auto 0px auto;
-  padding: 15px $paddingX;
+  padding: 15px 0;
   background-color: #f6f6f6;
   color: #aaa;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
 }
 </style>
