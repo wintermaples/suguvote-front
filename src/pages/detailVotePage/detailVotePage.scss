@@ -1,13 +1,16 @@
 #voteButtonContainer {
-  margin: 132px auto;
+  margin: 8rem auto;
   text-align: center;
 }
 
 #voteButton {
+  display: inline-block;
   text-decoration: inherit;
   border-radius: 4px;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-  padding: 1rem 5rem;
+  padding: 1rem 0;
+  width: 20em;
+  max-width: 100%;
   background-color: #4c7a34;
   color: white;
   font-weight: bold;
@@ -24,4 +27,11 @@
     background-color: #3c6a24;
     box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.5);
   }
+
+  &.disabled {
+    cursor: inherit;
+    background-color: #999999;
+    box-shadow: none;
+  }
+
 }

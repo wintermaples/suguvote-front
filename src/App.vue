@@ -39,7 +39,7 @@ export default class AppComponent extends Vue {}
 }
 
 #header {
-  $paddingX: 15%;
+  $paddingX: 5%;
   width: calc(100% - #{$paddingX} * 2);
   height: 40px;
   padding: 5px $paddingX;
@@ -59,7 +59,7 @@ export default class AppComponent extends Vue {}
 }
 
 #content {
-  $paddingX: 15%;
+  $paddingX: 5%;
   width: calc(100% - #{$paddingX} * 2);
   max-width: 1440px;
   padding: 0 $paddingX;

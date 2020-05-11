@@ -44,5 +44,6 @@ export default class VotingResultsComponent extends Vue {
 
 .voting-result-of-one-question-view {
   width: 600px;
+  max-width: 100%;
 }
 </style>

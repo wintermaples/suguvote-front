@@ -9,9 +9,14 @@
   }
 }
 
+input, textarea {
+  box-sizing: border-box;
+}
+
 input[type="text"].field-input,
 input[type="password"].field-input,
 input[type="datetime-local"].field-input,
+input.vdatetime-input,
 textarea.field-input {
   font-family: "Helvetica Neue",
   "Arial",
@@ -21,19 +26,20 @@ textarea.field-input {
   "sans-serif";
   border: 0;
   border: solid 1px #ccc;
-  height: 20px;
-  padding: 10px;
+  height: 2.5em;
+  padding: 0 0.5em;
   border-radius: 3px;
-  font-size: 1.3rem;
+  font-size: 1.15rem;
   box-shadow: inset 1px 4px 9px -6px rgba(0,0,0,0.3);
   margin: 5px 0;
 }
 
 textarea.field-input {
-  height: 4rem;
+  height: 8em;
+  padding: 0.5em 0.5em;
 }
 
-.wide-input {
+.wide-input,input.vdatetime-input {
   width: 768px;
   max-width: 100%;
 }
