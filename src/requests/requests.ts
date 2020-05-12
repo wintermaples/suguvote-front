@@ -10,7 +10,8 @@ const axiosInstance: AxiosInstance = axios.create({
   baseURL: BASE_URL,
   headers: {
     'Content-Type': 'application/json;charset=UTF-8',
-  }
+  },
+  withCredentials: true
 });
 
 async function listVote(query: any={}): Promise<VoteModelWrappedInPagination> {

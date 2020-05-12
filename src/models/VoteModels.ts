@@ -49,6 +49,7 @@ export class Vote {
   created_at: string|undefined;
   updated_at: string|undefined;
   vote_count: number|undefined;
+  is_voted_by_you: boolean|undefined;
 
   isClosed(): boolean {
     if (!this.closing_at)
