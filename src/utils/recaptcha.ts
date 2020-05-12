@@ -7,5 +7,5 @@ export async function getReCAPTCHAToken() {
     }
   });
   await readyPromise;
-  return await grecaptcha.execute('6LfW6u8UAAAAAEOrBF9FepgePLQXlzjie06TXxJK', { action: 'social' });
+  return await grecaptcha.execute('6LePqfUUAAAAAM03Uia5awBb9hNFQjNY80JAgSBM', { action: 'social' });
 }

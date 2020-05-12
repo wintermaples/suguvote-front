@@ -43,7 +43,7 @@ import HelperMixin from "@/utils/HelperMixin.vue";
 import { Prop } from "vue-property-decorator";
 import { Vote, VotingResult } from "@/models/VoteModels";
 import { VoteAnswersFactory, VoteAnswer } from "@/models/VoteAnswerModel";
-import { getReCAPTCHAToken } from "@/utils/recaptcha.js";
+import { getReCAPTCHAToken } from "@/utils/recaptcha";
 import { classToPlain } from "class-transformer";
 import { api } from "../../requests/requests";
 import SuguvoteVue from "@/utils/HelperMixin.vue";

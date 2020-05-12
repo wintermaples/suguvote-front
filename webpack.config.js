@@ -1,9 +1,11 @@
 const path = require('path');
 const outputPath = path.resolve(__dirname, 'dist');
+const NODE_ENV = process.env.NODE_ENV || 'dev';
 
 const { VueLoaderPlugin } = require('vue-loader');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+console.log(path.resolve(__dirname, `src/.env/${NODE_ENV}.ts`));
 
 module.exports = {
   entry: {
@@ -15,7 +17,8 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src/')
+      '@': path.resolve(__dirname, 'src/'),
+      env$: path.resolve(__dirname, `src/.env/${NODE_ENV}.ts`)
     },
     extensions: ['.ts', '.tsx', '.js', '.json', '.vue']
   },
