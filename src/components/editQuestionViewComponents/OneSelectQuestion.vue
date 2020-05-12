@@ -6,6 +6,8 @@
         class="one-select-question-title"
         v-model="question.title"
         placeholder="質問のタイトル"
+        required
+        maxlength="64"
       />
       <span class="delete-question-button" @click="$emit('delete')" v-if="canDeleteQuestion">×</span>
     </div>
