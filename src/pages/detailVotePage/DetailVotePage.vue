@@ -37,6 +37,7 @@
       </div>
     </template>
     <!-- VoteButtonContainer End -->
+    <div id="manageLink"><router-link :to="`/manage/${vote.pk}`">このアンケートを編集</router-link></div>
     <div class="border"></div>
     <VotingResultsComponent
       :vote="vote"
@@ -153,5 +154,9 @@ export default class DetailVotePageComponent extends SuguvoteVue {
 #voteCount {
   font-size: 87.5%;
   color: #606060;
+}
+
+#manageLink {
+  text-align: right;
 }
 </style>

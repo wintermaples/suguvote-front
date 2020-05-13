@@ -1,0 +1,51 @@
+
+.dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  min-width: 320px;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+
+  transition: opacity 0.2s, visibility 0.2s;
+  opacity: 0;
+}
+
+.dialog-contents {
+  width: 600px;
+  min-width: 320px;
+  max-height: 100vh;
+  background-color: #ffffff;
+  margin: auto;
+  z-index: 1002;
+  border-radius: 10px;
+  border: 1px solid #cccccc;
+  padding: 2rem;
+  overflow-y: auto;
+
+  transition: transform 0.2s;
+  transform: scale(0, 0);
+}
+
+.dialog-margin {
+  position: fixed;
+  opacity: 0;
+  z-index: 1001;
+  width: 100vw;
+  height: 100vh;
+}
+
+.dialog-show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.dialog-show > .dialog-contents {
+  transform: scale(1, 1);
+}
