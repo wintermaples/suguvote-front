@@ -10,7 +10,8 @@ const axiosInstance: AxiosInstance = axios.create({
   baseURL: BASE_URL,
   headers: {
     'Content-Type': 'application/json;charset=UTF-8',
-  }
+  },
+  withCredentials: true
 });
 
 async function listVote(query: any={}): Promise<VoteModelWrappedInPagination> {
@@ -36,6 +37,22 @@ async function retrieveVote(id: number): Promise<Vote> {
   return vote;
 }
 
+async function updateVote(vote: Vote): Promise<Vote> {
+  const data: string = JSON.stringify(vote);
+  const response: AxiosResponse = await axiosInstance.put(`/votes/${vote.pk}/`, data);
+  const updatedVote: Vote = plainToClass(Vote, response.data);
+  return updatedVote;
+}
+
+async function deleteVote(id: number, password: string): Promise<void> {
+  const config: object = {
+    data: {
+      password: password
+    }
+  };
+  const response: AxiosResponse = await axiosInstance.delete(`/votes/${id}/`, config);
+}
+
 async function retrieveVotingResults(id: number): Promise<VotingResult[]> {
   const response: AxiosResponse = await axiosInstance.get(`/votes/${id}/voting_results/`);
   const votingResults: VotingResult[] = response.data.map((obj: any) => plainToClass(VotingResult, obj));
@@ -57,6 +74,8 @@ export const api = {
     list: listVote,
     create: createVote,
     retrieve: retrieveVote,
+    update: updateVote,
+    delete: deleteVote,
     votingResults: {
       retrieve: retrieveVotingResults,
       post: postVotingResults,
