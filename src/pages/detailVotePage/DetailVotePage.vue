@@ -165,5 +165,9 @@ export default class DetailVotePageComponent extends SuguvoteVue {
 
 #manageLink {
   text-align: right;
+  a {
+    text-decoration: none;
+    color: #999;
+  }
 }
 </style>

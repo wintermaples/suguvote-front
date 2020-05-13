@@ -13,9 +13,8 @@
     </div>
     <div id="footer">
       <div>
-        Made by
-        <a href="https://twitter.com/yoshi_yukky">@yoshi_yukky</a>.
-        <br />Suguvote is in development now(Alpha dev.1).
+        Suguvote is in development now(Alpha dev.1).&nbsp;Made by <a href="https://twitter.com/yoshi_yukky" target="_blank">@yoshi_yukky</a>. <br>
+        ご意見・バグ報告などは<a href="https://forms.gle/MMRpWPzd2y6zJahq7" target="_blank">こちら</a>
       </div>
     </div>
   </div>
