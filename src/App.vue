@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <div id="header">
-      <div id="headerTitle">
-        <router-link to="/">Suguvote</router-link>
-      </div>
+      <span id="headerLogo">
+        <router-link to="/"><img src="/static/images/logo.png" alt="Suguvote"></router-link>
+      </span>
       <div id="headerMenu"></div>
     </div>
     <div id="content">
@@ -55,6 +55,13 @@ export default class AppComponent extends Vue {}
 #headerTitle a {
   text-decoration: none;
   color: #111;
+}
+
+#headerLogo {
+  display: inline-block;
+  img {
+    max-height: 100%;
+  }
 }
 
 #content {

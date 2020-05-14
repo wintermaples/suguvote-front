@@ -1,6 +1,6 @@
 <template>
   <div id="topPage">
-    <h1 id="title">Suguvote</h1>
+    <img src="/static/images/logo.png" alt="Suguvote" id="titleImg">
     <div id="titleDescription"><span class="text">アンケートを簡単に</span><span class="text">「作れる」・「見つけられる」</span><span class="text">サービス</span></div>
     <div id="topPageMenu">
       <router-link to="/createVote"><div class="btn btn-large btn-color-light-sky-blue">アンケートを作る</div></router-link>
@@ -31,10 +31,10 @@ export default class TopPageComponent extends Vue {}
   min-height: 550px - 152px;
 }
 
-h1#title {
-  font-size: 4rem;
-  border-bottom: 2px solid lightseagreen;
-  padding: 0 3rem 0.5rem 3rem;
+#titleImg {
+  width: 30rem;
+  max-width: 100%;
+  margin: 3rem;
 
   animation: titleAnimation 1s ease 0.5s 1 forwards;
   transform: rotateX(90deg);
