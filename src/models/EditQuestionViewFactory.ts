@@ -18,16 +18,6 @@ export abstract class EditQuestionViewFactory {
   }
 }
 
-
-class OneSelectQuestionViewFactory extends EditQuestionViewFactory {
-  getQuestionType(): QuestionType {
-    return QuestionType.ONE_SELECT;
-  }
-  generateComponent(question: Question): VueConstructor<Vue> {
-    return OneSelectQuestionComponent;
-  }
-}
-
 EditQuestionViewFactory.addFactory({
   getQuestionType: () => QuestionType.ONE_SELECT,
   generateComponent: () => OneSelectQuestionComponent
