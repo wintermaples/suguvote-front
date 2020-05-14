@@ -69,6 +69,7 @@
       :prev-class="'pagination-prev'"
       :next-class="'pagination-next'"
       :click-handler="paginationClickCallback"
+      v-if="votes&&votes.length>0"
     ></paginate>
   </div>
 </template>

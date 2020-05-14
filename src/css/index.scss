@@ -1,5 +1,6 @@
 @import './form';
 @import './pagination';
+@import './dialog';
 
 html {
   @media screen and (max-width: 767px) {
@@ -30,36 +31,103 @@ body {
   display: inline-block;
   text-decoration: none;
   text-align: center;
-  padding: 0.3em 1em;
-  border-radius: 3px;
-  transition: .4s;
+  border-radius: 5px;
+  transition: 0.2s;
+  cursor: pointer;
+  user-select: none;
+  box-sizing: border-box;
   
-  @media screen and (min-width: 768px) {
-    width: 8em;
+  @media screen and (max-width: 767px) {
+    padding: 0.75rem 1rem;
   }
-}
 
-.btn-small {
-  font-size: 100%;
-}
+  @media screen and (min-width: 768px) {
+    padding: 0.75rem 5rem;
+    min-width: 8em;
+    max-width: 100%;
+  }
 
-.btn-medium {
-  font-size: 150%;
-}
+  &.btn-small {
+    font-size: 100%;
+  }
+  
+  &.btn-medium {
+    font-size: 150%;
+  }
+  
+  &.btn-large {
+    font-size: 200%;
+    font-weight: bolder;
+  }
+  
+  &.btn-color-light-sky-blue {
+    color: #67c5ff;
+    border: solid 2px #67c5ff;
+    &:hover {
+      background: #67c5ff;
+      color: white;
+    }
+  }
 
-.btn-large {
-  font-size: 200%;
-  font-weight: bolder;
-}
+  &.btn-color-red {
+    color: #cc6666;
+    border: solid 2px #cc6666;
+    &:hover {
+      background: #cc6666;
+      color: white;
+    }
+    &:active {
+      background: #993333;
+      color: white;
+      border: solid 2px #993333;
+    }
+  }
 
-.btn-color-light-sky-blue {
-  color: #67c5ff;
-  border: solid 2px #67c5ff;
-}
+  &.btn-color-green {
+    color: #4c7a34;
+    border: solid 2px #4c7a34;
+    &:hover {
+      background: #5c8a44;
+      color: white;
+      border: solid 2px #5c8a44;
+      &.shadow {
+        box-shadow: 5px 5px 7px rgba(39, 33, 33, 0.5);
+      }
+    }
+    &:active {
+      background-color: #3c6a24;
+      color: white;
+      border: solid 2px #3c6a24;
+      &.shadow {
+        box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.5);
+      }
+    }
+    &.filled {
+      background: #4c7a34;
+      color: white;
+      border: none;
+      &:hover {
+        background: #5c8a44;
+        &.shadow {
+          box-shadow: 5px 5px 7px rgba(39, 33, 33, 0.5);
+        }
+      }
+      &:active {
+        background-color: #3c6a24;
+        &.shadow {
+          box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.5);
+        }
+      }
+    }
+  }
 
-.btn-color-light-sky-blue:hover {
-  background: #67c5ff;
-  color: white;
+  &.shadow {
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+  }
+
+  &.m1 {
+    margin: 1em;
+  }
 }
 
 .multiline-text {
@@ -86,55 +154,6 @@ body {
 }
 
 .grecaptcha-badge { visibility: hidden; }
-
-.dialog {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 1000;
-  background-color: rgba(0, 0, 0, 0.2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  visibility: hidden;
-
-  transition: opacity 0.2s, visibility 0.2s;
-  opacity: 0;
-}
-
-.dialog-contents {
-  width: 600px;
-  max-height: 100vh;
-  background-color: #ffffff;
-  margin: auto;
-  z-index: 1002;
-  border-radius: 10px;
-  border: 1px solid #cccccc;
-  padding: 2rem;
-  overflow-y: auto;
-
-  transition: transform 0.2s;
-  transform: scale(0, 0);
-}
-
-.dialog-margin {
-  position: fixed;
-  opacity: 0;
-  z-index: 1001;
-  width: 100vw;
-  height: 100vh;
-}
-
-.dialog-show {
-  visibility: visible;
-  opacity: 1;
-}
-
-.dialog-show > .dialog-contents {
-  transform: scale(1, 1);
-}
 
 .border {
   width: 100%;
