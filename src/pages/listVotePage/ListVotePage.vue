@@ -1,7 +1,7 @@
 <template>
   <div id="container">
     <div id="subtitleContainer">
-      <div id="subtitle">投稿された投票</div>
+      <div id="subtitle">投稿されたアンケート</div>
       <div
         id="sortButton"
         @click="isActiveSortingMenu=!isActiveSortingMenu"
@@ -12,7 +12,7 @@
         <div id="sortButtonSubMenu">
           <ul>
             <li @click="query.ordering='-created_at';reflectQuery(true);">新着順</li>
-            <li @click="query.ordering='-vote_count';reflectQuery(true);">投票数が多い順</li>
+            <li @click="query.ordering='-vote_count';reflectQuery(true);">回答数が多い順</li>
           </ul>
         </div>
       </div>
@@ -159,7 +159,7 @@ export default class ListVotePageComponent extends SuguvoteVue {
       case "-created_at":
         return "新着順";
       case "-vote_count":
-        return "投票数が多い順";
+        return "回答数が多い順";
       case undefined:
         return "新着順";
       default:

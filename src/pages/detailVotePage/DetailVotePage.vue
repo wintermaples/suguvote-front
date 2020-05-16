@@ -20,26 +20,26 @@
       class="right"
     >締切:&nbsp;{{ vote.closing_at ? formatDate(vote.closing_at) : '---' }}</div>
     <div class="clear"></div>
-    <div id="voteCount" class="right">投票数:&nbsp;{{ vote.vote_count }}</div>
+    <div id="voteCount" class="right">回答数:&nbsp;{{ vote.vote_count }}</div>
     <div class="clear"></div>
     <!-- VoteButtonContainer Start -->
     <template v-if="vote.isClosed()">
       <div id="voteButtonContainer">
-        <span id="voteButton" class="disabled">投票は終了しました</span>
+        <span id="voteButton" class="disabled">回答受付は終了しました</span>
       </div>
     </template>
     <template v-else>
       <template v-if="vote.is_voted_by_you">
         <div id="voteButtonContainer">
-          <span id="voteButton" class="disabled">投票済み</span>
+          <span id="voteButton" class="disabled">回答済み</span>
         </div>
       </template>
       <template v-else>
         <div id="voteButtonContainer" v-if="mode=='VOTING_RESULTS'">
-          <a @click="toggleMode();scrollToVotingView();" id="voteButton">この投票に回答する</a>
+          <a @click="toggleMode();scrollToVotingView();" id="voteButton">このアンケートに回答する</a>
         </div>
         <div id="voteButtonContainer" v-if="mode=='VOTING'">
-          <a @click="toggleMode();" id="voteButton">投票結果に戻る</a>
+          <a @click="toggleMode();" id="voteButton">アンケート結果に戻る</a>
         </div>
       </template>
     </template>
