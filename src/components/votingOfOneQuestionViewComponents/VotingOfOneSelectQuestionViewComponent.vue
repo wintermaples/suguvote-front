@@ -25,7 +25,7 @@ import { VotingResultChartGenerator } from "@/chart/VotingResultChartGenerator";
 import {
   VoteAnswer,
   VoteAnswerOfOneSelectQuestion
-} from "../../models/VoteAnswerModel";
+} from "../../models/VoteAnswerModels";
 
 @Component
 export default class VotingResultOfOneSelectQuestionViewComponent extends Vue {
