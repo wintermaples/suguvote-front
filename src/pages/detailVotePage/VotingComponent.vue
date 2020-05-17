@@ -42,7 +42,7 @@ import Component from "vue-class-component";
 import HelperMixin from "@/utils/HelperMixin.vue";
 import { Prop } from "vue-property-decorator";
 import { Vote, VotingResult } from "@/models/VoteModels";
-import { VoteAnswersFactory, VoteAnswer } from "@/models/VoteAnswerModel";
+import { VoteAnswersFactory, VoteAnswer } from "@/models/VoteAnswerModels";
 import { getReCAPTCHAToken } from "@/utils/recaptcha";
 import { classToPlain } from "class-transformer";
 import { api } from "../../requests/requests";

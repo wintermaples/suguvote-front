@@ -13,7 +13,7 @@
     </div>
     <div id="footer">
       <div>
-        Suguvote is in development now(Alpha dev.1).&nbsp;Made by <a href="https://twitter.com/yoshi_yukky_it" target="_blank">@yoshi_yukky_it</a>. <br>
+        Suguvote is in development now(Alpha dev.2).&nbsp;Made by <a href="https://twitter.com/yoshi_yukky_it" target="_blank">@yoshi_yukky_it</a>. <br>
         ご意見・バグ報告などは<a href="https://forms.gle/MMRpWPzd2y6zJahq7" target="_blank">こちら</a>
       </div>
     </div>
@@ -61,6 +61,7 @@ export default class AppComponent extends Vue {}
   display: inline-block;
   img {
     max-height: 100%;
+    max-width: 100%;
   }
 }
 

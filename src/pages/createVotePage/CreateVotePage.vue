@@ -67,7 +67,9 @@
         required
         maxlength="256"
         v-model="vote.password"
+        @change="validatePassword"
       />
+      <div v-if="validatePasswordErrorMessages" v-for="validatePasswordErrorMessage in validatePasswordErrorMessages" class="error">{{ validatePasswordErrorMessage }}</div>
     </div>
     <div class="border"></div>
     <div id="questionsContainer">
@@ -117,11 +119,14 @@ import { MAX_QUESTION_NUM, MAX_TAG_NUM } from "@/const/LimitConst";
 import { getReCAPTCHAToken } from "@/utils/recaptcha";
 import { Watch } from "vue-property-decorator";
 import dayjs from "dayjs";
+import { ValidatePasswordResult } from "../../models/OtherModels";
+import { suguvoteUIModule } from "@/store/modules/SuguvoteUIModule";
 
 @Component
 export default class CreateVoteComponent extends SuguvoteVue {
   vote: Vote = new Vote();
   tagField: string = "";
+  validatePasswordErrorMessages: string[]|null = null;
 
   async created() {
     //デフォルト値
@@ -152,6 +157,7 @@ export default class CreateVoteComponent extends SuguvoteVue {
         recaptcha_token
       );
       const pk = createdVote["pk"];
+      suguvoteUIModule.toggleIsOpenedSharingModal();
       this.$router.push(`/detail/${pk}`);
     } catch (err) {
       console.log(err);
@@ -196,6 +202,14 @@ export default class CreateVoteComponent extends SuguvoteVue {
     if (!this.canDeleteQuestion()) return false;
     this.vote.questions.splice(index, 1);
     return true;
+  }
+
+  async validatePassword(event: any) {
+    const validatePasswordResult: ValidatePasswordResult = await api.general.validatePassword(event.target.value);
+    if (!validatePasswordResult.result)
+      this.validatePasswordErrorMessages = validatePasswordResult.error_messages ?? [];
+    else
+      this.validatePasswordErrorMessages = null;
   }
 }
 </script>

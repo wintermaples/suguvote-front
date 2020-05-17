@@ -2,9 +2,10 @@ import { VoteModelWrappedInPagination } from '@/models/ModelWrappedInPagination'
 import { Vote, VotingResult } from '@/models/VoteModels';
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { plainToClass } from 'class-transformer';
-import { VoteAnswer } from '@/models/VoteAnswerModel';
+import { VoteAnswer } from '@/models/VoteAnswerModels';
 import { Dictionary } from 'vue-router/types/router';
 import { BASE_URL } from '@/const/CommonConst';
+import { ValidatePasswordResult } from '@/models/OtherModels';
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -69,7 +70,19 @@ async function postVotingResults(id: number, voteAnswers: VoteAnswer[], recaptch
   return votingResults;
 }
 
+async function validatePassword(password: string): Promise<ValidatePasswordResult> {
+  const data: object = {
+    password: password
+  };
+  const response: AxiosResponse = await axiosInstance.post(`/general/validate_password`,data);
+  const validatePasswordResult: ValidatePasswordResult = plainToClass(ValidatePasswordResult, response.data);
+  return validatePasswordResult;
+}
+
 export const api = {
+  general: {
+    validatePassword: validatePassword
+  },
   votes: {
     list: listVote,
     create: createVote,
