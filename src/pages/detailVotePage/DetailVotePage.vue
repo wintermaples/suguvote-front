@@ -3,13 +3,9 @@
     <div id="voteTitle">{{ vote.title }}</div>
     <div class="vote-tags right">
       <template v-if="vote.tags.length > 0">
-        <a
-          class="vote-tag"
-          v-for="tag in vote.tags"
-          :key="tag"
-          @click="query.like=tag;reflectQuery(resetPageNumber=true);"
-          style="cursor:pointer;"
-        >{{ tag }}</a>
+        <span class="vote-tag" v-for="tag in vote.tags" :key="tag">
+          {{ tag }}
+        </span>
       </template>
       <span v-else>タグ:&nbsp;なし</span>
     </div>
