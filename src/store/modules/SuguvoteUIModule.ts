@@ -6,7 +6,7 @@ export interface ISuguvoteUI {
 }
 @Module({ dynamic: true, store, name: "suguvote-ui", namespaced: true})
 class SuguvoteUI extends VuexModule implements ISuguvoteUI {
-  isOpenedSharingModal: boolean = true;
+  isOpenedSharingModal: boolean = false;
 
   @Mutation
   public SET_IS_OPENED_Sharing_MODAL(state: boolean) {
