@@ -120,6 +120,7 @@ import { getReCAPTCHAToken } from "@/utils/recaptcha";
 import { Watch } from "vue-property-decorator";
 import dayjs from "dayjs";
 import { ValidatePasswordResult } from "../../models/OtherModels";
+import { suguvoteUIModule } from "@/store/modules/SuguvoteUIModule";
 
 @Component
 export default class CreateVoteComponent extends SuguvoteVue {
@@ -156,6 +157,7 @@ export default class CreateVoteComponent extends SuguvoteVue {
         recaptcha_token
       );
       const pk = createdVote["pk"];
+      suguvoteUIModule.toggleIsOpenedSharingModal();
       this.$router.push(`/detail/${pk}`);
     } catch (err) {
       console.log(err);
