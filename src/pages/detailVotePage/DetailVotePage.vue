@@ -1,8 +1,5 @@
 <template>
   <div id="container" v-if="vote && votingResults.length > 0">
-    <div id="backToPrevious">
-      <a href="javascript:history.back();">← 前のページに戻る</a>
-    </div>
     <div id="voteTitle">{{ vote.title }}</div>
     <div id="voteDescription" class="multiline-text">{{ vote.description }}</div>
     <!-- UserNameContainer Start -->

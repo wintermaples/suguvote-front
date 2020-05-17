@@ -61,6 +61,7 @@ export default class AppComponent extends Vue {}
   display: inline-block;
   img {
     max-height: 100%;
+    max-width: 100%;
   }
 }
 
