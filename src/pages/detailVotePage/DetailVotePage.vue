@@ -1,6 +1,15 @@
 <template>
   <div id="container" v-if="vote && votingResults.length > 0">
     <div id="voteTitle">{{ vote.title }}</div>
+    <div class="vote-tags right">
+      <template v-if="vote.tags.length > 0">
+        <span class="vote-tag" v-for="tag in vote.tags" :key="tag">
+          {{ tag }}
+        </span>
+      </template>
+      <span v-else>タグ:&nbsp;なし</span>
+    </div>
+    <div class="clear"></div>
     <div id="voteDescription" class="multiline-text">{{ vote.description }}</div>
     <!-- UserNameContainer Start -->
     <div id="usernameContainer" class="right" v-if="vote.creator">{{ vote.creator }}</div>
