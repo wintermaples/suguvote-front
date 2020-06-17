@@ -2,7 +2,7 @@
   <div id="app">
     <div id="header">
       <span id="headerLogo">
-        <router-link to="/"><img src="/static/images/logo.png" alt="Suguvote"></router-link>
+        <router-link to="/list"><img src="/static/images/logo.png" alt="Suguvote"></router-link>
       </span>
       <div id="headerMenu"></div>
     </div>
