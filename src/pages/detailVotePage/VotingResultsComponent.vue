@@ -16,14 +16,12 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import HelperMixin from "@/utils/HelperMixin.vue";
+import SuguvoteVue from "@/utils/SuguvoteVue.vue";
 import { Prop } from "vue-property-decorator";
 import { Vote, VotingResult } from "@/models/VoteModels";
 
-@Component({
-  mixins: [HelperMixin]
-})
-export default class VotingResultsComponent extends Vue {
+@Component
+export default class VotingResultsComponent extends SuguvoteVue {
   @Prop()
   vote?: Readonly<Vote>;
   @Prop()

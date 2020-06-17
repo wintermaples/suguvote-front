@@ -7,6 +7,7 @@ import { EditQuestionViewFactory } from "@/models/EditQuestionViewFactory";
 import { VotingResultOfOneQuestionViewFactory } from "@/models/VotingResultOfOneQuestionViewFactory";
 import { VotingOfOneQuestionViewFactory } from "@/models/VotingOfOneQuestionViewFactory";
 
+
 @Component
 export default class SuguvoteVue extends Vue {
   reload(scrollTo: ScrollToOptions|undefined = undefined) {

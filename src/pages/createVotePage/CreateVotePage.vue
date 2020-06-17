@@ -114,13 +114,13 @@ import { OneSelectQuestion, OneSelectOption, Vote } from "@/models/VoteModels";
 import axios, { AxiosResponse } from "axios";
 import { plainToClass } from "class-transformer";
 import { api } from "@/requests/requests";
-import SuguvoteVue from "../../utils/HelperMixin.vue";
 import { MAX_QUESTION_NUM, MAX_TAG_NUM } from "@/const/LimitConst";
 import { getReCAPTCHAToken } from "@/utils/recaptcha";
 import { Watch } from "vue-property-decorator";
 import dayjs from "dayjs";
 import { ValidatePasswordResult } from "../../models/OtherModels";
 import { suguvoteUIModule } from "@/store/modules/SuguvoteUIModule";
+import SuguvoteVue from "@/utils/SuguvoteVue.vue";
 
 @Component
 export default class CreateVoteComponent extends SuguvoteVue {
