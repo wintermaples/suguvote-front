@@ -157,13 +157,13 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import HelperMixin from "../../utils/HelperMixin.vue";
 import VotingResultsComponent from "./VotingResultsComponent.vue";
 import VotingComponent from "./VotingComponent.vue";
 import { Vote, VotingResult } from "@/models/VoteModels";
 import { api } from "@/requests/requests";
-import SuguvoteVue from "../../utils/HelperMixin.vue";
+import SuguvoteVue from "@/utils/SuguvoteVue.vue";
 import { suguvoteUIModule } from "@/store/modules/SuguvoteUIModule";
+import * as CommonConst from "@/const/CommonConst";
 
 enum Mode {
   VOTING_RESULTS = "VOTING_RESULTS",
@@ -188,6 +188,9 @@ export default class DetailVotePageComponent extends SuguvoteVue {
     } catch (err) {
       console.log(err);
     }
+
+    document.title = CommonConst.DEFAULT_TITLE + (this.getTitleSuffix() ? ` - ${this.getTitleSuffix()}` : '');
+    document.querySelector('meta[name="description"]')?.setAttribute('content', this.getDescription() ?? '');
   }
 
   toggleMode(): void {
@@ -225,6 +228,14 @@ ${this.vote?.title}
 ${this.getHref()}
 #suguvote
 #アンケート`);
+  }
+
+  getTitleSuffix(): string|null {
+    return this.vote?.title ?? null;
+  }
+
+  getDescription(): string|null {
+    return this.vote?.description ?? null;
   }
 }
 </script>

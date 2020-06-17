@@ -78,14 +78,13 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { api } from "@/requests/requests";
-import HelperMixin from "@/utils/HelperMixin.vue";
 import { OneSelectQuestion, Vote } from "@/models/VoteModels";
 import { OneSelectOption } from "@/models/VoteModels";
 import {
   VoteModelWrappedInPagination,
   ModelWrappedInPageNumberPagination
 } from "@/models/ModelWrappedInPagination";
-import SuguvoteVue from "@/utils/HelperMixin.vue";
+import SuguvoteVue from "@/utils/SuguvoteVue.vue";
 import { Dictionary } from "vue-router/types/router";
 import { DEFAULT_PAGE_SIZE } from "@/const/CommonConst";
 import { Watch } from "vue-property-decorator";
