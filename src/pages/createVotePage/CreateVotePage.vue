@@ -115,15 +115,15 @@ import axios, { AxiosResponse } from "axios";
 import { plainToClass } from "class-transformer";
 import { api } from "@/requests/requests";
 import { MAX_QUESTION_NUM, MAX_TAG_NUM } from "@/const/LimitConst";
-import { getReCAPTCHAToken } from "@/utils/recaptcha";
 import { Watch } from "vue-property-decorator";
 import dayjs from "dayjs";
 import { ValidatePasswordResult } from "../../models/OtherModels";
 import { suguvoteUIModule } from "@/store/modules/SuguvoteUIModule";
-import SuguvoteVue from "@/utils/SuguvoteVue.vue";
+import { ReCAPTCHAHelpers } from "@/helpers/ReCAPTCHAHelpers";
+import { SuguvotePageVue } from "@/SuguvoteVue";
 
 @Component
-export default class CreateVoteComponent extends SuguvoteVue {
+export default class CreateVoteComponent extends SuguvotePageVue {
   vote: Vote = new Vote();
   tagField: string = "";
   validatePasswordErrorMessages: string[]|null = null;
@@ -145,7 +145,7 @@ export default class CreateVoteComponent extends SuguvoteVue {
 
     let recaptcha_token: string;
     try {
-      recaptcha_token = await getReCAPTCHAToken();
+      recaptcha_token = await ReCAPTCHAHelpers.getReCAPTCHAToken();
     } catch (err) {
       console.log(err);
       return;

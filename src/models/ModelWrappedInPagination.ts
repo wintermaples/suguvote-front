@@ -1,5 +1,5 @@
-import { TypeSpecifiedArrayTransformFn } from "@/utils/TransformUtil";
 import { Vote } from "./VoteModels";
+import { TransformHelpers } from "@/helpers/TransformHelpers";
 
 export abstract class ModelWrappedInPageNumberPagination {
   count: Readonly<number>|undefined;
@@ -9,6 +9,6 @@ export abstract class ModelWrappedInPageNumberPagination {
 }
 
 export class VoteModelWrappedInPagination extends ModelWrappedInPageNumberPagination {
-  @TypeSpecifiedArrayTransformFn(Vote)
+  @TransformHelpers.TypeSpecifiedArrayTransformFn(Vote)
   results: Readonly<Vote[]>|undefined;
 }

@@ -19,9 +19,10 @@ import Component from "vue-class-component";
 import SuguvoteVue from "@/utils/SuguvoteVue.vue";
 import { Prop } from "vue-property-decorator";
 import { Vote, VotingResult } from "@/models/VoteModels";
+import { SuguvoteComponentVue } from "@/SuguvoteVue";
 
 @Component
-export default class VotingResultsComponent extends SuguvoteVue {
+export default class VotingResultsComponent extends SuguvoteComponentVue {
   @Prop()
   vote?: Readonly<Vote>;
   @Prop()

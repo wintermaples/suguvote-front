@@ -42,13 +42,14 @@ import Component from "vue-class-component";
 import { Prop } from "vue-property-decorator";
 import { Vote, VotingResult } from "@/models/VoteModels";
 import { VoteAnswersFactory, VoteAnswer } from "@/models/VoteAnswerModels";
-import { getReCAPTCHAToken } from "@/utils/recaptcha";
 import { classToPlain } from "class-transformer";
-import { api } from "../../requests/requests";
 import SuguvoteVue from "@/utils/SuguvoteVue.vue";
+import { SuguvotePageVue } from "@/SuguvoteVue";
+import { ReCAPTCHAHelpers } from "@/helpers/ReCAPTCHAHelpers";
+import { api } from "@/requests/requests";
 
 @Component
-export default class VotingComponent extends SuguvoteVue {
+export default class VotingComponent extends SuguvotePageVue {
   @Prop()
   vote?: Readonly<Vote>;
   @Prop()
@@ -75,7 +76,7 @@ export default class VotingComponent extends SuguvoteVue {
   async sendVoteAnswer() {
     if (!this.vote || !this.votingResults || !this.voteAnswers) return;
 
-    const recaptcha_token: string = await getReCAPTCHAToken();
+    const recaptcha_token: string = await ReCAPTCHAHelpers.getReCAPTCHAToken();
     const votingResults: VotingResult[] = await api.votes.votingResults.post(parseInt(this.vote.pk ?? '-1'), this.voteAnswers, recaptcha_token);
     this.reload({left: 0, top: 0});
   }

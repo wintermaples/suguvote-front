@@ -88,12 +88,13 @@ import SuguvoteVue from "@/utils/SuguvoteVue.vue";
 import { Dictionary } from "vue-router/types/router";
 import { DEFAULT_PAGE_SIZE } from "@/const/CommonConst";
 import { Watch } from "vue-property-decorator";
+import { SuguvotePageVue } from "@/SuguvoteVue";
 
 // TODO: Change a design of this page
 // TODO: Implement showing creator's user name
 // TODO: Implement feature of chaning page size
 @Component
-export default class ListVotePageComponent extends SuguvoteVue {
+export default class ListVotePageComponent extends SuguvotePageVue {
   votes: Readonly<Vote[]> | null = null;
   isActiveSortingMenu: boolean = false;
   pageCount: number = -1;

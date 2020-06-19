@@ -1,6 +1,6 @@
 import { Question, QuestionType, VotingResult, OneSelectQuestion } from "@/models/VoteModels";
 import { ChartConfiguration } from "chart.js";
-import { planningChartBackgroundColorScheme } from "@/utils/ChartUtil";
+import { ChartHelpers } from "@/helpers/ChartHelpers";
 
 export abstract class VotingResultChartGenerator {
   abstract getQuestionType(): QuestionType;
@@ -31,7 +31,7 @@ export class VotingResultOfOneSelectQuestionChartGenerator extends VotingResultC
         labels: oneSelectQuestion.getOptions().map(o => o.content),
         datasets: [{
           data: votingResult.results,
-          backgroundColor: planningChartBackgroundColorScheme(oneSelectQuestion.getOptions().length)
+          backgroundColor: ChartHelpers.generateChartBackgroundColors(oneSelectQuestion.getOptions().length)
         }]
       },
       options: {

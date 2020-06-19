@@ -1,8 +1,8 @@
 import * as LimitConst from "@/const/LimitConst";
-import { ArrayTransformFn as ArrayTransform } from "@/utils/TransformUtil";
 import { classToClass, classToPlain, plainToClass, Type } from 'class-transformer';
 import { TransformationType } from "class-transformer/TransformOperationExecutor";
 import dayjs from "dayjs";
+import { TransformHelpers } from "@/helpers/TransformHelpers";
 
 export enum QuestionType {
   ONE_SELECT = "ONE_SELECT"
@@ -44,7 +44,7 @@ export class Vote {
   description: string = "";
   tags: string[] = [];
   closing_at: string|null = null;
-  @ArrayTransform(Question.transformFn)
+  @TransformHelpers.ArrayTransformFn(Question.transformFn)
   questions: Question[] = [];
   created_at: string|undefined;
   updated_at: string|undefined;
@@ -78,7 +78,7 @@ export class OneSelectOption {
 export class OneSelectQuestion extends Question {
   type: Readonly<QuestionType> = QuestionType.ONE_SELECT;
   @Type(() => OneSelectOption)
-  @ArrayTransform((optionPlain: any) => new OneSelectOption(optionPlain), { toClassOnly: true })
+  @TransformHelpers.ArrayTransformFn((optionPlain: any) => new OneSelectOption(optionPlain), { toClassOnly: true })
   private options: OneSelectOption[];
   constructor(title: string = '', options: OneSelectOption[] = []) {
     super(title);

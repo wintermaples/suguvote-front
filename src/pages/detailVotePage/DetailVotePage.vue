@@ -164,6 +164,7 @@ import { api } from "@/requests/requests";
 import SuguvoteVue from "@/utils/SuguvoteVue.vue";
 import { suguvoteUIModule } from "@/store/modules/SuguvoteUIModule";
 import * as CommonConst from "@/const/CommonConst";
+import { SuguvotePageVue } from "@/SuguvoteVue";
 
 enum Mode {
   VOTING_RESULTS = "VOTING_RESULTS",
@@ -173,7 +174,7 @@ enum Mode {
 @Component({
   components: { VotingResultsComponent, VotingComponent }
 })
-export default class DetailVotePageComponent extends SuguvoteVue {
+export default class DetailVotePageComponent extends SuguvotePageVue {
   vote: Vote | null = null;
   votingResults: VotingResult[] = [];
   charts: Chart[] = [];

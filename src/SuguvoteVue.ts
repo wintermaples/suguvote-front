@@ -1,22 +1,17 @@
-<script lang="ts">
 import Vue, { VueConstructor } from "vue";
 import Component from "vue-class-component";
 import dayjs from "dayjs";
-import { Question, VotingResult } from "@/models/VoteModels";
+import { Question } from "@/models/VoteModels";
 import { EditQuestionViewFactory } from "@/models/EditQuestionViewFactory";
 import { VotingResultOfOneQuestionViewFactory } from "@/models/VotingResultOfOneQuestionViewFactory";
 import { VotingOfOneQuestionViewFactory } from "@/models/VotingOfOneQuestionViewFactory";
+import { DATETIME_FORMAT } from "@/const/CommonConst";
+import { ChartHelpers } from "@/helpers/ChartHelpers";
+import { ClassType } from "class-transformer/ClassTransformer";
 
-
-@Component
-export default class SuguvoteVue extends Vue {
-  reload(scrollTo: ScrollToOptions|undefined = undefined) {
-    if (scrollTo) window.scrollTo(scrollTo);
-    this.$router.go(0);
-  }
-
+abstract class AbstractSuguvoteVue extends Vue {
   formatDate(date: Date) {
-    return dayjs(date).format("YYYY/MM/DD HH:mm:ss");
+    return dayjs(date).format(DATETIME_FORMAT);
   }
 
   toEditQuestionView(question: Question): VueConstructor<Vue> | undefined {
@@ -41,19 +36,35 @@ export default class SuguvoteVue extends Vue {
     )?.generateComponent(question);
   }
 
-  omitTooLongLines(text: string, maxLine: number=5, ellipsis_text='...'): string {
-    const lines: string[] = text.split('\n');
+  omitTooLongLines(
+    text: string,
+    maxLine: number = 5,
+    ellipsis_text = "..."
+  ): string {
+    const lines: string[] = text.split("\n");
     const linesOmitted: string[] = lines.slice(0, maxLine);
-    if (lines.length > maxLine)
-      linesOmitted.push(ellipsis_text);
-    return linesOmitted.join('\n');
+    if (lines.length > maxLine) linesOmitted.push(ellipsis_text);
+    return linesOmitted.join("\n");
   }
 
-  omitTooLongString(text: string, maxLength: number=48, ellipsis_text='...'): string {
+  omitTooLongString(
+    text: string,
+    maxLength: number = 48,
+    ellipsis_text = "..."
+  ): string {
     if (text.length > maxLength)
       return text.substr(0, maxLength) + ellipsis_text;
-    else
-      return text;
+    else return text;
   }
 }
-</script>
+
+export abstract class SuguvotePageVue extends AbstractSuguvoteVue {
+  reload(scrollTo: ScrollToOptions | undefined = undefined) {
+    if (scrollTo) window.scrollTo(scrollTo);
+    this.$router.go(0);
+  }
+}
+
+export abstract class SuguvoteComponentVue extends AbstractSuguvoteVue {
+
+}
