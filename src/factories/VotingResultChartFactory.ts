@@ -1,25 +1,25 @@
-import { Question, QuestionType, VotingResult, OneSelectQuestion } from "@/models/VoteModels";
+import { Question, QuestionType, VotingResult, OneSelectQuestion } from "@/entities/VoteModels";
 import { ChartConfiguration } from "chart.js";
 import { ChartHelpers } from "@/helpers/ChartHelpers";
 
-export abstract class VotingResultChartGenerator {
+export abstract class VotingResultChartFactory {
   abstract getQuestionType(): QuestionType;
   abstract generate(question: Question, votingResult: VotingResult): ChartConfiguration;
-  static generators: VotingResultChartGenerator[] = [];
+  static generators: VotingResultChartFactory[] = [];
 
-  static addGenerator(generator: VotingResultChartGenerator): void {
+  static addGenerator(generator: VotingResultChartFactory): void {
     if (this.generators.some(g => g.getQuestionType() == generator.getQuestionType()))
       throw `You are already added generator for ${generator.getQuestionType()}!`;
     this.generators.push(generator);
   }
 
-  static findGenerator(question: Question): VotingResultChartGenerator | null {
+  static findGenerator(question: Question): VotingResultChartFactory | null {
     return this.generators.find(f => f.getQuestionType() == question.type) ?? null;
   }
 
 }
 
-export class VotingResultOfOneSelectQuestionChartGenerator extends VotingResultChartGenerator {
+export class VotingResultOfOneSelectQuestionChartFactory extends VotingResultChartFactory {
   getQuestionType(): QuestionType {
     return QuestionType.ONE_SELECT;
   }
@@ -67,4 +67,4 @@ export class VotingResultOfOneSelectQuestionChartGenerator extends VotingResultC
   }
 }
 
-VotingResultChartGenerator.addGenerator(new VotingResultOfOneSelectQuestionChartGenerator());
+VotingResultChartFactory.addGenerator(new VotingResultOfOneSelectQuestionChartFactory());

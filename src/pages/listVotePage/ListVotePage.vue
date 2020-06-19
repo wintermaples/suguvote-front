@@ -78,12 +78,12 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { api } from "@/requests/requests";
-import { OneSelectQuestion, Vote } from "@/models/VoteModels";
-import { OneSelectOption } from "@/models/VoteModels";
+import { OneSelectQuestion, Vote } from "@/entities/VoteModels";
+import { OneSelectOption } from "@/entities/VoteModels";
 import {
   VoteModelWrappedInPagination,
   ModelWrappedInPageNumberPagination
-} from "@/models/ModelWrappedInPagination";
+} from "@/entities/ModelWrappedInPagination";
 import SuguvoteVue from "@/utils/SuguvoteVue.vue";
 import { Dictionary } from "vue-router/types/router";
 import { DEFAULT_PAGE_SIZE } from "@/const/CommonConst";

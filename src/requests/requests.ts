@@ -1,11 +1,11 @@
-import { VoteModelWrappedInPagination } from '@/models/ModelWrappedInPagination';
-import { Vote, VotingResult } from '@/models/VoteModels';
+import { VoteModelWrappedInPagination } from '@/entities/ModelWrappedInPagination';
+import { Vote, VotingResult } from '@/entities/VoteModels';
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { plainToClass } from 'class-transformer';
-import { VoteAnswer } from '@/models/VoteAnswerModels';
+import { VoteAnswer } from '@/entities/VoteAnswerModels';
 import { Dictionary } from 'vue-router/types/router';
 import { BASE_URL } from '@/const/CommonConst';
-import { ValidatePasswordResult } from '@/models/OtherModels';
+import { ValidatePasswordResult } from '@/entities/OtherModels';
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: BASE_URL,

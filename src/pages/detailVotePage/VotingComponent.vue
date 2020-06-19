@@ -40,8 +40,8 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { Prop } from "vue-property-decorator";
-import { Vote, VotingResult } from "@/models/VoteModels";
-import { VoteAnswersFactory, VoteAnswer } from "@/models/VoteAnswerModels";
+import { Vote, VotingResult } from "@/entities/VoteModels";
+import { VoteAnswersFactory, VoteAnswer } from "@/entities/VoteAnswerModels";
 import { classToPlain } from "class-transformer";
 import SuguvoteVue from "@/utils/SuguvoteVue.vue";
 import { SuguvoteComponentVue } from "@/SuguvoteVue";

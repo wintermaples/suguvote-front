@@ -1,8 +1,8 @@
 import { DATETIME_FORMAT } from "@/const/CommonConst";
-import { EditQuestionViewFactory } from "@/models/EditQuestionViewFactory";
-import { Question } from "@/models/VoteModels";
-import { VotingOfOneQuestionViewFactory } from "@/models/VotingOfOneQuestionViewFactory";
-import { VotingResultOfOneQuestionViewFactory } from "@/models/VotingResultOfOneQuestionViewFactory";
+import { EditQuestionViewFactory } from "@/factories/EditQuestionViewFactory";
+import { Question } from "@/entities/VoteModels";
+import { VotingOfOneQuestionViewFactory } from "@/factories/VotingOfOneQuestionViewFactory";
+import { VotingResultOfOneQuestionViewFactory } from "@/factories/VotingResultOfOneQuestionViewFactory";
 import dayjs from "dayjs";
 import Vue, { VueConstructor } from "vue"
 import { suguvotePageModule } from "./store/modules/SuguvotePageModule";

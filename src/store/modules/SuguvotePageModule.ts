@@ -22,7 +22,7 @@ class SuguvotePage extends VuexModule implements ISuguvotePage {
     this.titleAndDescriptionSetterIntervalTimer = state;
   }
 
-  @Action({ rawError: true})
+  @Action({})
   switchCurrentPage(suguvotePageVue: SuguvotePageVue) {
     if (this.titleAndDescriptionSetterIntervalTimer)
       clearInterval(this.titleAndDescriptionSetterIntervalTimer);
