@@ -1,6 +1,6 @@
 import { DATETIME_FORMAT } from "@/const/CommonConst";
 import { EditQuestionViewFactory } from "@/factories/EditQuestionViewFactory";
-import { Question } from "@/entities/VoteModels";
+import { Question } from "@/entities/VoteEntities";
 import { VotingOfOneQuestionViewFactory } from "@/factories/VotingOfOneQuestionViewFactory";
 import { VotingResultOfOneQuestionViewFactory } from "@/factories/VotingResultOfOneQuestionViewFactory";
 import dayjs from "dayjs";

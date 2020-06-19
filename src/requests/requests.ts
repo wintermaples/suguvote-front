@@ -1,11 +1,11 @@
-import { VoteModelWrappedInPagination } from '@/entities/ModelWrappedInPagination';
-import { Vote, VotingResult } from '@/entities/VoteModels';
+import { VoteWrappedInPagination } from '@/entities/EntityWrappedInPagination';
+import { Vote, VotingResult } from '@/entities/VoteEntities';
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { plainToClass } from 'class-transformer';
-import { VoteAnswer } from '@/entities/VoteAnswerModels';
+import { VoteAnswer } from '@/entities/VoteAnswerEntities';
 import { Dictionary } from 'vue-router/types/router';
 import { BASE_URL } from '@/const/CommonConst';
-import { ValidatePasswordResult } from '@/entities/OtherModels';
+import { ValidatePasswordResult } from '@/entities/OtherEntities';
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -15,10 +15,10 @@ const axiosInstance: AxiosInstance = axios.create({
   withCredentials: true
 });
 
-async function listVote(query: any={}): Promise<VoteModelWrappedInPagination> {
+async function listVote(query: any={}): Promise<VoteWrappedInPagination> {
   const queryString: string = Object.keys(query).filter(key => query[key]).map(key => key + '=' + query[key]).join('&');
   const response: AxiosResponse = await axiosInstance.get(`/votes/?${queryString}`);
-  const votes: VoteModelWrappedInPagination = plainToClass(VoteModelWrappedInPagination, response.data);
+  const votes: VoteWrappedInPagination = plainToClass(VoteWrappedInPagination, response.data);
   return votes;
 }
 

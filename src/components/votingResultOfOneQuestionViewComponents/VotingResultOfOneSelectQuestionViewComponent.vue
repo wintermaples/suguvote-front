@@ -8,7 +8,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { Prop } from "vue-property-decorator";
-import { VotingResult, Question } from "@/entities/VoteModels";
+import { VotingResult, Question } from "@/entities/VoteEntities";
 import { ChartConfiguration } from "chart.js";
 import Chart from "chart.js";
 import { VotingResultChartFactory } from "@/factories/VotingResultChartFactory";

@@ -78,12 +78,12 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { api } from "@/requests/requests";
-import { OneSelectQuestion, Vote } from "@/entities/VoteModels";
-import { OneSelectOption } from "@/entities/VoteModels";
+import { OneSelectQuestion, Vote } from "@/entities/VoteEntities";
+import { OneSelectOption } from "@/entities/VoteEntities";
 import {
-  VoteModelWrappedInPagination,
-  ModelWrappedInPageNumberPagination
-} from "@/entities/ModelWrappedInPagination";
+  VoteWrappedInPagination,
+  EntityWrappedInPageNumberPagination
+} from "@/entities/EntityWrappedInPagination";
 import SuguvoteVue from "@/utils/SuguvoteVue.vue";
 import { Dictionary } from "vue-router/types/router";
 import { DEFAULT_PAGE_SIZE } from "@/const/CommonConst";
@@ -127,7 +127,7 @@ export default class ListVotePageComponent extends SuguvotePageVue {
   }
 
   async fetchVotes() {
-    const votes: VoteModelWrappedInPagination = await api.votes.list(
+    const votes: VoteWrappedInPagination = await api.votes.list(
       this.query
     );
     this.votes = votes.results ?? [];
@@ -180,7 +180,7 @@ export default class ListVotePageComponent extends SuguvotePageVue {
   }
 
   calcPageCount(
-    modelWrappedInPagination: ModelWrappedInPageNumberPagination
+    modelWrappedInPagination: EntityWrappedInPageNumberPagination
   ): number {
     if (!modelWrappedInPagination.count)
       return this.query["page"]

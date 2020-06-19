@@ -1,4 +1,4 @@
-import { QuestionType, Question } from "../entities/VoteModels";
+import { QuestionType, Question } from "../entities/VoteEntities";
 import { VueConstructor } from "vue";
 import VotingResultOfOneSelectQuestionViewComponent from "@/components/votingResultOfOneQuestionViewComponents/VotingResultOfOneSelectQuestionViewComponent.vue";
 

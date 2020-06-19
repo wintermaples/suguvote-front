@@ -1,4 +1,4 @@
-import { Question, QuestionType, VotingResult, OneSelectQuestion } from "@/entities/VoteModels";
+import { Question, QuestionType, VotingResult, OneSelectQuestion } from "@/entities/VoteEntities";
 import { ChartConfiguration } from "chart.js";
 import { ChartHelpers } from "@/helpers/ChartHelpers";
 

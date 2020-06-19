@@ -41,7 +41,7 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import { OneSelectOption, OneSelectQuestion } from "@/entities/VoteModels";
+import { OneSelectOption, OneSelectQuestion } from "@/entities/VoteEntities";
 
 @Component({
   props: ["question", "canDeleteQuestion"]

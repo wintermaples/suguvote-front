@@ -110,14 +110,14 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import { OneSelectQuestion, OneSelectOption, Vote } from "@/entities/VoteModels";
+import { OneSelectQuestion, OneSelectOption, Vote } from "@/entities/VoteEntities";
 import axios, { AxiosResponse } from "axios";
 import { plainToClass } from "class-transformer";
 import { api } from "@/requests/requests";
 import { MAX_QUESTION_NUM, MAX_TAG_NUM } from "@/const/LimitConst";
 import { Watch } from "vue-property-decorator";
 import dayjs from "dayjs";
-import { ValidatePasswordResult } from "../../entities/OtherModels";
+import { ValidatePasswordResult } from "../../entities/OtherEntities";
 import { suguvoteUIModule } from "@/store/modules/SuguvoteUIModule";
 import { ReCAPTCHAHelpers } from "@/helpers/ReCAPTCHAHelpers";
 import { SuguvotePageVue } from "@/SuguvoteVue";

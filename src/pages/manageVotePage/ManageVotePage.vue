@@ -103,7 +103,7 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import { Vote, VotingResult } from "@/entities/VoteModels";
+import { Vote, VotingResult } from "@/entities/VoteEntities";
 import { api } from "@/requests/requests";
 import { MAX_TAG_NUM } from "@/const/LimitConst";
 import { SuguvotePageVue } from "@/SuguvoteVue";

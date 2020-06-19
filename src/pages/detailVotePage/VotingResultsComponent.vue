@@ -18,7 +18,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import SuguvoteVue from "@/utils/SuguvoteVue.vue";
 import { Prop } from "vue-property-decorator";
-import { Vote, VotingResult } from "@/entities/VoteModels";
+import { Vote, VotingResult } from "@/entities/VoteEntities";
 import { SuguvoteComponentVue } from "@/SuguvoteVue";
 
 @Component

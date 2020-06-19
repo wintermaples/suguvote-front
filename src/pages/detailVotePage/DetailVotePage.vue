@@ -159,7 +159,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import VotingResultsComponent from "./VotingResultsComponent.vue";
 import VotingComponent from "./VotingComponent.vue";
-import { Vote, VotingResult } from "@/entities/VoteModels";
+import { Vote, VotingResult } from "@/entities/VoteEntities";
 import { api } from "@/requests/requests";
 import SuguvoteVue from "@/utils/SuguvoteVue.vue";
 import { suguvoteUIModule } from "@/store/modules/SuguvoteUIModule";
