@@ -1,15 +1,18 @@
-import Vue, { VueConstructor } from "vue";
-import Component from "vue-class-component";
-import dayjs from "dayjs";
-import { Question } from "@/models/VoteModels";
-import { EditQuestionViewFactory } from "@/models/EditQuestionViewFactory";
-import { VotingResultOfOneQuestionViewFactory } from "@/models/VotingResultOfOneQuestionViewFactory";
-import { VotingOfOneQuestionViewFactory } from "@/models/VotingOfOneQuestionViewFactory";
 import { DATETIME_FORMAT } from "@/const/CommonConst";
-import { ChartHelpers } from "@/helpers/ChartHelpers";
-import { ClassType } from "class-transformer/ClassTransformer";
+import { EditQuestionViewFactory } from "@/models/EditQuestionViewFactory";
+import { Question } from "@/models/VoteModels";
+import { VotingOfOneQuestionViewFactory } from "@/models/VotingOfOneQuestionViewFactory";
+import { VotingResultOfOneQuestionViewFactory } from "@/models/VotingResultOfOneQuestionViewFactory";
+import dayjs from "dayjs";
+import Vue, { VueConstructor } from "vue"
+import { suguvotePageModule } from "./store/modules/SuguvotePageModule";
 
 abstract class AbstractSuguvoteVue extends Vue {
+  reload(scrollTo: ScrollToOptions | undefined = undefined) {
+    if (scrollTo) window.scrollTo(scrollTo);
+    this.$router.go(0);
+  }
+
   formatDate(date: Date) {
     return dayjs(date).format(DATETIME_FORMAT);
   }
@@ -59,12 +62,28 @@ abstract class AbstractSuguvoteVue extends Vue {
 }
 
 export abstract class SuguvotePageVue extends AbstractSuguvoteVue {
-  reload(scrollTo: ScrollToOptions | undefined = undefined) {
-    if (scrollTo) window.scrollTo(scrollTo);
-    this.$router.go(0);
+
+  constructor() {
+    super();
+    suguvotePageModule.switchCurrentPage(this);
+  }
+
+  getTitleSuffix(): string|null {
+    return null;
+  }
+
+  getDescription(): string|null {
+    return null;
+  }
+
+  canSetTitleSuffix(): boolean {
+    return true;
+  }
+
+  canSetDescription(): boolean {
+    return true;
   }
 }
 
 export abstract class SuguvoteComponentVue extends AbstractSuguvoteVue {
-
 }

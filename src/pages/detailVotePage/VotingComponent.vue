@@ -44,12 +44,12 @@ import { Vote, VotingResult } from "@/models/VoteModels";
 import { VoteAnswersFactory, VoteAnswer } from "@/models/VoteAnswerModels";
 import { classToPlain } from "class-transformer";
 import SuguvoteVue from "@/utils/SuguvoteVue.vue";
-import { SuguvotePageVue } from "@/SuguvoteVue";
+import { SuguvoteComponentVue } from "@/SuguvoteVue";
 import { ReCAPTCHAHelpers } from "@/helpers/ReCAPTCHAHelpers";
 import { api } from "@/requests/requests";
 
 @Component
-export default class VotingComponent extends SuguvotePageVue {
+export default class VotingComponent extends SuguvoteComponentVue {
   @Prop()
   vote?: Readonly<Vote>;
   @Prop()

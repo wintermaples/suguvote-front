@@ -9,13 +9,13 @@ class SuguvoteUI extends VuexModule implements ISuguvoteUI {
   isOpenedSharingModal: boolean = false;
 
   @Mutation
-  public SET_IS_OPENED_Sharing_MODAL(state: boolean) {
+  private SET_IS_OPENED_SHARING_MODAL(state: boolean) {
     this.isOpenedSharingModal = state;
   }
 
   @Action({})
-  public toggleIsOpenedSharingModal() {
-    this.SET_IS_OPENED_Sharing_MODAL(!this.isOpenedSharingModal);
+  toggleIsOpenedSharingModal() {
+    this.SET_IS_OPENED_SHARING_MODAL(!this.isOpenedSharingModal);
   }
 }
 

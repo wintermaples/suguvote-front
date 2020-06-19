@@ -189,9 +189,6 @@ export default class DetailVotePageComponent extends SuguvotePageVue {
     } catch (err) {
       console.log(err);
     }
-
-    document.title = CommonConst.DEFAULT_TITLE + (this.getTitleSuffix() ? ` - ${this.getTitleSuffix()}` : '');
-    document.querySelector('meta[name="description"]')?.setAttribute('content', this.getDescription() ?? '');
   }
 
   toggleMode(): void {
@@ -237,6 +234,14 @@ ${this.getHref()}
 
   getDescription(): string|null {
     return this.vote?.description ?? null;
+  }
+
+  canSetTitleSuffix(): boolean {
+    return this.vote != null;
+  }
+
+  canSetDescription() : boolean {
+    return this.vote != null;
   }
 }
 </script>
