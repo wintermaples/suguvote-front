@@ -49,10 +49,12 @@ body {
 
   &.btn-small {
     font-size: 100%;
+    font-weight: bolder;
   }
   
   &.btn-medium {
     font-size: 150%;
+    font-weight: bolder;
   }
   
   &.btn-large {
@@ -60,6 +62,15 @@ body {
     font-weight: bolder;
   }
   
+  &.btn-small-padding {
+    padding: 0.25rem 1rem;
+  }
+
+  &.btn-medium-horizontal-margin {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
   &.btn-color-light-sky-blue {
     color: #67c5ff;
     border: solid 2px #67c5ff;
@@ -121,6 +132,33 @@ body {
     }
   }
 
+  &.btn-color-blue {
+    background-color: #1464f6;
+    border: solid 2px #1464f6;
+    color: white;
+    &:hover {
+      background: #2474f6;
+      color: white;
+      border: solid 2px #2474f6;
+      &.shadow {
+        box-shadow: 5px 5px 7px rgba(39, 33, 33, 0.5);
+      }
+    }
+    &:active {
+      background-color: #0454e6;
+      color: white;
+      border: solid 2px #0454e6;
+      &.shadow {
+        box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+
+  &.btn-color-transparent {
+    background-color: rgba(0,0,0,0);
+    border: solid 2px #333;
+  }
+
   &.shadow {
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
   }
@@ -133,6 +171,16 @@ body {
 .multiline-text {
   white-space: pre-wrap;
   word-break: break-all;
+}
+
+.center-container {
+  display: flex;
+  justify-content: center;
+}
+
+.inline-center-container {
+  display: inline-flex;
+  justify-content: center;
 }
 
 .left {

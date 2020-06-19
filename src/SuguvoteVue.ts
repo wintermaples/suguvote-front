@@ -5,7 +5,8 @@ import { VotingOfOneQuestionViewFactory } from "@/factories/VotingOfOneQuestionV
 import { VotingResultOfOneQuestionViewFactory } from "@/factories/VotingResultOfOneQuestionViewFactory";
 import dayjs from "dayjs";
 import Vue, { VueConstructor } from "vue"
-import { suguvotePageModule } from "./store/modules/SuguvotePageModule";
+import { suguvotePageModule } from "@/store/modules/SuguvotePageModule";
+import { suguvoteSessionModule } from "@/store/modules/SuguvoteSessionModule";
 
 abstract class AbstractSuguvoteVue extends Vue {
   reload(scrollTo: ScrollToOptions | undefined = undefined) {
@@ -66,6 +67,7 @@ export abstract class SuguvotePageVue extends AbstractSuguvoteVue {
   constructor() {
     super();
     suguvotePageModule.switchCurrentPage(this);
+    suguvoteSessionModule.fetchIsLoggedIn();
   }
 
   getTitleSuffix(): string|null {

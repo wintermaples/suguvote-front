@@ -2,9 +2,26 @@
   <div id="app">
     <div id="header">
       <span id="headerLogo">
-        <router-link to="/list"><img src="/static/images/logo.png" alt="Suguvote"></router-link>
+        <router-link to="/list">
+          <img src="/static/images/logo.png" alt="Suguvote" />
+        </router-link>
       </span>
-      <div id="headerMenu"></div>
+      <div id="headerMenu">
+        <div
+          v-if="!isLoggedIn"
+          @click="isShowingLogInDialog=true"
+          class="btn btn-color-blue btn-small btn-small-padding btn-medium-horizontal-margin"
+        >ログイン</div>
+        <div
+          v-else
+          class="btn btn-color-green btn-small btn-small-padding btn-medium-horizontal-margin"
+        >マイページ</div>
+        <router-link
+          to="/createVote"
+          tag="div"
+          class="btn btn-color-transparent btn-small btn-small-padding btn-medium-horizontal-margin"
+        >アンケートを作成</router-link>
+      </div>
     </div>
     <div id="content">
       <transition name="router-transition" mode="out-in">
@@ -13,9 +30,56 @@
     </div>
     <div id="footer">
       <div>
-        Suguvote is in development now(Alpha dev.3-r1).&nbsp;Made by <a href="https://twitter.com/yoshi_yukky_it" target="_blank">@yoshi_yukky_it</a>. <br>
-        ご意見・バグ報告などは<a href="https://forms.gle/MMRpWPzd2y6zJahq7" target="_blank">こちら</a>
+        Suguvote is in development now(Alpha dev.3-r1).&nbsp;Made by
+        <a
+          href="https://twitter.com/yoshi_yukky_it"
+          target="_blank"
+        >@yoshi_yukky_it</a>.
+        <br />ご意見・バグ報告などは
+        <a href="https://forms.gle/MMRpWPzd2y6zJahq7" target="_blank">こちら</a>
       </div>
+    </div>
+
+    <!-- ログインダイアログ -->
+    <div id="loginDialog" class="dialog" :class="{ 'dialog-show': isShowingLogInDialog }">
+      <div class="dialog-contents">
+        <form id="logInForm">
+          <div class="center-container">
+            <big>
+              <strong>Suguvoteにログイン</strong>
+            </big>
+          </div>
+          <div class="field">
+            <label class="field-title" for="username">ユーザー名</label>
+            <br />
+            <input
+              type="text"
+              name="username"
+              id="logInForm-username"
+              class="field-input wide-input"
+              required
+              maxlength="256"
+              v-model="logInForm_username"
+            />
+          </div>
+          <div class="field">
+            <label class="field-title" for="password">パスワード</label>
+            <br />
+            <input
+              type="password"
+              name="password"
+              id="logInForm-password"
+              class="field-input wide-input"
+              required
+              maxlength="256"
+              v-model="logInForm_password"
+            />
+          </div>
+          <div class="btn btn-color-green btn-small right">ログイン</div>
+          <div class="clear"></div>
+        </form>
+      </div>
+      <div class="dialog-margin" @click="isShowingLogInDialog=false"></div>
     </div>
   </div>
 </template>
@@ -23,15 +87,22 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-@Component
-export default class AppComponent extends Vue {}
+import { api } from "./requests/requests";
+import { mapState } from "vuex";
+@Component({
+  computed: mapState("suguvote-session", ["isLoggedIn"])
+})
+export default class AppComponent extends Vue {
+  isShowingLogInDialog: boolean = false;
+  logInForm_username: string | null = null;
+  logInForm_password: string | null = null;
+}
 </script>
 
 <style lang="scss" scoped>
 #app {
   display: flex;
   flex-direction: column;
-  // min-height: 100vh;
   min-height: calc(var(--vh, 1vh) * 100);
   justify-content: center;
   align-items: center;
@@ -45,6 +116,8 @@ export default class AppComponent extends Vue {}
   background-color: #f6f6f6;
   display: flex;
   border-bottom: 1px solid lightgreen;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #headerTitle {
@@ -58,9 +131,10 @@ export default class AppComponent extends Vue {}
 }
 
 #headerLogo {
-  display: inline-block;
+  display: inline-flex;
+  max-height: 100%;
   img {
-    max-height: 100%;
+    max-height: 40px;
     max-width: 100%;
   }
 }
