@@ -15,13 +15,13 @@ class SuguvoteSession extends VuexModule implements ISuguvoteSession {
   }
 
   @Action({})
-  async login(username: string, password: string) {
-    this.logout();
-    this.SET_IS_LOGGED_IN(await api.auth.logIn(username, password));
+  async logIn(logInData: {username: string, password: string}) {
+    this.logOut();
+    this.SET_IS_LOGGED_IN(await api.auth.logIn(logInData.username, logInData.password));
   }
 
   @Action({})
-  async logout() {
+  async logOut() {
     this.SET_IS_LOGGED_IN(false);
     await api.auth.logOut();
   }

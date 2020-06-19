@@ -9,7 +9,7 @@
       <div id="headerMenu">
         <div
           v-if="!isLoggedIn"
-          @click="isShowingLogInDialog=true"
+          @click="isOpenedLogInModal=true"
           class="btn btn-color-blue btn-small btn-small-padding btn-medium-horizontal-margin"
         >ログイン</div>
         <div
@@ -39,48 +39,7 @@
         <a href="https://forms.gle/MMRpWPzd2y6zJahq7" target="_blank">こちら</a>
       </div>
     </div>
-
-    <!-- ログインダイアログ -->
-    <div id="loginDialog" class="dialog" :class="{ 'dialog-show': isShowingLogInDialog }">
-      <div class="dialog-contents">
-        <form id="logInForm">
-          <div class="center-container">
-            <big>
-              <strong>Suguvoteにログイン</strong>
-            </big>
-          </div>
-          <div class="field">
-            <label class="field-title" for="username">ユーザー名</label>
-            <br />
-            <input
-              type="text"
-              name="username"
-              id="logInForm-username"
-              class="field-input wide-input"
-              required
-              maxlength="256"
-              v-model="logInForm_username"
-            />
-          </div>
-          <div class="field">
-            <label class="field-title" for="password">パスワード</label>
-            <br />
-            <input
-              type="password"
-              name="password"
-              id="logInForm-password"
-              class="field-input wide-input"
-              required
-              maxlength="256"
-              v-model="logInForm_password"
-            />
-          </div>
-          <div class="btn btn-color-green btn-small right">ログイン</div>
-          <div class="clear"></div>
-        </form>
-      </div>
-      <div class="dialog-margin" @click="isShowingLogInDialog=false"></div>
-    </div>
+    <LogInModal :isOpened="isOpenedLogInModal" @close="isOpenedLogInModal=false" />
   </div>
 </template>
 
@@ -89,13 +48,14 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { api } from "./requests/requests";
 import { mapState } from "vuex";
+import LogInModal from "@/components/modalComponents/LogInModal.vue";
+
 @Component({
-  computed: mapState("suguvote-session", ["isLoggedIn"])
+  computed: mapState("suguvote-session", ["isLoggedIn"]),
+  components: { LogInModal }
 })
 export default class AppComponent extends Vue {
-  isShowingLogInDialog: boolean = false;
-  logInForm_username: string | null = null;
-  logInForm_password: string | null = null;
+  isOpenedLogInModal: boolean = false;
 }
 </script>
 

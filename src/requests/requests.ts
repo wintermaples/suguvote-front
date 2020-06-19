@@ -19,11 +19,12 @@ async function logIn(username: string, password: string): Promise<boolean> {
     username: username,
     password: password
   });
-  const respose: AxiosResponse = await axiosInstance.post(`/auth/login/`, data);
-  if (respose.status == 200)
+  try {
+    const respose: AxiosResponse = await axiosInstance.post(`/auth/login/`, data);
     return true;
-  else
+  } catch {
     return false;
+  }
 }
 
 async function logOut(): Promise<void> {
@@ -31,7 +32,7 @@ async function logOut(): Promise<void> {
 }
 
 async function isLoggedIn(): Promise<boolean> {
-  const response: AxiosResponse = await axiosInstance.post(`/auth/is_logged_in/`);
+  const response: AxiosResponse = await axiosInstance.get(`/auth/is_logged_in/`);
   return response.data.is_logged_in;
 }
 
