@@ -7,20 +7,22 @@
         </router-link>
       </span>
       <div id="headerMenu">
-        <div
-          v-if="!isLoggedIn"
-          @click="isOpenedLogInModal=true"
-          class="btn btn-color-blue btn-small btn-small-padding btn-medium-horizontal-margin"
-        >ログイン</div>
-        <div
-          v-else
-          class="btn btn-color-green btn-small btn-small-padding btn-medium-horizontal-margin"
-        >マイページ</div>
-        <router-link
-          to="/createVote"
-          tag="div"
-          class="btn btn-color-transparent btn-small btn-small-padding btn-medium-horizontal-margin"
-        >アンケートを作成</router-link>
+        <template v-if="isLoggedInFetchedOnce">
+          <div
+            v-if="!isLoggedIn"
+            @click="isOpenedLogInModal=true"
+            class="btn btn-color-blue btn-small btn-small-padding btn-medium-horizontal-margin"
+          >ログイン</div>
+          <div
+            v-else
+            class="btn btn-color-green btn-small btn-small-padding btn-medium-horizontal-margin"
+          >マイページ</div>
+          <router-link
+            to="/createVote"
+            tag="div"
+            class="btn btn-color-transparent btn-small btn-small-padding btn-medium-horizontal-margin"
+          >アンケートを作成</router-link>
+        </template>
       </div>
     </div>
     <div id="content">
@@ -51,7 +53,10 @@ import { mapState } from "vuex";
 import LogInModal from "@/components/modalComponents/LogInModal.vue";
 
 @Component({
-  computed: mapState("suguvote-session", ["isLoggedIn"]),
+  computed: mapState("suguvote-session", [
+    "isLoggedIn",
+    "isLoggedInFetchedOnce"
+  ]),
   components: { LogInModal }
 })
 export default class AppComponent extends Vue {

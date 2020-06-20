@@ -7,7 +7,7 @@ export abstract class VotingResultChartFactory {
   abstract generate(question: Question, votingResult: VotingResult): ChartConfiguration;
   static generators: VotingResultChartFactory[] = [];
 
-  static addGenerator(generator: VotingResultChartFactory): void {
+  static addFactory(generator: VotingResultChartFactory): void {
     if (this.generators.some(g => g.getQuestionType() == generator.getQuestionType()))
       throw `You are already added generator for ${generator.getQuestionType()}!`;
     this.generators.push(generator);
@@ -67,4 +67,4 @@ export class VotingResultOfOneSelectQuestionChartFactory extends VotingResultCha
   }
 }
 
-VotingResultChartFactory.addGenerator(new VotingResultOfOneSelectQuestionChartFactory());
+VotingResultChartFactory.addFactory(new VotingResultOfOneSelectQuestionChartFactory());

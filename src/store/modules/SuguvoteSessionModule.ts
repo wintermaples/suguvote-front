@@ -4,14 +4,17 @@ import { api } from "@/requests/requests";
 
 export interface ISuguvoteSession {
   isLoggedIn: boolean;
+  isLoggedInFetchedOnce: boolean;
 }
 @Module({ dynamic: true, store, name: "suguvote-session", namespaced: true})
 class SuguvoteSession extends VuexModule implements ISuguvoteSession {
   isLoggedIn: boolean = false;
+  isLoggedInFetchedOnce = false;
 
   @Mutation
   private SET_IS_LOGGED_IN(state: boolean) {
     this.isLoggedIn = state;
+    this.isLoggedInFetchedOnce = true;
   }
 
   @Action({})
