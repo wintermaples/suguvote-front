@@ -1,5 +1,5 @@
 <template>
-  <div id="container">
+  <div id="listVotePage">
     <div id="subtitleContainer">
       <div id="subtitle">投稿されたアンケート</div>
       <div
@@ -201,12 +201,6 @@ export default class ListVotePageComponent extends SuguvotePageVue {
 </script>
 
 <style lang="scss" scoped>
-#container {
-  margin: auto;
-  width: 100%;
-  max-width: 1024px;
-}
-
 #subtitleContainer {
   display: flex;
   width: 100%;

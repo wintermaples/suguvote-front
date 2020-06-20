@@ -1,28 +1,55 @@
 <template>
   <div id="app">
-    <div id="header">
-      <span id="headerLogo">
-        <router-link to="/list">
-          <img src="/static/images/logo.png" alt="Suguvote" />
-        </router-link>
-      </span>
-      <div id="headerMenu">
-        <template v-if="isLoggedInFetchedOnce">
-          <div
-            v-if="!isLoggedIn"
-            @click="isOpenedLogInModal=true"
-            class="btn btn-color-blue btn-small btn-small-padding btn-medium-horizontal-margin"
-          >ログイン</div>
-          <div
-            v-else
-            class="btn btn-color-green btn-small btn-small-padding btn-medium-horizontal-margin"
-          >マイページ</div>
-          <router-link
-            to="/createVote"
-            tag="div"
-            class="btn btn-color-transparent btn-small btn-small-padding btn-medium-horizontal-margin"
-          >アンケートを作成</router-link>
-        </template>
+    <div id="headerContainer">
+      <div id="header">
+        <span id="headerLogo">
+          <router-link to="/list">
+            <img src="/static/images/logo.png" alt="Suguvote" />
+          </router-link>
+        </span>
+        <div id="headerMenu">
+          <template v-if="isLoggedInFetchedOnce">
+            <div class="is-not-mobile vertical-center-container">
+              <router-link
+                tag="div"
+                to="/createVote"
+                class="btn btn-color-transparent btn-small btn-small-padding"
+              >アンケートを作成</router-link>
+            </div>
+            <div class="is-mobile vertical-center-container">
+              <router-link
+                tag="img"
+                to="/createVote"
+                id="createVoteIcon"
+                src="/static/images/pen.png"
+                height="25"
+                width="25"
+              />
+            </div>
+            <img
+              @click="isOpenedUserSubMenu=!isOpenedUserSubMenu"
+              id="userMenuIcon"
+              src="/static/images/default-user-menu-icon.png"
+              height="40"
+              width="40"
+            />
+            <SubMenuComponent
+              :width.number="200"
+              :height.number="150"
+              :isOpened="isOpenedUserSubMenu"
+              :parentElement="getUserSubMenuParentElement()"
+              id="userSubMenu"
+              @close="isOpenedUserSubMenu=false"
+            >
+            <ul>
+              <li>マイページ</li>
+              <li>作成したアンケート</li>
+              <li class="hr"></li>
+              <li>ログアウト</li>
+            </ul>
+            </SubMenuComponent>
+          </template>
+        </div>
       </div>
     </div>
     <div id="content">
@@ -51,20 +78,30 @@ import Component from "vue-class-component";
 import { api } from "./requests/requests";
 import { mapState } from "vuex";
 import LogInModal from "@/components/modalComponents/LogInModal.vue";
+import SubMenuComponent from "@/components/subMenuComponent/SubMenuComponent.vue";
 
 @Component({
   computed: mapState("suguvote-session", [
     "isLoggedIn",
     "isLoggedInFetchedOnce"
   ]),
-  components: { LogInModal }
+  components: { LogInModal, SubMenuComponent }
 })
 export default class AppComponent extends Vue {
   isOpenedLogInModal: boolean = false;
+  isOpenedUserSubMenu: boolean = false;
+
+  getUserSubMenuParentElement(): HTMLElement | null {
+    return document.getElementById("userMenuIcon");
+  }
 }
 </script>
 
 <style lang="scss" scoped>
+$contentMaxWidth: 1050px;
+$marginHorizontal: 5%;
+$paddingHorizontal: 5%;
+
 #app {
   display: flex;
   flex-direction: column;
@@ -73,14 +110,19 @@ export default class AppComponent extends Vue {
   align-items: center;
 }
 
-#header {
-  $paddingX: 5%;
-  width: calc(100% - #{$paddingX} * 2);
-  height: 40px;
-  padding: 5px $paddingX;
+#headerContainer {
+  width: 100%;
   background-color: #f6f6f6;
-  display: flex;
   border-bottom: 1px solid lightgreen;
+}
+
+#header {
+  max-width: $contentMaxWidth;
+  width: calc(100% - #{$paddingHorizontal} * 2);
+  height: 40px;
+  margin: auto;
+  padding: 5px;
+  display: flex;
   justify-content: space-between;
   align-items: center;
 }
@@ -105,10 +147,8 @@ export default class AppComponent extends Vue {
 }
 
 #content {
-  $paddingX: 5%;
-  width: calc(100% - #{$paddingX} * 2);
-  max-width: 1440px;
-  padding: 0 $paddingX;
+  width: calc(100% - #{$paddingHorizontal} * 2);
+  max-width: $contentMaxWidth;
   margin: 0 auto auto auto;
 }
 
@@ -130,5 +170,24 @@ export default class AppComponent extends Vue {
   background-color: #f6f6f6;
   color: #aaa;
   text-align: center;
+}
+
+#headerMenu {
+  height: 100%;
+  max-height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+img#userMenuIcon, img#createVoteIcon {
+  margin: 0 0.5rem;
+  max-height: 100%;
+  width: auto;
+  cursor: pointer;
+  transition: filter 0.2s ease;
+  filter: brightness(100%);
+  &:hover {
+    filter: brightness(90%);
+  }
 }
 </style>

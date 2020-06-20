@@ -27,6 +27,17 @@ body {
   display: inline-block;
 }
 
+@media screen and (max-width: 767px) {
+  .is-not-mobile {
+    display: none !important;
+  }
+}
+@media screen and (min-width: 768px) {
+  .is-mobile {
+    display: none !important;
+  }
+}
+
 .btn {
   display: inline-block;
   text-decoration: none;
@@ -181,6 +192,16 @@ body {
 .inline-center-container {
   display: inline-flex;
   justify-content: center;
+}
+
+.vertical-center-container {
+  display: flex;
+  align-items: center;
+}
+
+.vertical-inline-center-container {
+  display: flex;
+  align-items: center;
 }
 
 .left {
