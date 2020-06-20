@@ -159,11 +159,12 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import VotingResultsComponent from "./VotingResultsComponent.vue";
 import VotingComponent from "./VotingComponent.vue";
-import { Vote, VotingResult } from "@/models/VoteModels";
+import { Vote, VotingResult } from "@/entities/VoteEntities";
 import { api } from "@/requests/requests";
 import SuguvoteVue from "@/utils/SuguvoteVue.vue";
 import { suguvoteUIModule } from "@/store/modules/SuguvoteUIModule";
 import * as CommonConst from "@/const/CommonConst";
+import { SuguvotePageVue } from "@/SuguvoteVue";
 
 enum Mode {
   VOTING_RESULTS = "VOTING_RESULTS",
@@ -173,7 +174,7 @@ enum Mode {
 @Component({
   components: { VotingResultsComponent, VotingComponent }
 })
-export default class DetailVotePageComponent extends SuguvoteVue {
+export default class DetailVotePageComponent extends SuguvotePageVue {
   vote: Vote | null = null;
   votingResults: VotingResult[] = [];
   charts: Chart[] = [];
@@ -188,9 +189,6 @@ export default class DetailVotePageComponent extends SuguvoteVue {
     } catch (err) {
       console.log(err);
     }
-
-    document.title = CommonConst.DEFAULT_TITLE + (this.getTitleSuffix() ? ` - ${this.getTitleSuffix()}` : '');
-    document.querySelector('meta[name="description"]')?.setAttribute('content', this.getDescription() ?? '');
   }
 
   toggleMode(): void {
@@ -236,6 +234,14 @@ ${this.getHref()}
 
   getDescription(): string|null {
     return this.vote?.description ?? null;
+  }
+
+  canSetTitleSuffix(): boolean {
+    return this.vote != null;
+  }
+
+  canSetDescription() : boolean {
+    return this.vote != null;
   }
 }
 </script>

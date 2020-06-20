@@ -1,4 +1,4 @@
-import { QuestionType, Question, Vote, OneSelectQuestion } from "./VoteModels";
+import { QuestionType, Question, Vote, OneSelectQuestion } from "./VoteEntities";
 
 export class VoteAnswersFactory {
   static generate(questions: Question[]): VoteAnswer[] {

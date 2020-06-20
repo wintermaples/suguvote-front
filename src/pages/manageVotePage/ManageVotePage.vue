@@ -103,12 +103,13 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import { Vote, VotingResult } from "@/models/VoteModels";
+import { Vote, VotingResult } from "@/entities/VoteEntities";
 import { api } from "@/requests/requests";
 import { MAX_TAG_NUM } from "@/const/LimitConst";
-import { getReCAPTCHAToken } from "@/utils/recaptcha";
+import { SuguvotePageVue } from "@/SuguvoteVue";
+
 @Component
-export default class ManageVotePageComponent extends Vue {
+export default class ManageVotePageComponent extends SuguvotePageVue {
   vote: Vote | null = null;
   votingResults: VotingResult[] = [];
   tagField: string = "";

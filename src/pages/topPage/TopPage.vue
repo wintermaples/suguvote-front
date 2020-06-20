@@ -12,8 +12,9 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
+import { SuguvotePageVue } from "@/SuguvoteVue";
 @Component
-export default class TopPageComponent extends Vue {}
+export default class TopPageComponent extends SuguvotePageVue {}
 </script>
 
 <style lang="scss" scoped>

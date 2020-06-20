@@ -1,5 +1,5 @@
 <template>
-  <div id="container">
+  <div id="listVotePage">
     <div id="subtitleContainer">
       <div id="subtitle">投稿されたアンケート</div>
       <div
@@ -78,22 +78,23 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { api } from "@/requests/requests";
-import { OneSelectQuestion, Vote } from "@/models/VoteModels";
-import { OneSelectOption } from "@/models/VoteModels";
+import { OneSelectQuestion, Vote } from "@/entities/VoteEntities";
+import { OneSelectOption } from "@/entities/VoteEntities";
 import {
-  VoteModelWrappedInPagination,
-  ModelWrappedInPageNumberPagination
-} from "@/models/ModelWrappedInPagination";
+  VoteWrappedInPagination,
+  EntityWrappedInPageNumberPagination
+} from "@/entities/EntityWrappedInPagination";
 import SuguvoteVue from "@/utils/SuguvoteVue.vue";
 import { Dictionary } from "vue-router/types/router";
 import { DEFAULT_PAGE_SIZE } from "@/const/CommonConst";
 import { Watch } from "vue-property-decorator";
+import { SuguvotePageVue } from "@/SuguvoteVue";
 
 // TODO: Change a design of this page
 // TODO: Implement showing creator's user name
 // TODO: Implement feature of chaning page size
 @Component
-export default class ListVotePageComponent extends SuguvoteVue {
+export default class ListVotePageComponent extends SuguvotePageVue {
   votes: Readonly<Vote[]> | null = null;
   isActiveSortingMenu: boolean = false;
   pageCount: number = -1;
@@ -126,7 +127,7 @@ export default class ListVotePageComponent extends SuguvoteVue {
   }
 
   async fetchVotes() {
-    const votes: VoteModelWrappedInPagination = await api.votes.list(
+    const votes: VoteWrappedInPagination = await api.votes.list(
       this.query
     );
     this.votes = votes.results ?? [];
@@ -179,7 +180,7 @@ export default class ListVotePageComponent extends SuguvoteVue {
   }
 
   calcPageCount(
-    modelWrappedInPagination: ModelWrappedInPageNumberPagination
+    modelWrappedInPagination: EntityWrappedInPageNumberPagination
   ): number {
     if (!modelWrappedInPagination.count)
       return this.query["page"]
@@ -200,12 +201,6 @@ export default class ListVotePageComponent extends SuguvoteVue {
 </script>
 
 <style lang="scss" scoped>
-#container {
-  margin: auto;
-  width: 100%;
-  max-width: 1024px;
-}
-
 #subtitleContainer {
   display: flex;
   width: 100%;

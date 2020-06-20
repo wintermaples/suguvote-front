@@ -8,10 +8,10 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { Prop } from "vue-property-decorator";
-import { VotingResult, Question } from "@/models/VoteModels";
+import { VotingResult, Question } from "@/entities/VoteEntities";
 import { ChartConfiguration } from "chart.js";
 import Chart from "chart.js";
-import { VotingResultChartGenerator } from "@/chart/VotingResultChartGenerator";
+import { VotingResultChartFactory } from "@/factories/VotingResultChartFactory";
 
 @Component
 export default class VotingResultOfOneSelectQuestionViewComponent extends Vue {
@@ -31,7 +31,7 @@ export default class VotingResultOfOneSelectQuestionViewComponent extends Vue {
     );
     const chartConfiguration:
       | ChartConfiguration
-      | undefined = VotingResultChartGenerator.findGenerator(
+      | undefined = VotingResultChartFactory.findGenerator(
       this.question
     )?.generate(this.question, this.votingResult);
     if (chartCanvasElement && chartConfiguration)

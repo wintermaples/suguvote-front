@@ -18,17 +18,12 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { Prop } from "vue-property-decorator";
-import { VotingResult, Question, OneSelectQuestion } from "@/models/VoteModels";
-import { ChartConfiguration } from "chart.js";
-import Chart from "chart.js";
-import { VotingResultChartGenerator } from "@/chart/VotingResultChartGenerator";
-import {
-  VoteAnswer,
-  VoteAnswerOfOneSelectQuestion
-} from "../../models/VoteAnswerModels";
+import { OneSelectQuestion } from "@/entities/VoteEntities";
+import { VoteAnswerOfOneSelectQuestion } from "@/entities/VoteAnswerEntities";
+
 
 @Component
-export default class VotingResultOfOneSelectQuestionViewComponent extends Vue {
+export default class VotingOfOneSelectQuestionViewComponent extends Vue {
   @Prop()
   question?: OneSelectQuestion;
   @Prop()
